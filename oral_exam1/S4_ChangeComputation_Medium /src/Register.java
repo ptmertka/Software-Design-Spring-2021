@@ -3,17 +3,32 @@ import java.util.Scanner;
 
 
 public class Register {
-    //creates a Random object in order generate a random number of bills and change in the drawer.
-    Random random1 = new Random();
 
-    int numTwenties = random1.nextInt(16); //randomly generate value between 0-15, represents number of 20's in register
-    int numTens = random1.nextInt(16); //randomly generate value between 0-15, represents number of 10's in register
-    int numFives = random1.nextInt(16); //randomly generate value between 0-15, represents number of 5's in register
-    int numOnes = random1.nextInt(16); //randomly generate value between 0-15, represents number of 1's in register
-    int numQuarters = random1.nextInt(16); //randomly generate value between 0-15, represents number of quarters in register
-    int numDimes = random1.nextInt(16); //randomly generate value between 0-15, represents number of dimes in register
-    int numNickels = random1.nextInt(16); //randomly generate value between 0-15, represents number of nickels in register
-    int numPennies = random1.nextInt(16); //randomly generate value between 0-15, represents number of pennies in register
+    /**
+     * Things to change for later today, add java docs, add checkers with stringcasting inputs, checking if all positive
+     * integers, then casting to an int, convert everything from doubles to ints so that every money value is in cents
+     */
+    private int numTwenties;
+    private int numTens;
+    private int numFives;
+    private int numOnes;
+    private int numQuarters;
+    private int numDimes;
+    private int numNickels;
+    private int numPennies;
+
+    Random random1 = new Random();  //creates a Random object in order generate a random number of bills and change in the drawer.
+
+    public Register() {
+        numTwenties = random1.nextInt(16); //randomly generate value between 0-15, represents number of 20's in register
+        numTens = random1.nextInt(16); //randomly generate value between 0-15, represents number of 10's in register
+        numFives = random1.nextInt(16); //randomly generate value between 0-15, represents number of 5's in register
+        numOnes = random1.nextInt(16); //randomly generate value between 0-15, represents number of 1's in register
+        numQuarters = random1.nextInt(16); //randomly generate value between 0-15, represents number of quarters in register
+        numDimes = random1.nextInt(16); //randomly generate value between 0-15, represents number of dimes in register
+        numNickels = random1.nextInt(16); //randomly generate value between 0-15, represents number of nickels in register
+        numPennies = random1.nextInt(16); //randomly generate value between 0-15, represents number of pennies in register
+    }
 
     double checkCashInRegister(){
         double totalInRegister = 0.0;
@@ -37,6 +52,19 @@ public class Register {
         return totalInRegister; //returns the running total
 
     }
+
+    /**
+     *
+     * @param amountOwed
+     * @param twenties
+     * @param tens
+     * @param fives
+     * @param ones
+     * @param quarters
+     * @param dimes
+     * @param nickels
+     * @param pennies
+     */
     void returnChange(double amountOwed,int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
 
         boolean canCompute = true; //boolean temp variable that tells the loop if there is enough of the right money in the register to give exact change
