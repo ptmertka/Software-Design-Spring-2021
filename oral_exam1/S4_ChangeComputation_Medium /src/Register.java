@@ -6,14 +6,14 @@ public class Register {
     //creates a Random object in order generate a random number of bills and change in the drawer.
     Random random1 = new Random();
 
-    int numTwenties = 10;//random1.nextInt(16); //randomly generate value between 0-15, represents number of 20's in register
-    int numTens = 10 ;//random1.nextInt(16); //randomly generate value between 0-15, represents number of 10's in register
-    int numFives = 10; //random1.nextInt(16); //randomly generate value between 0-15, represents number of 5's in register
-    int numOnes = 10; //random1.nextInt(16); //randomly generate value between 0-15, represents number of 1's in register
-    int numQuarters = 10 ;//random1.nextInt(16); //randomly generate value between 0-15, represents number of quarters in register
-    int numDimes = 10;//random1.nextInt(16); //randomly generate value between 0-15, represents number of dimes in register
-    int numNickels = 10;//random1.nextInt(16); //randomly generate value between 0-15, represents number of nickels in register
-    int numPennies = 10;//random1.nextInt(16); //randomly generate value between 0-15, represents number of pennies in register
+    int numTwenties = random1.nextInt(16); //randomly generate value between 0-15, represents number of 20's in register
+    int numTens = random1.nextInt(16); //randomly generate value between 0-15, represents number of 10's in register
+    int numFives = random1.nextInt(16); //randomly generate value between 0-15, represents number of 5's in register
+    int numOnes = random1.nextInt(16); //randomly generate value between 0-15, represents number of 1's in register
+    int numQuarters = random1.nextInt(16); //randomly generate value between 0-15, represents number of quarters in register
+    int numDimes = random1.nextInt(16); //randomly generate value between 0-15, represents number of dimes in register
+    int numNickels = random1.nextInt(16); //randomly generate value between 0-15, represents number of nickels in register
+    int numPennies = random1.nextInt(16); //randomly generate value between 0-15, represents number of pennies in register
 
     double checkCashInRegister(){
         double totalInRegister = 0.0;
@@ -67,7 +67,7 @@ public class Register {
 
             if (amountOwed >= 10) {
                 for (int i = 1; i <= numTens; i++) {
-                    if (((amountOwed - (i * 10) > 0) && (amountOwed - (i * 10) < 10)) || (i == numTens)) {
+                    if (((amountOwed - (i * 10) >= 0) && (amountOwed - (i * 10) < 10)) || (i == numTens)) {
                         tensUsed = i;
                         amountOwed = amountOwed - (10 * i);
                         break;
@@ -76,7 +76,7 @@ public class Register {
             }
             if (amountOwed >= 5){
                 for (int i = 1; i <= numFives; i++) {
-                    if (((amountOwed - (i * 5) > 0) && (amountOwed - (i * 5) < 5)) || (i == numFives)) {
+                    if (((amountOwed - (i * 5) >= 0) && (amountOwed - (i * 5) < 5)) || (i == numFives)) {
                         fivesUsed = i;
                         amountOwed = amountOwed - (5*i);
                         break;
@@ -85,7 +85,7 @@ public class Register {
             }
             if (amountOwed >= 1){
                 for (int i = 1; i <= numOnes; i++) {
-                    if (((amountOwed - (i * 1) > 0) && (amountOwed - (i * 1) < 1)) || (i == numOnes)) {
+                    if (((amountOwed - (i * 1) >= 0) && (amountOwed - (i * 1) < 1)) || (i == numOnes)) {
                         onesUsed = i;
                         amountOwed = amountOwed - (1*i);
                         break;
@@ -95,8 +95,10 @@ public class Register {
             }
 
             if (amountOwed >= .25){
+
                 for (int i = 1; i <= numQuarters; i++) {
-                    if (((amountOwed - (i * .25) > 0) && (amountOwed - (i * .25) < .25)) || (i == numQuarters)) {
+
+                    if (((amountOwed - (i * .25) >= 0) && (amountOwed - (i * .25) < .25)) || (i == numQuarters)) {
                         quartersUsed = i;
                         amountOwed = amountOwed - (.25*i);
                         break;
@@ -106,7 +108,7 @@ public class Register {
             }
             if (amountOwed >= .10){
                 for (int i = 1; i <= numDimes; i++) {
-                    if (((amountOwed - (i * .1) > 0) && (amountOwed - (i * .1) < .1)) || (i == numDimes)) {
+                    if (((amountOwed - (i * .1) >= 0) && (amountOwed - (i * .1) < .1)) || (i == numDimes)) {
                         dimesUsed = i;
                         amountOwed = amountOwed - (.1*i);
                         break;
@@ -117,7 +119,7 @@ public class Register {
 
             if (amountOwed >= .05){
                 for (int i = 1; i <= numNickels; i++) {
-                    if (((amountOwed - (i * .05) > 0) && (amountOwed - (i * .05) < 5)) || (i == numNickels)) {
+                    if (((amountOwed - (i * .05) >= 0) && (amountOwed - (i * .05) < 5)) || (i == numNickels)) {
                         nickelsUsed = i;
                         amountOwed = amountOwed - (.05*i);
                         break;
@@ -125,10 +127,10 @@ public class Register {
                     }
                 }
             }
-
+            System.out.println("Amount Owed is " + amountOwed);
             if (amountOwed >= .01){
                 for (int i = 1; i <= numPennies; i++) {
-                    if (((amountOwed - (i * .01) > 0) && (amountOwed - (i * .01) < .01)) || (i == numPennies)) {
+                    if (((amountOwed - (i * .01) >= 0) && (amountOwed - (i * .01) < .01)) || (i == numPennies)) {
                         penniesUsed = i;
                         amountOwed = amountOwed - (.01*i);
                         break;
