@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class Register {
@@ -17,17 +18,26 @@ public class Register {
     double checkCashInRegister(){
         double totalInRegister = 0.0;
         totalInRegister = totalInRegister + (numTwenties * 20); //every line takes the number of each item in register and multiplies it by its value
-        totalInRegister = totalInRegister + (numTens * 10); //By doing this, it gets the cash value in the register, adding it to a running total
+        //By doing this, it gets the cash value in the register, adding it to a running total
+        System.out.println("Your have " + numTwenties + " twenty dollar bill(s)"); //This function also prints out the total amount of each bill and coin in the register
+        totalInRegister = totalInRegister + (numTens * 10);
+        System.out.println("Your have " + numTens + " ten dollar bill(s)");
         totalInRegister = totalInRegister + (numFives * 5);
+        System.out.println("Your have " + numFives + " five dollar bill(s)");
         totalInRegister = totalInRegister + (numOnes);
+        System.out.println("Your have " + numOnes + " one dollar bill(s)");
         totalInRegister = totalInRegister + (numQuarters * .25);
+        System.out.println("Your have " + numQuarters + " quarter(s)");
         totalInRegister = totalInRegister + (numDimes * .1);
+        System.out.println("Your have " + numDimes + " dimes(s)");
         totalInRegister = totalInRegister + (numNickels * .05);
+        System.out.println("Your have " + numNickels + " nickel(s)");
         totalInRegister = totalInRegister + (numPennies * .01);
+        System.out.println("Your have " + numPennies + " pennies(s)");
         return totalInRegister; //returns the running total
 
     }
-    void returnChange(double amountOwed){
+    void returnChange(double amountOwed,int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
 
         boolean canCompute = true; //boolean temp variable that tells the loop if there is enough of the right money in the register to give exact change
         int twentiesUsed = 0; // all of these int variables are used to track how much of each denomination is used in producing change
@@ -135,6 +145,8 @@ public class Register {
 
         if (canCompute == false){ //if the register cannot return change, it displays an error explaining so
             System.out.println("I'm sorry, your change can cannot be calculated due to lack of proper bills");
+            removeMoneyFromRegister( twenties, tens,  fives,  ones, quarters,  dimes,  nickels, pennies); //removes bills added before calculation to return to customer
+
         }
         else{ //if proper bills can be used, this else displays the amount used and subtracts their number from each denomination to sybolize removing it from the register
             System.out.println("Your change is " + twentiesUsed + " twenty dollar bill(s)");
@@ -156,6 +168,103 @@ public class Register {
 
         }
 
+    }
+
+    void addMoneyToRegister(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
+        numTwenties = numTwenties + twenties; //based on parameters input by user, adds specific number of each bill paid with to the cash register
+        numTens = numTens + tens;
+        numFives = numFives + fives;
+        numOnes = numOnes + ones;
+        numQuarters = numQuarters + quarters;
+        numDimes = numDimes + dimes;
+        numNickels = numNickels + nickels;
+        numPennies = numPennies+ pennies;
+    }
+
+    void removeMoneyFromRegister(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
+        numTwenties = numTwenties - twenties; //based on parameters input by user, removes specific number of each bill paid with from the cash register
+        numTens = numTens - tens; //this is done if there is not enough of all bills or a specifc combination so that exact change cannot be given.
+        numFives = numFives - fives;
+        numOnes = numOnes - ones;
+        numQuarters = numQuarters - quarters;
+        numDimes = numDimes - dimes;
+        numNickels = numNickels - nickels;
+        numPennies = numPennies - pennies;
+    }
+
+    double sumBillsAndCoins(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
+        double total = 0;
+        total = total + (twenties * 20); //takes an custom input of bills and coins and sums them all together
+        total = total + (tens * 10);
+        total = total + (fives * 5);
+        total = total + (ones);
+        total = total + (quarters *.25);
+        total = total + (dimes * .1);
+        total = total + (nickels * .05);
+        total = total + (pennies * .01);
+        return total;
+    }
+
+    void handleSale(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies, double priceOfItem){
+        addMoneyToRegister(twenties,tens,fives,ones,quarters, dimes, nickels, pennies); //adds the money being used to pay to the register, making it available to be used in change
+        double cashRecieved = sumBillsAndCoins(twenties,tens,fives,ones,quarters, dimes, nickels, pennies); //calculates the sum of money being used by the customer to pay
+
+
+        returnChange(cashRecieved-priceOfItem, twenties,tens,fives,ones,quarters, dimes, nickels, pennies); //takes in the bills recieved and the amount of change owed and returns change if possible
+
+
+
+    }
+
+    void beginOperation(){
+        Scanner scanner = new Scanner(System.in);
+        boolean takingOrders = true; //creates variable to track if user is still taking orders
+        System.out.println("Welcome to your cash register!");
+        while (takingOrders){
+
+            System.out.println("What is the price of the item being purchased?");
+            double itemPrice = scanner.nextDouble();
+
+            System.out.println("How many twenties is the customer paying with?");
+            int twenties = scanner.nextInt();
+
+            System.out.println("How many tens is the customer paying with?");
+            int tens = scanner.nextInt();
+
+            System.out.println("How many fives is the customer paying with?");
+            int fives = scanner.nextInt();
+
+            System.out.println("How many ones is the customer paying with?");
+            int ones = scanner.nextInt();
+
+            System.out.println("How many quarters is the customer paying with?");
+            int quarters = scanner.nextInt();
+
+            System.out.println("How many dimes is the customer paying with?");
+            int dimes = scanner.nextInt();
+
+            System.out.println("How many nickels is the customer paying with?");
+            int nickels = scanner.nextInt();
+
+            System.out.println("How many pennies is the customer paying with?");
+            int pennies = scanner.nextInt();
+
+            handleSale(twenties,tens,fives,ones,quarters, dimes, nickels, pennies, itemPrice);
+
+            double totalInRegister = checkCashInRegister();
+
+            System.out.println("You have a total of $" + totalInRegister + " in the register");
+
+            System.out.println("Would you like to enter another sale? Enter 1 for yes and 0 for no");
+
+            int response = scanner.nextInt();
+
+            if (response == 0){
+                takingOrders = false;
+            }
+
+
+        }
     }
 
 
