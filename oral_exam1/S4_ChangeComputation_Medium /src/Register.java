@@ -6,14 +6,14 @@ public class Register {
     //creates a Random object in order generate a random number of bills and change in the drawer.
     Random random1 = new Random();
 
-    int numTwenties = random1.nextInt(16); //randomly generate value between 0-15, represents number of 20's in register
-    int numTens = random1.nextInt(16); //randomly generate value between 0-15, represents number of 10's in register
-    int numFives = random1.nextInt(16); //randomly generate value between 0-15, represents number of 5's in register
-    int numOnes = random1.nextInt(16); //randomly generate value between 0-15, represents number of 1's in register
-    int numQuarters = random1.nextInt(16); //randomly generate value between 0-15, represents number of quarters in register
-    int numDimes = random1.nextInt(16); //randomly generate value between 0-15, represents number of dimes in register
-    int numNickels = random1.nextInt(16); //randomly generate value between 0-15, represents number of nickels in register
-    int numPennies = random1.nextInt(16); //randomly generate value between 0-15, represents number of pennies in register
+    int numTwenties = 10;//random1.nextInt(16); //randomly generate value between 0-15, represents number of 20's in register
+    int numTens = 10 ;//random1.nextInt(16); //randomly generate value between 0-15, represents number of 10's in register
+    int numFives = 10; //random1.nextInt(16); //randomly generate value between 0-15, represents number of 5's in register
+    int numOnes = 10; //random1.nextInt(16); //randomly generate value between 0-15, represents number of 1's in register
+    int numQuarters = 10 ;//random1.nextInt(16); //randomly generate value between 0-15, represents number of quarters in register
+    int numDimes = 10;//random1.nextInt(16); //randomly generate value between 0-15, represents number of dimes in register
+    int numNickels = 10;//random1.nextInt(16); //randomly generate value between 0-15, represents number of nickels in register
+    int numPennies = 10;//random1.nextInt(16); //randomly generate value between 0-15, represents number of pennies in register
 
     double checkCashInRegister(){
         double totalInRegister = 0.0;
