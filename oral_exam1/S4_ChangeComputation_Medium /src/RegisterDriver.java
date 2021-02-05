@@ -1,6 +1,8 @@
 /**
  * Class RegisterDriver
  * Handles the main event for my code, creating a register object
+ * @author Peter Mertka
+ * @version 2/5/2021
  */
 public class RegisterDriver {
     /**

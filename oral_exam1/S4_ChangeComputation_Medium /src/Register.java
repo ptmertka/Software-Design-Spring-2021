@@ -6,6 +6,8 @@ import java.util.Scanner;
  * Class Register:
  * Holds the main fucntionality of the register object for the assignment,
  * Contains the number of each type of bill and coin in the register and allows the user to make change based on user purchases
+ * @author Peter Mertka
+ * @version 2/5/2021
  */
 public class Register {
 
