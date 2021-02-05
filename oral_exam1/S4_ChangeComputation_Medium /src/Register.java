@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -333,70 +334,130 @@ public class Register {
 
     /**
      * Converts the price of the item from a double dollar value to an integer value of cents
-     * @param value
-     * @return
+     * @param value double: the dollar amount of the price of the item being bought
+     * @return valInCents integer: the value of the item being bought in cents
      */
     int changeToCents(double value){
         int valInCents = (int) (value * 100);
         return  valInCents;
     }
 
+    /**
+     * Function that handles purchases by taking in bills and calculating whether a sale can take place
+     * @param twenties integer: number of twenty dollar bills used by customer to pay
+     * @param tens integer: number of ten dollar bills used by customer to pay
+     * @param fives integer: number of five dollar bills used by customer to pay
+     * @param ones integer: number of one dollar bills used by customer to pay
+     * @param quarters integer: number of quarters used by customer to pay
+     * @param dimes integer: number of dimes used by customer to pay
+     * @param nickels integer: number of nickels used by customer to pay
+     * @param pennies integer: number of pennies used by customer to pay
+     */
+
     void handleSale(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies, double priceOfItem){
         addMoneyToRegister(twenties,tens,fives,ones,quarters, dimes, nickels, pennies); //adds the money being used to pay to the register, making it available to be used in change
         int newPriceOfItem = changeToCents(priceOfItem);
         int cashRecieved = sumBillsAndCoins(twenties,tens,fives,ones,quarters, dimes, nickels, pennies); //calculates the sum of money being used by the customer to pay
 
-        returnChange(cashRecieved- newPriceOfItem, twenties,tens,fives,ones,quarters, dimes, nickels, pennies); //takes in the bills recieved and the amount of change owed and returns change if possible
 
+        if(cashRecieved - newPriceOfItem <0){ //if the customer doesn't provide sufficient funds, return an error message
+            System.out.println("I'm sorry, you have provided in sufficient funds"); //prints out error
+            removeMoneyFromRegister( twenties, tens,  fives,  ones, quarters,  dimes,  nickels, pennies); //removes bills added before calculation to return to customer
+        }
+        else {
+            returnChange(cashRecieved - newPriceOfItem, twenties, tens, fives, ones, quarters, dimes, nickels, pennies); //takes in the bills recieved and the amount of change owed and returns change if possible
+        }
 
 
     }
 
+    /**
+     * Method to get a valid, positive, integer user input
+     * @return i, interger: a valid user input, non negative
+     */
+    int getValidInput(){
+        int i = -1;
+        Scanner scanner = new Scanner(System.in); //scanner to handle inputs
+        while (i < 0){ //while the user hasn't entered a negative number
+            try{
+                i = scanner.nextInt(); //gets the user's input
+            }catch(InputMismatchException e){ //if the user enters an invalid input, return an error, get a new number
+                String badInput = scanner.next();
+                System.out.println("Please enter a valid, positive number");
+                continue; //move past bad input
+
+            }
+
+        }
+        return i;
+    }
+
+    /**
+     * Main loop that handles purchases, runs to handle multiple purchases per the user input
+     */
     void beginOperation(){
-        Scanner scanner = new Scanner(System.in);
+
+        Scanner scanner = new Scanner(System.in); //scanner to handle inputs
+
         boolean takingOrders = true; //creates variable to track if user is still taking orders
-        System.out.println("Welcome to your cash register!");
-        while (takingOrders){
 
-            System.out.println("What is the price of the item being purchased?");
-            double itemPrice = scanner.nextDouble();
+        System.out.println("Welcome to your cash register!"); //welcome message
 
-            System.out.println("How many twenties is the customer paying with?");
-            int twenties = scanner.nextInt();
+        while (takingOrders){  //while the user is still handling orders
+
+            System.out.println("What is the price of the item being purchased?"); //takes in the price of the item as a double
+
+            double i = -1.0; //variable to handle try catch
+
+            while (i <0){ //while the user hasn't entered a negative number
+                try{
+                    i = scanner.nextDouble(); //gets the user's input
+                }catch(InputMismatchException e){ //if the user enters an invalid input, return an error, get a new number
+                    String badInput = scanner.next();
+                    System.out.println("Please enter a valid, positive number");
+                    continue; //tells code to move past the error
+
+                }
+            }
+
+            double itemPrice = i; //sets the items price to the users input
+
+            System.out.println("How many twenties is the customer paying with?"); //gets a valid user input for each type of bill and coin
+            int twenties = getValidInput();
 
             System.out.println("How many tens is the customer paying with?");
-            int tens = scanner.nextInt();
+            int tens = getValidInput();
 
             System.out.println("How many fives is the customer paying with?");
-            int fives = scanner.nextInt();
+            int fives = getValidInput();
 
             System.out.println("How many ones is the customer paying with?");
-            int ones = scanner.nextInt();
+            int ones = getValidInput();
 
             System.out.println("How many quarters is the customer paying with?");
-            int quarters = scanner.nextInt();
+            int quarters = getValidInput();
 
             System.out.println("How many dimes is the customer paying with?");
-            int dimes = scanner.nextInt();
+            int dimes = getValidInput();
 
             System.out.println("How many nickels is the customer paying with?");
-            int nickels = scanner.nextInt();
+            int nickels = getValidInput();
 
             System.out.println("How many pennies is the customer paying with?");
-            int pennies = scanner.nextInt();
+            int pennies = getValidInput();
 
-            handleSale(twenties,tens,fives,ones,quarters, dimes, nickels, pennies, itemPrice);
+            handleSale(twenties,tens,fives,ones,quarters, dimes, nickels, pennies, itemPrice); //tells register to handle sale, is either succesful or not
 
-            double totalInRegister = checkCashInRegister();
+            double totalInRegister = checkCashInRegister(); //gets the amount in the register
 
-            System.out.println("You have a total of " + (double)(totalInRegister/100.0) + " in the register");
+            System.out.println("You have a total of " + (double)(totalInRegister/100.0) + " in the register"); //prints the value in the register, repromts for a new sale
 
             System.out.println("Would you like to enter another sale? Enter 1 for yes and 0 for no");
 
-            int response = scanner.nextInt();
+            int response = getValidInput();  //gets users response
 
             if (response == 0){
-                takingOrders = false;
+                takingOrders = false; //exits while loop
             }
 
 
