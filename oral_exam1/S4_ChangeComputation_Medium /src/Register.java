@@ -131,7 +131,7 @@ public class Register {
 
             if (amountOwed >= 2000) { //for each repeated chunk, it checks to see if the denomination of bill can be used to lower the amount owed
 
-                while(!((amountOwed - (i * 2000) >= 0) && (amountOwed - (i * 2000) < 2000)) && !(i == numTwenties)) {//if it can, it checks to see how many of each bill to use, using a while loop
+                while(!((amountOwed - (i * 2000) >= 0) && (amountOwed - (i * 2000) < 2000)) && (numQuarters-i >0)) {//if it can, it checks to see how many of each bill to use, using a while loop
 
                     //if any amount of a denomination is 0, the loop simply doesn't execute, if there is 1 or more bills, it goes through 1-number available, until a number gets
                     //you to a level where the amount remaining when that many bills is subtracted off is less than the bill value itself, or all of the bill/coin is used.
@@ -146,7 +146,7 @@ public class Register {
             if (amountOwed >= 1000) {
 
                 i = 1;
-                while(!((amountOwed - (i * 1000) >= 0) && (amountOwed - (i * 1000) < 1000)) && !(i == numTens)) {
+                while(!((amountOwed - (i * 1000) >= 0) && (amountOwed - (i * 1000) < 1000)) && (numTens-i >0)) {
 
                     i++;
                 }
@@ -157,7 +157,7 @@ public class Register {
             if (amountOwed >= 500){
 
                 i = 1;
-                while(!((amountOwed - (i * 500) >= 0) && (amountOwed - (i * 500) < 500)) && !(i == numFives)) {
+                while(!((amountOwed - (i * 500) >= 0) && (amountOwed - (i * 500) < 500)) && (numFives-i >0)) {
 
                     i++;
                 }
@@ -168,7 +168,7 @@ public class Register {
             if (amountOwed >= 100){
 
                 i = 1;
-                while(!((amountOwed - (i * 100) >= 0) && (amountOwed - (i * 100) < 100)) && !(i == numOnes)) {
+                while(!((amountOwed - (i * 100) >= 0) && (amountOwed - (i * 100) < 100)) && (numOnes-i >0)) {
 
                     i++;
                 }
@@ -180,7 +180,7 @@ public class Register {
             if (amountOwed >= 25){
 
                 i = 1;
-                while(!((amountOwed - (i * 25) >= 0) && (amountOwed - (i * 25) < 25)) && !(i == numQuarters)) {
+                while(!((amountOwed - (i * 25) >= 0) && (amountOwed - (i * 25) < 25)) && (numQuarters-i >0)) {
 
                     i++;
                 }
@@ -192,7 +192,7 @@ public class Register {
             if (amountOwed >= 10){
 
                 i = 1;
-                while(!((amountOwed - (i * 10) >= 0) && (amountOwed - (i * 10) < 10)) && !(i == numDimes)) {
+                while(!((amountOwed - (i * 10) >= 0) && (amountOwed - (i * 10) < 10)) && (numDimes-i >0)) {
 
                     i++;
                 }
@@ -204,7 +204,7 @@ public class Register {
             if (amountOwed >= 5){
 
                 i = 1;
-                while(!((amountOwed - (i * 5) >= 0) && (amountOwed - (i * 5) < 5)) && !(i == numFives)) {
+                while(!((amountOwed - (i * 5) >= 0) && (amountOwed - (i * 5) < 5)) && (numNickels-i >0)) {
 
                     i++;
                 }
@@ -216,7 +216,7 @@ public class Register {
             if (amountOwed >= 1){
 
                 i = 1;
-                while(!((amountOwed - (i * 1) >= 0) && (amountOwed - (i * 1) < 1)) && !(i == numTwenties)) {
+                while(!((amountOwed - (i * 1) >= 0) && (amountOwed - (i * 1) < 1)) && !(numPennies-i >0)) {
 
                     i++;
                 }
