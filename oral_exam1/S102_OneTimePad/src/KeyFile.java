@@ -1,6 +1,7 @@
 
 import java.lang.reflect.Array;
 import java.util.Random;
+import java.io.*;
 
 /**
  * Class keyFile
@@ -15,6 +16,8 @@ public class KeyFile {
 
     private int[] key;
 
+    private int start;
+
     private String filename;
 
     Random random1 = new Random();
@@ -25,12 +28,54 @@ public class KeyFile {
 
     }
 
-    private void generateKey(int n){
-        key = new int[n];
-        for(int i = 0; i<n; i++){
+    public void generateKey(){
+        key = new int[lengthKey];
+        start = random1.nextInt(lengthKey) + 1;
+        for(int i = 0; i< lengthKey; i++){
             key[i] = random1.nextInt(26) + 1;
         }
     }
+    private String arrayToString(){
+        String convertedString = "";
+
+        for(int i = 0; i < lengthKey - 1; i++){
+            convertedString = convertedString + Integer.toString(key[i]) + ", " ;
+        }
+
+        convertedString = convertedString + Integer.toString(key[lengthKey-1]);
+
+        return convertedString;
+    }
+
+    public void createFile() throws IOException {
+        try {
+            File dir = new File("ptmertka_swd\\oral_exam1\\S102_OneTimePad\\keyFiles");// not working to write a
+
+            File file = new File(dir, filename); //will contain.txt already
+
+            file.createNewFile();
+
+            FileWriter writer = new FileWriter(file);
+
+            writer.write(Integer.toString(start) + "\n");
+            writer.write(arrayToString());
+            writer.flush();
+            writer.close();
+
+            System.out.println("Your key file is stored at ptmertka_swd\\oral_exam1\\S102_OneTimePad\\keyFiles");
+        } catch (IOException ioe){
+            System.out.println("Trouble reading and/or writing your file, please try again");
+            System.out.println("Error Message: " + ioe.getMessage());
+        }
+
+
+    }
+
+
+
+
+
+
 
 
 

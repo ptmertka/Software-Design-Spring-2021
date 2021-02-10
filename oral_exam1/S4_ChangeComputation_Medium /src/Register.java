@@ -114,7 +114,7 @@ public class Register {
      * @param nickels integer: number of nickels used by customer to pay
      * @param pennies integer: number of pennies used by customer to pay
      */
-    void returnChange(int amountOwed,int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
+    public void returnChange(int amountOwed,int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
 
         boolean canCompute = true; //boolean temp variable that tells the loop if there is enough of the right money in the register to give exact change
         int twentiesUsed = 0; // all of these int variables are used to track how much of each denomination is used in producing change
@@ -274,7 +274,7 @@ public class Register {
      * @param nickels integer: number of nickels used by customer to pay
      * @param pennies integer: number of pennies used by customer to pay
      */
-    void addMoneyToRegister(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
+    public void addMoneyToRegister(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
 
         numTwenties = numTwenties + twenties; //based on parameters input by user, adds specific number of each bill paid with to the cash register
         numTens = numTens + tens;
@@ -297,7 +297,7 @@ public class Register {
      * @param nickels integer: number of nickels used by customer to pay
      * @param pennies integer: number of pennies used by customer to pay
      */
-    void removeMoneyFromRegister(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
+    public void removeMoneyFromRegister(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
 
         numTwenties = numTwenties - twenties; //based on parameters input by user, removes specific number of each bill paid with from the cash register
         numTens = numTens - tens; //this is done if there is not enough of all bills or a specifc combination so that exact change cannot be given.
@@ -321,7 +321,7 @@ public class Register {
      * @param pennies integer: number of pennies used by customer to pay
      * @return
      */
-    int sumBillsAndCoins(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
+    public int sumBillsAndCoins(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies){
         int total = 0;
         total = total + (twenties * 2000); //takes an custom input of bills and coins and sums them all together
         total = total + (tens * 1000);
@@ -339,7 +339,7 @@ public class Register {
      * @param value double: the dollar amount of the price of the item being bought
      * @return valInCents integer: the value of the item being bought in cents
      */
-    int changeToCents(double value){
+    public int changeToCents(double value){
         int valInCents = (int) (value * 100);
         return  valInCents;
     }
@@ -356,7 +356,7 @@ public class Register {
      * @param pennies integer: number of pennies used by customer to pay
      */
 
-    void handleSale(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies, double priceOfItem){
+    public void handleSale(int twenties, int tens, int fives, int ones, int quarters, int dimes, int nickels, int pennies, double priceOfItem){
         addMoneyToRegister(twenties,tens,fives,ones,quarters, dimes, nickels, pennies); //adds the money being used to pay to the register, making it available to be used in change
         int newPriceOfItem = changeToCents(priceOfItem);
         int cashRecieved = sumBillsAndCoins(twenties,tens,fives,ones,quarters, dimes, nickels, pennies); //calculates the sum of money being used by the customer to pay
@@ -377,7 +377,7 @@ public class Register {
      * Method to get a valid, positive, integer user input
      * @return i, interger: a valid user input, non negative
      */
-    int getValidInput(){
+    private int getValidInput(){
         int i = -1;
         Scanner scanner = new Scanner(System.in); //scanner to handle inputs
         while (i < 0){ //while the user hasn't entered a negative number
@@ -397,7 +397,7 @@ public class Register {
     /**
      * Main loop that handles purchases, runs to handle multiple purchases per the user input
      */
-    void beginOperation(){
+    public void beginOperation(){
 
         Scanner scanner = new Scanner(System.in); //scanner to handle inputs
 
