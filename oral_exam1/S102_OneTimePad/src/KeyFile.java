@@ -3,6 +3,7 @@ import java.lang.reflect.Array;
 import java.util.Random;
 import java.io.*;
 
+
 /**
  * Class keyFile
  * Meant to hold relevant information regarding a key file, including postion, key itself, and filename. Allows for the creation of key file
@@ -69,6 +70,14 @@ public class KeyFile {
         }
 
 
+    }
+
+    public int getStart(){
+        return start;
+    }
+
+    public int[] getKey(){
+        return key;
     }
 
 

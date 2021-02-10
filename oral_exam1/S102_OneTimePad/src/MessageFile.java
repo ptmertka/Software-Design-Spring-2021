@@ -38,5 +38,7 @@ public class MessageFile {
 
     }
 
-
+    public String getEncodedMessage() {
+        return encodedMessage;
+    }
 }
