@@ -14,7 +14,7 @@ public class MessageFile {
         start = n;
         encodedMessage = message;
     }
-    public void createFile() throws IOException {
+    public void createFile(){
         try {
             File dir = new File("ptmertka_swd\\oral_exam1\\S102_OneTimePad\\messages");// not working to write a
 
