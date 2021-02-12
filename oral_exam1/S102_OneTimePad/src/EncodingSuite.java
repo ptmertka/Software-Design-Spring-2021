@@ -94,11 +94,11 @@ public class EncodingSuite {
 
     private String encode(String message, String filepath, int[] keyVals, int start){
         char messageAsChar[] = new char[message.length()];
-        System.out.println("message as an string is of length" + message.length());
+
         for (int i = 0; i < message.length(); i++){
             messageAsChar[i] = message.charAt(i);
         }
-        System.out.println("message as an array is of length" + messageAsChar.length);
+
         int position = start;
         for(int j = 0; j < messageAsChar.length; j++){
             if ( (int) messageAsChar[j]==32){
@@ -123,6 +123,7 @@ public class EncodingSuite {
             }
 
         }
+        position = position -1;
         try {
 
             FileWriter writer = new FileWriter(new File(filepath));
@@ -152,10 +153,10 @@ public class EncodingSuite {
         }
 
         int position = start;
-        for(int j = messageAsChar.length-1; j > 0; j--){
+        for(int j = messageAsChar.length-1; j >= 0; j--){
             if ( (int) messageAsChar[j]==32){
                 position = position - 1;
-                if (position < 0){
+                if (position < 1){
                     position = keyVals.length;
                 }
             }
@@ -167,7 +168,7 @@ public class EncodingSuite {
                 messageAsChar[j] = (char) temp;
 
                 position = position - 1;
-                if (position < 0){
+                if (position < 1){
                     position = keyVals.length;
                 }
 
@@ -178,6 +179,7 @@ public class EncodingSuite {
         for (char c : messageAsChar) {
             System.out.print(c);
         }
+        System.out.println("\n");
 
     }
 
