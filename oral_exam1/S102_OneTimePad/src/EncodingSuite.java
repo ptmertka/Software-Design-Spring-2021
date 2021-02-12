@@ -69,7 +69,7 @@ public class EncodingSuite {
         while(checkIfStringValid(a) == false){
 
 
-            a = scanner1.next();
+            a = scanner1.nextLine();
 
             if(checkIfStringValid(a) == false){
                 System.out.println("Please enter a string without any punctuation");
@@ -80,16 +80,33 @@ public class EncodingSuite {
         return a;
     }
 
+    private String arrayToString(int [] keyVals){
+        String convertedString = "";
+
+        for(int i = 0; i < keyVals.length - 1; i++){
+            convertedString = convertedString + Integer.toString(keyVals[i]) + "," ;
+        }
+
+        convertedString = convertedString + Integer.toString(keyVals[keyVals.length-1]);
+
+        return convertedString;
+    }
+
     private String encode(String message, String filepath, int[] keyVals, int start){
         char messageAsChar[] = new char[message.length()];
-
+        System.out.println("message as an string is of length" + message.length());
         for (int i = 0; i < message.length(); i++){
             messageAsChar[i] = message.charAt(i);
         }
+        System.out.println("message as an array is of length" + messageAsChar.length);
         int position = start;
         for(int j = 0; j < messageAsChar.length; j++){
             if ( (int) messageAsChar[j]==32){
-                continue;
+
+                position = position + 1;
+                if (position > keyVals.length){
+                    position = 1;
+                }
             }
             else {
                 int temp = (int) messageAsChar[j] + keyVals[position-1];
@@ -111,6 +128,7 @@ public class EncodingSuite {
             FileWriter writer = new FileWriter(new File(filepath));
 
             writer.write(Integer.toString(position) + "\n");
+            writer.write(arrayToString(keyVals));
             writer.flush();
             writer.close();
 
@@ -127,6 +145,39 @@ public class EncodingSuite {
     }
 
     private void decode(String encodedMessage, int[] keyVals, int start){
+        char messageAsChar[] = new char[encodedMessage.length()];
+
+        for (int i = 0; i < encodedMessage.length(); i++){
+            messageAsChar[i] = encodedMessage.charAt(i);
+        }
+
+        int position = start;
+        for(int j = messageAsChar.length-1; j > 0; j--){
+            if ( (int) messageAsChar[j]==32){
+                position = position - 1;
+                if (position < 0){
+                    position = keyVals.length;
+                }
+            }
+            else {
+                int temp = (int) messageAsChar[j] - keyVals[position-1];
+                if (temp < 65){
+                    temp = 91 + (temp - 65);
+                }
+                messageAsChar[j] = (char) temp;
+
+                position = position - 1;
+                if (position < 0){
+                    position = keyVals.length;
+                }
+
+            }
+
+        }
+        System.out.println("Your secret message is ");
+        for (char c : messageAsChar) {
+            System.out.print(c);
+        }
 
     }
 
@@ -159,7 +210,7 @@ public class EncodingSuite {
 
                 filename = filename + ".txt";
 
-                System.out.println("Your file is called:" + filename);
+                System.out.println("Your file is called: " + filename);
 
                 createKeyFile(keyLength, filename);
 
@@ -184,10 +235,6 @@ public class EncodingSuite {
                     int start = Integer.parseInt(line1);
 
                     String [] keyValueString = reader.readLine().split(",");
-
-                    for(int k = 0; k< keyValueString.length; k++){
-                        System.out.println(keyValueString[k]);
-                    }
 
                     int [] keyValues = new int[keyValueString.length];
 

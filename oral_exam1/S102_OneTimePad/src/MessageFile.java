@@ -29,7 +29,7 @@ public class MessageFile {
             writer.flush();
             writer.close();
 
-            System.out.println("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProject/sptmertka_swd/oral_exam1/S102_OneTimePad/messages/" + "message" + Integer.toString(fileNum)+".txt");
+            System.out.println("Your file is called: " +  "message" + Integer.toString(fileNum)+".txt");
 
             fileNum = fileNum + 1;
         } catch (IOException ioe){
