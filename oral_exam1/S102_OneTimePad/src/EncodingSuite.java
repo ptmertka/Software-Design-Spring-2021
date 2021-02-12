@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -20,7 +17,7 @@ public class EncodingSuite {
 
     public void createKeyFile(int n, String whatToNameFile){
         KeyFile keyfile1 = new KeyFile(n, whatToNameFile);
-
+        keyfile1.generateKey();
         keyfile1.createFile();
 
 
@@ -50,15 +47,31 @@ public class EncodingSuite {
         return i;
     }
 
+    private boolean checkIfStringValid(String test){
+        boolean returnVal = true;
+        for (int i = 0; i < test.length(); i++){
+            if(!(Character.isLetterOrDigit(test.charAt(i)) == true || test.charAt(i) == ' ')){
+                returnVal = false;
+            }
+
+        }
+
+        return returnVal;
+    }
+
     private String getValidStringInput(){
+
+
         String a = "...";
 
         Scanner scanner1 = new Scanner(System.in);
 
-        while((Pattern.matches("[\\p{IsPunctuation}\\p{Punct}]", a))){
+        while(checkIfStringValid(a) == false){
+
+
             a = scanner1.next();
 
-            if((Pattern.matches("[\\p{IsPunctuation}\\p{Punct}]", a))){
+            if(checkIfStringValid(a) == false){
                 System.out.println("Please enter a string without any punctuation");
             }
 
@@ -68,6 +81,48 @@ public class EncodingSuite {
     }
 
     private String encode(String message, String filepath, int[] keyVals, int start){
+        char messageAsChar[] = new char[message.length()];
+
+        for (int i = 0; i < message.length(); i++){
+            messageAsChar[i] = message.charAt(i);
+        }
+        int position = start;
+        for(int j = 0; j < messageAsChar.length; j++){
+            if ( (int) messageAsChar[j]==32){
+                continue;
+            }
+            else {
+                int temp = (int) messageAsChar[j] + keyVals[position-1];
+                if (temp >90){
+                    temp = 64 + (temp - 90);
+                }
+                messageAsChar[j] = (char) temp;
+
+                position = position + 1;
+                if (position > keyVals.length){
+                    position = 1;
+                }
+
+            }
+
+        }
+        try {
+
+            FileWriter writer = new FileWriter(new File(filepath));
+
+            writer.write(Integer.toString(position) + "\n");
+            writer.flush();
+            writer.close();
+
+        }catch (IOException ioe){
+            System.out.println("Error overwriting file");
+        }
+        String encodedMessage = new String(messageAsChar);
+
+
+
+        return encodedMessage;
+
 
     }
 
@@ -75,12 +130,12 @@ public class EncodingSuite {
 
     }
 
-    public void runSuite() throws FileNotFoundException {
+    public void runSuite()  {
         boolean runLoop = true;
         int userChoice = 0;
 
-        String keyFilePath = "ptmertka_swd\\oral_exam1\\S102_OneTimePad\\keyFiles\\";
-        String messageFilePath = "ptmertka_swd\\oral_exam1\\S102_OneTimePade\\messages\\";
+        String keyFilePath = "/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad/keyFiles/";
+        String messageFilePath ="/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad/messages/";
 
         System.out.println("Welcome to the encoding suite, what would you like to do today? You can create key files, message files, and decode messages");
         while (runLoop){
@@ -102,7 +157,9 @@ public class EncodingSuite {
 
                 filename = getValidStringInput();
 
-                filename = filename+ ".txt";
+                filename = filename + ".txt";
+
+                System.out.println("Your file is called:" + filename);
 
                 createKeyFile(keyLength, filename);
 
@@ -127,6 +184,11 @@ public class EncodingSuite {
                     int start = Integer.parseInt(line1);
 
                     String [] keyValueString = reader.readLine().split(",");
+
+                    for(int k = 0; k< keyValueString.length; k++){
+                        System.out.println(keyValueString[k]);
+                    }
+
                     int [] keyValues = new int[keyValueString.length];
 
                     for (int i = 0; i < keyValueString.length; i++){

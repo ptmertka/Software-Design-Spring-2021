@@ -16,10 +16,10 @@ public class MessageFile {
     }
     public void createFile(){
         try {
-            File dir = new File("ptmertka_swd\\oral_exam1\\S102_OneTimePad\\messages");// not working to write a
+            //File dir = new File("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjectsptmertka_swd/oral_exam1/S102_OneTimePad/messages/");// not working to write a
 
-            File file = new File(dir, "message" + Integer.toString(fileNum)+".txt"); //will contain.txt already
-            fileNum = fileNum + 1;
+            File file = new File("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad/messages/" + "message" + Integer.toString(fileNum)+".txt"); //will contain.txt already
+
             file.createNewFile();
 
             FileWriter writer = new FileWriter(file);
@@ -29,7 +29,9 @@ public class MessageFile {
             writer.flush();
             writer.close();
 
-            System.out.println("Your key file is stored at ptmertka_swd\\oral_exam1\\S102_OneTimePad\\messages");
+            System.out.println("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProject/sptmertka_swd/oral_exam1/S102_OneTimePad/messages/" + "message" + Integer.toString(fileNum)+".txt");
+
+            fileNum = fileNum + 1;
         } catch (IOException ioe){
             System.out.println("Trouble reading and/or writing your file, please try again");
             System.out.println("Error Message: " + ioe.getMessage());

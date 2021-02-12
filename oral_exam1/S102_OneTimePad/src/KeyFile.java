@@ -40,7 +40,7 @@ public class KeyFile {
         String convertedString = "";
 
         for(int i = 0; i < lengthKey - 1; i++){
-            convertedString = convertedString + Integer.toString(key[i]) + ", " ;
+            convertedString = convertedString + Integer.toString(key[i]) + "," ;
         }
 
         convertedString = convertedString + Integer.toString(key[lengthKey-1]);
@@ -50,9 +50,9 @@ public class KeyFile {
 
     public void createFile() {
         try {
-            File dir = new File("ptmertka_swd\\oral_exam1\\S102_OneTimePad\\keyFiles");// not working to write a
-
-            File file = new File(dir, filename); //will contain.txt already
+            //File dir = new File("ptmertka_swd\\oral_exam1\\S102_OneTimePad\\keyFiles");// not working to write a
+            System.out.println("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad/keyFiles/" + filename);
+            File file = new File("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad/keyFiles/" + filename); //will contain.txt already
 
             file.createNewFile();
 
@@ -63,7 +63,7 @@ public class KeyFile {
             writer.flush();
             writer.close();
 
-            System.out.println("Your key file is stored at ptmertka_swd\\oral_exam1\\S102_OneTimePad\\keyFiles\\" + filename);
+            System.out.println("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad/keyFiles/" + filename);
         } catch (IOException ioe){
             System.out.println("Trouble reading and/or writing your file, please try again");
             System.out.println("Error Message: " + ioe.getMessage());
@@ -72,13 +72,7 @@ public class KeyFile {
 
     }
 
-    public int getStart(){
-        return start;
-    }
 
-    public int[] getKey(){
-        return key;
-    }
 
 
 
