@@ -100,7 +100,7 @@ public class KeyFile {
 
             writer.write(Integer.toString(start) + "\n"); //appends the start value of the key as astring
             writer.write(arrayToString()); //adds the key array as a string
-            writer.flush(); //clears the buffer but doesn't clear it
+            writer.flush(); //clears the buffer but doesn't close it
             writer.close(); //closes the bufferstream
 
 
