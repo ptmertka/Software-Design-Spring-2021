@@ -46,7 +46,7 @@ public class MessageFile {
         try { //Try to catch a IOE exception
 
 
-            File file = new File("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad/messages/" + filename +".txt"); //will contain.txt already
+            File file = new File("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad_Hard/messages/" + filename +".txt"); //will contain.txt already
             //creates a proper txt file in the messages folder
             file.createNewFile();//tests that the program can open, returns an expcetion if not
 

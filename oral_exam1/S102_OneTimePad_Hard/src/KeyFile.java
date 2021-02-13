@@ -92,7 +92,7 @@ public class KeyFile {
 
         try { //try block to catch IOException errors
 
-            File file = new File("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad/keyFiles/" + filename); //creates a txt file in the proper keyFiles folder
+            File file = new File("/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad_Hard/keyFiles/" + filename); //creates a txt file in the proper keyFiles folder
 
             file.createNewFile();//creates the file itself, throws an error if the file cannot be made
 

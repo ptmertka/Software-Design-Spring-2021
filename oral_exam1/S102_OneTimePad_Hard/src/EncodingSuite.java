@@ -279,8 +279,8 @@ public class EncodingSuite {
         boolean runLoop = true; //boolean to allow while loop to run
         int userChoice = 0; //integer to store the user's choice of action
 
-        String keyFilePath = "/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad/keyFiles/"; //strings to hold the exact file path of the two file folders, as exactly specified on the machine
-        String messageFilePath ="/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad/messages/"; //learned the hard way that LINUX filepaths arent the same as windows
+        String keyFilePath = "/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad_Hard/keyFiles/"; //strings to hold the exact file path of the two file folders, as exactly specified on the machine
+        String messageFilePath ="/nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/oral_exam1/S102_OneTimePad_Hard/messages/"; //learned the hard way that LINUX filepaths arent the same as windows
 
         System.out.println("Welcome to the encoding suite, what would you like to do today? You can create key files, message files, and decode messages"); //welcoming message
 
