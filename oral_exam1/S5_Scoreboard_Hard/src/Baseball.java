@@ -29,7 +29,9 @@ public class Baseball extends Sport{
         setHomeTeam(home);
         setAwayTeam(away); //sets the home and away teams, the period length, and the unique scoring methods of baseball
         setPeriodLength("3 outs");
-        String [] scoreMethods = {"Single", "Double", "Triple", "Homerun", "Bunt", "Strikeout", "Flyout", "Lineout", "Popout", "Walk"};
+        String [] scoreMethods = {"Single", "Double", "Triple", "Homerun", "Strikeout", "Flyout", "Lineout", "Popout", "Walk"};
+        int [] inputBound = {1,9};
+        setInputBounds(inputBound); //sets the input bounds for the user input
         setScoringMethods(scoreMethods);
 
     }
@@ -64,6 +66,10 @@ public class Baseball extends Sport{
 
     }
 
+    /**
+     * Takes in the user's input ant applies the correct game action, moving runners as well
+     * @param n Int:  the choice of the user of what to do with the game
+     */
     @Override
     public void applyScoreChoice(int n) {
         int runsScored = 0;
@@ -108,16 +114,140 @@ public class Baseball extends Sport{
                 onFirst = false;
             }
             else if (onThird && !onSecond && onFirst){
+                runsScored = 1;
                 onSecond = true;
+                onFirst = false;
+            }
+            else if (onThird && !onSecond && !onFirst){
+                runsScored = 1;
+                onThird = false;
+                onSecond = true;
+            }
+            else if (!onThird && onSecond && !onFirst){
+
+                runsScored = 1;
+            }
+            else if(!onThird && !onSecond && onFirst){
+                onSecond = true;
+                onThird = true;
+                onFirst = false;
+            }
+            else{
+                onSecond = true;
+            }
+        }
+        if(n==3){
+            if(onThird && onSecond && onFirst){
+                runsScored = 3;
+                onFirst = false;
+                onSecond = false;
+            }
+            else if (onThird && onSecond && !onFirst){
+                runsScored = 2;
+                onSecond =false;
+            }
+            else if (!onThird && onSecond && onFirst){
+                runsScored = 2;
+                onThird = true;
+                onFirst = false;
+                onSecond = false;
+            }
+            else if (onThird && !onSecond && onFirst){
+                runsScored = 2;
+                onSecond = false;
+                onFirst = false;
+            }
+            else if (onThird && !onSecond && !onFirst){
+                runsScored = 1;
+                onSecond = false;
+            }
+            else if (!onThird && onSecond && !onFirst){
+
+                runsScored = 1;
+                onSecond = false;
+                onThird = false;
+            }
+            else if(!onThird && !onSecond && onFirst){
+                runsScored = 1;
+
+                onThird = true;
+                onFirst = false;
+            }
+            else{
+                onThird = true;
+            }
+        }
+        if(n==4){
+            if(onThird && onSecond && onFirst){
+                runsScored = 4;
+                onFirst = false;
+                onSecond = false;
+                onThird = false;
+            }
+            else if (onThird && onSecond && !onFirst){
+                runsScored = 3;
+                onThird = false;
+                onSecond = false;
+            }
+            else if (!onThird && onSecond && onFirst){
+                runsScored = 3;
+                onSecond = false;
+                onFirst = false;
+            }
+            else if (onThird && !onSecond && onFirst){
+                runsScored = 3;
+                onThird = false;
+                onFirst = false;
+            }
+            else if (onThird && !onSecond && !onFirst){
+                runsScored = 2;
+                onThird = false;
+
+            }
+            else if (!onThird && onSecond && !onFirst){
+
+                runsScored = 2;
+                onSecond = false;
+            }
+            else if(!onThird && !onSecond && onFirst){
+                runsScored = 2;
+                onFirst = false;
+            }
+            else{
+                runsScored = 1;
+            }
+        }
+        else if (n>=5 && n<=8){
+            outs = outs + 1;
+        }
+        else if (n == 9){
+            if(onThird && onSecond && onFirst){
+                runsScored = 1;
+
+            }
+            else if (onThird && onSecond && !onFirst){
+
+                onFirst = true;
+            }
+            else if (!onThird && onSecond && onFirst){
+                onThird = true;
+
+            }
+            else if (onThird && !onSecond && onFirst){
+
+                onSecond = true;
+
             }
             else if (onThird && !onSecond && !onFirst){
                 onFirst = true;
             }
             else if (!onThird && onSecond && !onFirst){
+
                 onFirst = true;
             }
             else if(!onThird && !onSecond && onFirst){
                 onSecond = true;
+
             }
             else{
                 onFirst = true;
@@ -126,17 +256,35 @@ public class Baseball extends Sport{
 
     }
 
+    /**
+     * Displays the game options for the user for the game of baseball, displaying only the team that is batting
+     * @return
+     */
     @Override
     public String displayOptions() {
         String teamNameToUse = "";
-
+        String a = "";
         if(topOfInning){
             teamNameToUse = getAwayTeam(); //shows which team is batting based on the part of the inning
         }
         else{
             teamNameToUse = getHomeTeam();
         }
-        return null;
+
+        for (int i = 0; i < getScoringMethods().length ; i++){ // for every option for scoring
+            a =a + i + ". " + getScoringMethods()[i] + "\n";
+        }
+
+        return a;
+    }
+
+    /**
+     * Overridden display score to display more detailed score for the game, including outs and baserunners.
+     * @return
+     */
+    @Override
+    public String displayScore() {
+        return super.displayScore();
     }
 
     @Override
