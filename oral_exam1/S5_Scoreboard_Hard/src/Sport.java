@@ -12,7 +12,6 @@
 public abstract class Sport {
 
 
-
     /**
      * String: The name the home team
      */
@@ -43,16 +42,22 @@ public abstract class Sport {
     private int period = 1;
 
     /**
+     * String: The length of the period in the sport, either a time or outs for baseball
+     */
+
+    private String periodLength;
+
+    /**
      * String array[]: An array of strings representing the methods of scoring for each sport
      */
 
     private String[] scoringMethods;
 
     /**
-     * Boolean: holds whether the game is over or not
+     * Boolean: holds whether the game is over or not, default is false
      */
 
-    private Boolean gameOver;
+    private Boolean gameOver = false;
 
     /**
      * Getter for the name of the home team
@@ -135,6 +140,22 @@ public abstract class Sport {
     }
 
     /**
+     * Getter for the period length of the sport
+     * @return String: the period length of the sport
+     */
+    public String getPeriodLength() {
+        return periodLength;
+    }
+
+    /**
+     * Setter for the period length of the sport
+     * @param period String: the length of the period of the sport
+     */
+    public void setPeriodLength(String period) {
+        periodLength = period;
+    }
+
+    /**
      * Getter for the gameOver Boolean
      * @return Boolean: True or False as to whether the game is over or not
      */
@@ -171,23 +192,31 @@ public abstract class Sport {
     /**
      * Generic function used to display the score of the game in one neat line
      */
-    public void displayScore(){
+    public String displayScore(){
 
-        System.out.println("Score: " + homeTeam + ": " + Integer.toString(homeScore) + " - " + awayTeam + ": " + Integer.toString(awayScore));
+        String i = "";
+        i = i + "Score: " + homeTeam + ": " + Integer.toString(homeScore) + " - " + awayTeam + ": " + Integer.toString(awayScore) + "\n";
 
-        //implement winner screen:
+
+        if(gameOver){
+            if (homeScore > awayScore){
+                i = i + homeTeam + " Wins!\n";
+            }
+            else if (awayScore > homeScore){
+                i = i + awayTeam + " Wins!\n";
+            }
+            else{
+               i = i + "The game has ended in a tie\n";
+            }
+        }
+
+        return i;
     }
 
     /**
      * Abstract function that will advance the time period of the game, specific to each game's rules
      */
     public abstract void advanceTimePeriod();
-
-    /**
-     * Abastract function that will get a valid user choice for scoring options based on number of options available
-     * @return int: The chosen value of the user after input is validated
-     */
-    public abstract int getValidInput();
 
     /**
      * Abstract function that will take a user's choice and apply the proper functionality to the score/game
@@ -198,12 +227,12 @@ public abstract class Sport {
     /**
      * Abstract function that will display to the user their options for interacting with the game, made abstract due to differences betwen games
      */
-    public abstract void displayOptions();
+    public abstract String displayOptions();
 
     /**
      * Abstract function that will display the period of the game, but within each class, will allow for specific changes based on rules of games
      */
-    public abstract void displayPeriod();
+    public abstract String displayPeriod();
 
 
 }

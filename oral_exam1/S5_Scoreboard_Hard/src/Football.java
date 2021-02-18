@@ -1,6 +1,12 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Class Football
+ * Holds sport specifc implementations of both the timing system (quarters) and scoring system (touchdowns, field goals etc) of the sport of football
+ * @author Peter Mertka
+ * @version 2/16/2021
+ */
 public class Football extends Sport{
 
 
@@ -12,6 +18,7 @@ public class Football extends Sport{
     public Football(String home, String away){
         setAwayTeam(away); //passes the strings back up to the parent classes instance variables
         setHomeTeam(home);
+        setPeriodLength("15 Minutes");
         String [] ScoringMethods = {"Touchdown", "Extra Point", "Two Point Conversion", "Safety", "Field goal"}; //specific string array sets the scoring methods
         setScoringMethods(ScoringMethods);
     }
@@ -30,29 +37,6 @@ public class Football extends Sport{
 
     }
 
-    /**
-     * Gets a valid user input based on the number of options available for scoring in the football game
-     * @return int: the valid user input of their choice
-     */
-    @Override
-    public int getValidInput() {
-
-        int i = -1;
-        Scanner scanner = new Scanner(System.in); //scanner to handle inputs
-        while ((i < 1) || (i > 11)){ //while the user hasn't entered a number less than 1 or greater than 11
-            try{
-                i = scanner.nextInt(); //gets the user's input
-            }catch(InputMismatchException e){ //if the user enters an invalid input, return an error, get a new number
-                String badInput = scanner.next();
-                System.out.println("Please enter a valid, positive number");
-                continue; //move past bad input
-
-            }
-
-        }
-        return i;
-
-    }
 
     /**
      * Takes the user's choice of scoring method and applies its functionaliy based on the scoring action in football
@@ -95,36 +79,46 @@ public class Football extends Sport{
      * Shows all of the scoring options and time options based on scoring methods and rules of football
      */
     @Override
-    public void displayOptions() {
+    public String displayOptions() {
+        String a = ""; //empty String to return
         String[] scoringMethods  = getScoringMethods(); // gets the array of scoring methods so that they can be printed off
 
-        for(int i = 0; i < scoringMethods.length; i++){
-            System.out.println(i + ". " + getHomeTeam() + " " + scoringMethods[i]);
+        for(int i = 0; i < scoringMethods.length; i++){ //adds the scoring methods for the home team to the return string
+            a = a + i + 1 + ". " + getHomeTeam() + " " + scoringMethods[i] + "\n";
         }
-        System.out.println("11. Advance to next quarter");
+        for(int j = 0; j < scoringMethods.length; j++){ //adds the scoring methods for the away team to the return string
+            a = a + j + 6 + ". " + getAwayTeam() + " " + scoringMethods[j] + "\n";
+        }
+        System.out.println("11. Advance to next quarter"); //prints off the time increment section
+        a = a + "11. Advance to next quarter"; // adds the quarter advance option to the return string
+
+        return a;
     }
 
     /**
      * Displays the time period of the game, with specific cathces for the game being over, and overtimes
      */
     @Override
-    public void displayPeriod() {
+    public String displayPeriod() {
+
+        String a = "";
 
         if(getPeriod() <= 4){ //handles normal quarters
-            System.out.println("Quarter " + getPeriod());
+            a = a + "Quarter " + getPeriod() + "\n";
         }
         else if(getGameOver()){ //prints if game is over
-            System.out.println("Game Over");
+            a = a + "Game Over\n";
         }
         else if(getPeriod() == 5){ //handles the next 3 overtimes
-            System.out.println("First Overtime");
+            a = a + "First Overtime\n";
         }
         else if(getPeriod() == 6){
-            System.out.println("Second Overtime");
+            a = a + "Second Overtime\n";
         }
         else{
-            System.out.println("Third Overtime");
+            a = a + "Third OVertime\n";
         }
-
+        return a;
     }
+
 }
