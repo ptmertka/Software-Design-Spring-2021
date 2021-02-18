@@ -16,6 +16,9 @@ public class Hockey extends Sport{
     }
 
 
+    /**
+     * Moves the games time period forward by 1 period, ending the game when necessary
+     */
     @Override
     public void advanceTimePeriod() {
         setPeriod(getPeriod() + 1); //advances to the next period
@@ -28,23 +31,70 @@ public class Hockey extends Sport{
         }
     }
 
+    /**
+     * Taking a users input, applies the correct scoring method or timekeeping option
+     * @param n Int:  the choice of the user of what to do with the game
+     */
     @Override
     public void applyScoreChoice(int n) {
 
         if (n <= 4){
             setHomeScore(getHomeScore() + 1); //adds a goal to the home team in whatever manner the user wants
         }
+        else if(n <= 8){
+            setAwayScore(getAwayScore() +1);//adds a goal to the away team in whatever manner the user wants
+        }
+        else if (n==9){
+            advanceTimePeriod(); //moves the game ahead one period
+        }
 
 
     }
 
+    /**
+     * Returns a string of all the possible options or scorng/timekeeping
+     * @return String: the message of all possible options for the user to select
+     */
     @Override
     public String displayOptions() {
-        return null;
+        String a = "";
+
+        String[] scoringMethods  = getScoringMethods(); // gets the array of scoring methods so that they can be printed off
+
+        for(int i = 0; i < scoringMethods.length; i++){ //adds the scoring methods for the home team to the return string
+            a = a + i + 1 + ". " + getHomeTeam() + " " + scoringMethods[i] + "\n";
+        }
+        for(int j = 0; j < scoringMethods.length; j++){ //adds the scoring methods for the away team to the return string
+            a = a + j + 5 + ". " + getAwayTeam() + " " + scoringMethods[j] + "\n";
+        }
+        a = a + "9. Advance to next quarter \n"; // adds the quarter advance option to the return string
+
+        return a;
     }
 
+    /**
+     * Returns a string that shows what time period the game is in
+     * @return String:  a message showing what time period the game is in
+     */
     @Override
     public String displayPeriod() {
-        return null;
+        String a = "";
+
+        if(getPeriod() <= 3){ //handles normal quarters
+            a = a + "Quarter " + getPeriod() + "\n";
+        }
+        else if(getGameOver()){ //prints if game is over
+            a = a + "Game Over\n";
+        }
+        else if(getPeriod() == 4){ //handles the next 3 overtimes
+            a = a + "First Overtime\n";
+        }
+        else if(getPeriod() == 5){
+            a = a + "Second Overtime\n";
+        }
+        else{
+            a = a + "Third Overtime\n";
+        }
+        return a;
     }
 }

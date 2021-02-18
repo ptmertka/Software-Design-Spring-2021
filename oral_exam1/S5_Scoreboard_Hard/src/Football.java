@@ -25,6 +25,9 @@ public class Football extends Sport{
         setScoringMethods(ScoringMethods);
     }
 
+    /**
+     * Moves the games time period forward, while also ending the game when necessary
+     */
     @Override
     public void advanceTimePeriod() {
         setPeriod(getPeriod() + 1); //increments the period by one, in this case by quarters
@@ -78,7 +81,8 @@ public class Football extends Sport{
     }
 
     /**
-     * Shows all of the scoring options and time options based on scoring methods and rules of football
+     * returns a string showing all of the scoring options and time options based on scoring methods and rules of football
+     * @return String: a message showing all possible scoring/timekeeping options for the user
      */
     @Override
     public String displayOptions() {
@@ -91,13 +95,14 @@ public class Football extends Sport{
         for(int j = 0; j < scoringMethods.length; j++){ //adds the scoring methods for the away team to the return string
             a = a + j + 6 + ". " + getAwayTeam() + " " + scoringMethods[j] + "\n";
         }
-        a = a + "11. Advance to next quarter"; // adds the quarter advance option to the return string
+        a = a + "11. Advance to next quarter\n"; // adds the quarter advance option to the return string
 
         return a;
     }
 
     /**
-     * Displays the time period of the game, with specific cathces for the game being over, and overtimes
+     * Returns a string that displays the time period of the game, with specific cathces for the game being over, and overtimes
+     * @return String: A message of what time period the game is in
      */
     @Override
     public String displayPeriod() {

@@ -38,6 +38,10 @@ public class Basketball extends Sport{
 
     }
 
+    /**
+     * Takes in the users choice and applies the correct scoring method or option
+     * @param n Int:  the choice of the user of what to do with the game
+     */
     @Override
     public void applyScoreChoice(int n) {
         if (n == 1){
@@ -66,7 +70,8 @@ public class Basketball extends Sport{
 
     }
     /**
-     * Shows all of the scoring options and time options based on scoring methods and rules of football
+     * Returns a string showing all of the scoring options and time options based on scoring methods and rules of basketball
+     * @return String: a message showing all the options for the user to select
      */
     @Override
     public String displayOptions() {
@@ -77,15 +82,16 @@ public class Basketball extends Sport{
             a = a + i + 1 + ". " + getHomeTeam() + " " + scoringMethods[i] + "\n";
         }
         for(int j = 0; j < scoringMethods.length; j++){ //adds the scoring methods for the away team to the return string
-            a = a + j + 6 + ". " + getAwayTeam() + " " + scoringMethods[j] + "\n";
+            a = a + j + 5 + ". " + getAwayTeam() + " " + scoringMethods[j] + "\n";
         }
-        a = a + "11. Advance to next quarter"; // adds the quarter advance option to the return string
+        a = a + "9. Advance to next quarter \n"; // adds the quarter advance option to the return string
 
         return a;
     }
 
     /**
-     * Displays the time period of the game, with specific cathces for the game being over, and overtimes
+     * Displays the time period of the game, with specific catches for the game being over, and overtimes
+     * @return String: the message showing what time period that game is at
      */
     @Override
     public String displayPeriod() {
