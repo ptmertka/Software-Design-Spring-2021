@@ -60,6 +60,12 @@ public abstract class Sport {
     private Boolean gameOver = false;
 
     /**
+     * Integer Array: pair of values that represent the minimum and maximum value for the scanner when picking values based on sport
+     */
+
+    private int[] inputBounds;
+
+    /**
      * Getter for the name of the home team
      * @return String: Name of the home team
      */
@@ -187,6 +193,22 @@ public abstract class Sport {
     public void setScoringMethods(String[] howToScore){
         scoringMethods = howToScore;
 
+    }
+
+    /**
+     * Getter for the InputBounds of a specific sport
+     * @return Int Array: The upper and lower bounds of the valid inputs of a sport
+     */
+    public int[] getInputBounds() {
+        return inputBounds;
+    }
+
+    /**
+     * Setter for the inputBounds of a sport
+     * @param inputBounds Int Array: The array containing the bounds of valid input
+     */
+    public void setInputBounds(int[] inputBounds) {
+        this.inputBounds = inputBounds;
     }
 
     /**

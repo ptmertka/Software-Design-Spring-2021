@@ -18,7 +18,9 @@ public class Football extends Sport{
     public Football(String home, String away){
         setAwayTeam(away); //passes the strings back up to the parent classes instance variables
         setHomeTeam(home);
-        setPeriodLength("15 Minutes");
+        setPeriodLength("15 Minutes"); //sets the period length
+        int []  validBounds = {1, 11}; //valid choices for the user
+        setInputBounds(validBounds);
         String [] ScoringMethods = {"Touchdown", "Extra Point", "Two Point Conversion", "Safety", "Field goal"}; //specific string array sets the scoring methods
         setScoringMethods(ScoringMethods);
     }
@@ -89,7 +91,6 @@ public class Football extends Sport{
         for(int j = 0; j < scoringMethods.length; j++){ //adds the scoring methods for the away team to the return string
             a = a + j + 6 + ". " + getAwayTeam() + " " + scoringMethods[j] + "\n";
         }
-        System.out.println("11. Advance to next quarter"); //prints off the time increment section
         a = a + "11. Advance to next quarter"; // adds the quarter advance option to the return string
 
         return a;
