@@ -82,21 +82,21 @@ public class Register {
         int totalInRegister = 0;
         totalInRegister = totalInRegister + (numTwenties * 2000); //every line takes the number of each item in register and multiplies it by its value
         //By doing this, it gets the cash value in the register, adding it to a running total
-        System.out.println("Your have " + numTwenties + " twenty dollar bill(s)"); //This function also prints out the total amount of each bill and coin in the register
+        System.out.println("You have " + numTwenties + " twenty dollar bill(s)"); //This function also prints out the total amount of each bill and coin in the register
         totalInRegister = totalInRegister + (numTens * 1000);
-        System.out.println("Your have " + numTens + " ten dollar bill(s)");
+        System.out.println("You have " + numTens + " ten dollar bill(s)");
         totalInRegister = totalInRegister + (numFives * 500);
-        System.out.println("Your have " + numFives + " five dollar bill(s)");
+        System.out.println("You have " + numFives + " five dollar bill(s)");
         totalInRegister = totalInRegister + (numOnes * 100);
-        System.out.println("Your have " + numOnes + " one dollar bill(s)");
+        System.out.println("You have " + numOnes + " one dollar bill(s)");
         totalInRegister = totalInRegister + (numQuarters * 25);
-        System.out.println("Your have " + numQuarters + " quarter(s)");
+        System.out.println("You have " + numQuarters + " quarter(s)");
         totalInRegister = totalInRegister + (numDimes * 10);
-        System.out.println("Your have " + numDimes + " dimes(s)");
+        System.out.println("You have " + numDimes + " dimes(s)");
         totalInRegister = totalInRegister + (numNickels * 5);
-        System.out.println("Your have " + numNickels + " nickel(s)");
+        System.out.println("You have " + numNickels + " nickel(s)");
         totalInRegister = totalInRegister + (numPennies * 1);
-        System.out.println("Your have " + numPennies + " pennies(s)");
+        System.out.println("You have " + numPennies + " pennies(s)");
         return totalInRegister; //returns the running total
 
     }
@@ -127,7 +127,8 @@ public class Register {
         int penniesUsed = 0;
 
 
-        int i = 1; //counter variable used to represent number of each item used as necessary
+        int i = 0; //counter variable used to represent number of each item used as necessary
+            checkCashInRegister();
 
             if (amountOwed >= 2000) { //for each repeated chunk, it checks to see if the denomination of bill can be used to lower the amount owed
 
@@ -145,7 +146,7 @@ public class Register {
 
             if (amountOwed >= 1000) {
 
-                i = 1;
+                i = 0;
                 while(!((amountOwed - (i * 1000) >= 0) && (amountOwed - (i * 1000) < 1000)) && (numTens-i >0)) {
 
                     i++;
@@ -154,9 +155,10 @@ public class Register {
                 tensUsed = i;
                 amountOwed = amountOwed - (1000 * i);
             }
+
             if (amountOwed >= 500){
 
-                i = 1;
+                i = 0;
                 while(!((amountOwed - (i * 500) >= 0) && (amountOwed - (i * 500) < 500)) && (numFives-i >0)) {
 
                     i++;
@@ -165,9 +167,10 @@ public class Register {
                 fivesUsed = i;
                 amountOwed = amountOwed - (500 * i);
             }
+
             if (amountOwed >= 100){
 
-                i = 1;
+                i = 0;
                 while(!((amountOwed - (i * 100) >= 0) && (amountOwed - (i * 100) < 100)) && (numOnes-i >0)) {
 
                     i++;
@@ -179,7 +182,7 @@ public class Register {
 
             if (amountOwed >= 25){
 
-                i = 1;
+                i = 0;
                 while(!((amountOwed - (i * 25) >= 0) && (amountOwed - (i * 25) < 25)) && (numQuarters-i >0)) {
 
                     i++;
@@ -191,7 +194,7 @@ public class Register {
 
             if (amountOwed >= 10){
 
-                i = 1;
+                i = 0;
                 while(!((amountOwed - (i * 10) >= 0) && (amountOwed - (i * 10) < 10)) && (numDimes-i >0)) {
 
                     i++;
@@ -203,7 +206,7 @@ public class Register {
 
             if (amountOwed >= 5){
 
-                i = 1;
+                i = 0;
                 while(!((amountOwed - (i * 5) >= 0) && (amountOwed - (i * 5) < 5)) && (numNickels-i >0)) {
 
                     i++;
@@ -215,8 +218,8 @@ public class Register {
 
             if (amountOwed >= 1){
 
-                i = 1;
-                while(!((amountOwed - (i * 1) >= 0) && (amountOwed - (i * 1) < 1)) && !(numPennies-i >0)) {
+                i = 0;
+                while(!((amountOwed - (i * 1) >= 0) && (amountOwed - (i * 1) < 1)) && (numPennies-i >0)) {
 
                     i++;
                 }
