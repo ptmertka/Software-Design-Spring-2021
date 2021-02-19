@@ -52,9 +52,17 @@ public class Baseball extends Sport{
 
             if (topOfInning){ //if its the top of the inning, switches to the bottom
                 topOfInning = false;
+                outs = 0;//resets the number of outs
+                onFirst = false; //clears the bases between innings
+                onSecond = false;
+                onThird = false;
             }
             else{ //otherwise, it goes back to the top of the iinning and advances the inning
                 topOfInning = true;
+                outs = 0; //resets number of outs
+                onFirst = false; //clears the bases between innings
+                onSecond = false;
+                onThird = false;
                 setPeriod(getPeriod() + 1);
             }
             if (getPeriod() >=9 && (getAwayScore() < getHomeScore()) && (topOfInning == false)){ //if the home team is winning in the bottom of the 9th or later, game is over
@@ -259,6 +267,13 @@ public class Baseball extends Sport{
                 onFirst = true;
             }
         }
+        if (topOfInning){
+            setAwayScore(getAwayScore() + runsScored); //adds the runs scored to the proper team based on which one is batting
+        }
+        else{
+            setHomeScore(getHomeScore() + runsScored);
+        }
+        advanceTimePeriod(); //checks if inning is over
 
     }
 
@@ -278,7 +293,7 @@ public class Baseball extends Sport{
         }
 
         for (int i = 0; i < getScoringMethods().length ; i++){ // for every option for scoring
-            a =a + i + ". " + getScoringMethods()[i] + "\n";
+            a =a + (i+1) + ". " + getScoringMethods()[i] + "\n";
         }
 
         return a;
@@ -290,9 +305,11 @@ public class Baseball extends Sport{
      */
     @Override
     public String displayScore() {
+
+
         String a = "";
 
-        a = a + getHomeTeam() + ": " + getHomeScore() + " - " + getAwayTeam() + ": " +getAwayScore() + " \n";
+        a = a + getHomeTeam() + ": " + getHomeScore() + " - " + getAwayTeam() + ": " +getAwayScore() + " \n"; //displays the score, the outs in the inning and what runners are on base
         a = a + "There are " + outs + " outs in the inning \n";
         if(onFirst){
             a = a + "There is a runner on first \n";
@@ -303,7 +320,23 @@ public class Baseball extends Sport{
         if(onThird){
             a = a + "There is a runner on third \n";
         }
+
+        //this is the base displayScore with now the added functionality above
+
+
+
+        if(getGameOver()){
+            if (getHomeScore() >getAwayScore()){
+                a = a + getHomeTeam() + " Wins!\n";
+            }
+            else if (getAwayScore() > getHomeScore()){
+                a = a + getAwayTeam() + " Wins!\n";
+            }
+
+        }
         return a;
+
+
 
     }
 
@@ -315,10 +348,12 @@ public class Baseball extends Sport{
     public String displayPeriod() {
         String a = "";
         if (topOfInning){
-            a = a +"It is the top of inning number " + getPeriod() + "\n";
+            a = a +"It is the top of inning number " + getPeriod() + "\n"; //tells you which inning it is and whether or not its the top of th einning or not
+            a = a + getAwayTeam() + " are up to bat\n";
         }
         else{
             a =a + "It is the bottom of inning number " + getPeriod() + "\n";
+            a = a + getHomeTeam() + " are up to bat\n";
         }
         return a;
     }

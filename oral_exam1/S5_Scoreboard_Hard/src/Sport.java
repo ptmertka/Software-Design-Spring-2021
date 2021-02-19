@@ -65,6 +65,9 @@ public abstract class Sport {
 
     private int[] inputBounds;
 
+    /**
+     * Default constructor, takes no arguments, initilized the base scores, the period, and the game not being over
+     */
     public Sport(){
         awayScore = 0;
         homeScore = 0;

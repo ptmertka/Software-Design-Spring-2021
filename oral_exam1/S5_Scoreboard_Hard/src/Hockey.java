@@ -68,10 +68,10 @@ public class Hockey extends Sport{
         String[] scoringMethods  = getScoringMethods(); // gets the array of scoring methods so that they can be printed off
 
         for(int i = 0; i < scoringMethods.length; i++){ //adds the scoring methods for the home team to the return string
-            a = a + i + 1 + ". " + getHomeTeam() + " " + scoringMethods[i] + "\n";
+            a = a + (i + 1) + ". " + getHomeTeam() + " " + scoringMethods[i] + "\n";
         }
         for(int j = 0; j < scoringMethods.length; j++){ //adds the scoring methods for the away team to the return string
-            a = a + j + 5 + ". " + getAwayTeam() + " " + scoringMethods[j] + "\n";
+            a = a + (j + 5) + ". " + getAwayTeam() + " " + scoringMethods[j] + "\n";
         }
         a = a + "9. Advance to next quarter \n"; // adds the quarter advance option to the return string
 
@@ -87,7 +87,7 @@ public class Hockey extends Sport{
         String a = "";
 
         if(getPeriod() <= 3){ //handles normal quarters
-            a = a + "Quarter " + getPeriod() + "\n";
+            a = a + "Period " + getPeriod() + "\n";
         }
         else if(getGameOver()){ //prints if game is over
             a = a + "Game Over\n";

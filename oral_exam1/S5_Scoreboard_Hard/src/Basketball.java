@@ -12,7 +12,7 @@ public class Basketball extends Sport{
      * @param away String: name of the away team
      */
     public Basketball(String home, String away){ //initializes the superclass variables by using getters and setters,
-        super();
+        super(); //calls parent constructor
         setHomeTeam(home); //get set methods used over having a constructor in Sport so that scoringMethods can be specified within the object itself
         setAwayTeam(away); //cannot create or use a specified value of class basketball without calling contructor in sport if it existed, so that is why no default construct exists in Sport
         setPeriodLength("15 Minutes");
@@ -80,10 +80,10 @@ public class Basketball extends Sport{
         String[] scoringMethods  = getScoringMethods(); // gets the array of scoring methods so that they can be printed off
 
         for(int i = 0; i < scoringMethods.length; i++){ //adds the scoring methods for the home team to the return string
-            a = a + i + 1 + ". " + getHomeTeam() + " " + scoringMethods[i] + "\n";
+            a = a + (i + 1) + ". " + getHomeTeam() + " " + scoringMethods[i] + "\n";
         }
         for(int j = 0; j < scoringMethods.length; j++){ //adds the scoring methods for the away team to the return string
-            a = a + j + 5 + ". " + getAwayTeam() + " " + scoringMethods[j] + "\n";
+            a = a + (j + 5) + ". " + getAwayTeam() + " " + scoringMethods[j] + "\n";
         }
         a = a + "9. Advance to next quarter \n"; // adds the quarter advance option to the return string
 
@@ -112,7 +112,7 @@ public class Basketball extends Sport{
             a = a + "Second Overtime\n";
         }
         else{
-            a = a + "Third OVertime\n";
+            a = a + "Third Overtime\n";
         }
         return a;
     }

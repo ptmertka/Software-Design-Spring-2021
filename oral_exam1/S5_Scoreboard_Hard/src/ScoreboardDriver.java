@@ -18,6 +18,7 @@ public class ScoreboardDriver {
         Scanner scanner = new Scanner(System.in); //scanner to handle inputs
         while ((i < bounds[0]) || (i > bounds[1])){ //while the user hasn't entered an input in the valid range of the sport
             try{
+                System.out.println("Please enter a valid number within the bounds of the options");
                 i = scanner.nextInt(); //gets the user's input
             }catch(InputMismatchException e){ //if the user enters an invalid input, return an error, get a new number
                 String badInput = scanner.next();
@@ -69,7 +70,7 @@ public class ScoreboardDriver {
        }
 
 
-       while(sport1.getGameOver()){
+       while( !(sport1.getGameOver())){ //while the game is not over
            System.out.println(sport1.displayScore()); //prints out the score, time, and user options
            System.out.println(sport1.displayPeriod());
            System.out.println(sport1.displayOptions());
@@ -83,7 +84,7 @@ public class ScoreboardDriver {
 
 
        }
-
+       System.out.println(sport1.displayScore());
        System.out.println("Thank you for playing");
 
 
