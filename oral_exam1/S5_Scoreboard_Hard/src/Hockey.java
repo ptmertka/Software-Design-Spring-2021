@@ -11,6 +11,7 @@ public class Hockey extends Sport{
      * @param away String: the name of the away team to be set
      */
     public Hockey(String home, String away){
+        super();
         setHomeTeam(home); //sets the home and away teams, the period length, and specific scoring methods
         setAwayTeam(away);
         setPeriodLength("20 Minutes");

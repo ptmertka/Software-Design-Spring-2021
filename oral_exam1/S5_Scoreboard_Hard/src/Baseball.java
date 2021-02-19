@@ -31,6 +31,7 @@ public class Baseball extends Sport{
     private boolean topOfInning = true;
 
     public Baseball(String home, String away){
+        super();
         setHomeTeam(home);
         setAwayTeam(away); //sets the home and away teams, the period length, and the unique scoring methods of baseball
         setPeriodLength("3 outs");

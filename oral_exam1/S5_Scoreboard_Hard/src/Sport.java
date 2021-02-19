@@ -27,19 +27,19 @@ public abstract class Sport {
      * Integer: The score of the home team, always begins at zero
      */
 
-    private int homeScore = 0;
+    private int homeScore ;
 
     /**
      * Integer: The score of the away team, always begins at zero
      */
 
-    private int awayScore = 0;
+    private int awayScore;
 
     /**
      * Integer: The time period of the game being played, wheter it is a quarter, a period, etc, always begins at one
      */
 
-    private int period = 1;
+    private int period;
 
     /**
      * String: The length of the period in the sport, either a time or outs for baseball
@@ -65,6 +65,12 @@ public abstract class Sport {
 
     private int[] inputBounds;
 
+    public Sport(){
+        awayScore = 0;
+        homeScore = 0;
+        gameOver = false;
+        period = 1;
+    }
     /**
      * Getter for the name of the home team
      * @return String: Name of the home team

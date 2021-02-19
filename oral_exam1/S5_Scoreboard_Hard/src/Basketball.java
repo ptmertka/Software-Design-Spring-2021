@@ -12,6 +12,7 @@ public class Basketball extends Sport{
      * @param away String: name of the away team
      */
     public Basketball(String home, String away){ //initializes the superclass variables by using getters and setters,
+        super();
         setHomeTeam(home); //get set methods used over having a constructor in Sport so that scoringMethods can be specified within the object itself
         setAwayTeam(away); //cannot create or use a specified value of class basketball without calling contructor in sport if it existed, so that is why no default construct exists in Sport
         setPeriodLength("15 Minutes");

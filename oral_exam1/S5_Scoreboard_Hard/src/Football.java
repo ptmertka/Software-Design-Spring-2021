@@ -15,6 +15,7 @@ public class Football extends Sport{
      * @param away String: the name of the away team to be set
      */
     public Football(String home, String away){
+        super();
         setAwayTeam(away); //passes the strings back up to the parent classes instance variables
         setHomeTeam(home);
         setPeriodLength("15 Minutes"); //sets the period length
