@@ -1,3 +1,8 @@
+/**
+ * Holds the overwritten rules of the sport of hockey so that scoring and timekeeping adhere to the sports rules
+ * @author Peter Mertka
+ * @version 1/17/2021
+ */
 public class Hockey extends Sport{
 
     /**

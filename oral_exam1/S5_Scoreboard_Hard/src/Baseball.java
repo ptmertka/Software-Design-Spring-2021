@@ -1,3 +1,8 @@
+/**
+ * Holds the overwritten methods specific to the game of baseball, along with new instance variables
+ * @author Peter Mertka
+ * @version 2/18/2021
+ */
 public class Baseball extends Sport{
 
     /**
@@ -280,15 +285,40 @@ public class Baseball extends Sport{
 
     /**
      * Overridden display score to display more detailed score for the game, including outs and baserunners.
-     * @return
+     * @return String showing the score of the game, along with the runners on base, and outs
      */
     @Override
     public String displayScore() {
-        return super.displayScore();
+        String a = "";
+
+        a = a + getHomeTeam() + ": " + getHomeScore() + " - " + getAwayTeam() + ": " +getAwayScore() + " \n";
+        a = a + "There are " + outs + " outs in the inning \n";
+        if(onFirst){
+            a = a + "There is a runner on first \n";
+        }
+        if(onSecond){
+            a = a + "There is a runner on second \n";
+        }
+        if(onThird){
+            a = a + "There is a runner on third \n";
+        }
+        return a;
+
     }
 
+    /**
+     * Shows what the period of the game is
+     * @return
+     */
     @Override
     public String displayPeriod() {
-        return null;
+        String a = "";
+        if (topOfInning){
+            a = a +"It is the top of inning number " + getPeriod() + "\n";
+        }
+        else{
+            a =a + "It is the bottom of inning number " + getPeriod() + "\n";
+        }
+        return a;
     }
 }

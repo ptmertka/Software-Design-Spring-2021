@@ -1,5 +1,4 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
+
 
 /**
  * Class Football
@@ -122,7 +121,7 @@ public class Football extends Sport{
             a = a + "Second Overtime\n";
         }
         else{
-            a = a + "Third OVertime\n";
+            a = a + "Third Overtime\n";
         }
         return a;
     }
