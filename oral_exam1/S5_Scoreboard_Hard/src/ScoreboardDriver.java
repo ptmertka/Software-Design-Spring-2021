@@ -55,7 +55,7 @@ public class ScoreboardDriver {
        System.out.println("Please enter the name of the away team:");
        String awayTeam = getStringInput();
 
-       Sport sport1 = new Football(homeTeam, awayTeam); //makes a sport object to be assigned a specific reference based on the user's chocie
+       Sport sport1 = new Football(homeTeam, awayTeam); //makes a sport object to be assigned a specific reference based on the user's choice, made a footbal so that declaration would be valid and useable later on in code
        if(choice ==1){
            sport1 = new Football(homeTeam,awayTeam);
        }
