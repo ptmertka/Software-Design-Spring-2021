@@ -16,9 +16,9 @@ public class SavingsAccount extends Account{
      * @param interest int: The percentage of interest for the account
      */
     public SavingsAccount(String name, int number, int balanceOfAccount, String type, int interest){
-        super(name, number, balanceOfAccount, type);
-        interestRate = interest;
-        setNumSavingsAccounts(getNumSavingsAccounts() + 1);
+        super(name, number, balanceOfAccount, type); //super class constructor
+        interestRate = interest; //sets interest rate
+        setNumSavingsAccounts(getNumSavingsAccounts() + 1); //increments number of savings accounts
     }
 
     /**
