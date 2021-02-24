@@ -50,6 +50,20 @@ public class Account {
     private static int numLoanAccountsCompany = 0;
 
     /**
+     * Class constructor for the Account class
+     * @param name The name of the account owner
+     * @param number The number of the account
+     * @param balanceOfAccount the balance of the account
+     * @param type The account type
+     */
+    public Account(String name, int number, int balanceOfAccount, String type){
+        accountUserName = name;
+        accountNumber = number;
+        balance = balanceOfAccount;
+        accountType = type;
+    }
+
+    /**
      * Getter for the account UserName
      * @return String: the name of the account owner
      */
@@ -185,21 +199,47 @@ public class Account {
         Account.numLoanAccountsCompany = numLoanAccountsCompany;
     }
 
+    /**
+     * Allows users to withdraw from the account, with error checking for bad inputs
+     * @param cents int: the amount being withdrawn in cents
+     * @return String: The error or success message for the operation
+     */
     public String withdraw(int cents){
         String returnString = ""; //string to hold return message of code
-        if ((cents <= balance) && (cents >=1)){
-            balance = balance - cents;
-            returnString = "Withdrawl Succsesful!";
+
+        if ((cents <= balance) && (cents >=0)){ //if the user is withdrawn an amount smaller or equal to balance
+            balance = balance - cents; //removes the withdrawl
+            returnString = "Withdrawl Succsesful!"; //sets the return message
         }
-        else if (cents > balance){
-            returnString ="You cannot withdraw more than your account balance";
+        else if (cents > balance){ //if the user is trying to withdraw more than possible
+            returnString ="You cannot withdraw more than your account balance"; //sets return message
         }
-        else{
-            returnString = "You cannot withdraw less than 1 cent";
+        else{ //third case is the withdraw amount is negative
+            returnString = "You cannot withdraw less than 0 cents";  //sets return message
         }
         return returnString;
     }
 
-    public String deposit(int cents)
+    /**
+     * Allows the user to deposit into the account, checking for bad inputs
+     * @param cents Int; the amount being deposited
+     * @return String: the return message either of success or error
+     */
+    public String deposit(int cents){
+        String returnString = ""; //sets a string for the return message
+
+        if (cents >=0){ //if the user is adding 0 or more cents
+            balance = balance + cents; //adds the amount and sets the balance to the same plus the deposit
+            returnString = "Deposit Succseful";
+        }
+        else{ //if the user tries adding negative funds, sets an error message
+            returnString = "You cannot deposit a negative value";
+        }
+
+        return returnString;
+
+    }
+
+
 
 }
