@@ -120,6 +120,13 @@ public class Account {
     }
 
     /**
+     * Setter for the balance of the account
+     * @param balance Int: the new balance of the account
+     */
+    public void setBalance(int balance){
+        this.balance = balance;
+    }
+    /**
      * Getter for the number of the Savings Accounts
      * @return Int: The number of savings accounts
      */
