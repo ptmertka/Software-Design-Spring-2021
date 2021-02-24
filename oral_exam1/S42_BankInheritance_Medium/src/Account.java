@@ -66,37 +66,57 @@ public class Account {
     }
 
     /**
-     * Getter for the
-     * @return
+     * Getter for the account Number
+     * @return int: The account number
      */
     public int getAccountNumber() {
         return accountNumber;
     }
 
+    /**
+     * Setter for the account number
+     * @param accountNumber Int: the new number of the account
+     */
     public void setAccountNumber(int accountNumber) {
         this.accountNumber = accountNumber;
     }
 
+    /**
+     * Getter for the account type, either company or individual
+     * @return String: The type of the account
+     */
     public String getAccountType() {
         return accountType;
     }
 
+    /**
+     * Setter for the account type
+     * @param accountType String: The type of the account to be set
+     */
     public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
 
+    /**
+     * Getter for the balance of the account in cents
+     * @return
+     */
     public int getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
+    /**
+     * Getter for the number of the Savings Accounts
+     * @return Int: The number of savings accounts
+     */
     public static int getNumSavingsAccounts() {
         return numSavingsAccounts;
     }
 
+    /**
+     * Setter for the number of Savings Accounts in the bank
+     * @param numSavingsAccounts Int: The new number to set the number of accounts to
+     */
     public static void setNumSavingsAccounts(int numSavingsAccounts) {
         Account.numSavingsAccounts = numSavingsAccounts;
     }
