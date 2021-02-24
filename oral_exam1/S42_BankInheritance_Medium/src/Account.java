@@ -121,36 +121,85 @@ public class Account {
         Account.numSavingsAccounts = numSavingsAccounts;
     }
 
+    /**
+     * Getter the number of checking accounts for individuals
+     * @return
+     */
     public static int getNumCheckingIndividual() {
         return NumCheckingIndividual;
     }
 
+    /**
+     * Setter for the number of individual checking accounts in the bank
+     * @param numCheckingIndividual Int: the new number of checking accounts in the bank to update to
+     */
     public static void setNumCheckingIndividual(int numCheckingIndividual) {
         NumCheckingIndividual = numCheckingIndividual;
     }
 
+    /**
+     * Getter for the number of the checking accounts for companies
+     * @return Int: the number of company checking accounts
+     */
     public static int getNumCheckingCompany() {
         return numCheckingCompany;
     }
 
+    /**
+     * Setter for the number of company checking accounts
+     * @param numCheckingCompany Int: The new number of checking accounts for companys
+     */
     public static void setNumCheckingCompany(int numCheckingCompany) {
         Account.numCheckingCompany = numCheckingCompany;
     }
 
+    /**
+     * Getter for the number of individual loan accounts
+     * @return Int: The number of individual loan accounts
+     */
     public static int getNumLoanAccountsIndividual() {
         return numLoanAccountsIndividual;
     }
 
+    /**
+     * Setter for the number of individual loan accounts
+     * @param numLoanAccountsIndividual Int: The new number of individual loan accounts
+     */
     public static void setNumLoanAccountsIndividual(int numLoanAccountsIndividual) {
         Account.numLoanAccountsIndividual = numLoanAccountsIndividual;
     }
 
+    /**
+     * Getter for the number of loan accounts for companies
+     * @return Int: The number of company loan accounts
+     */
     public static int getNumLoanAccountsCompany() {
         return numLoanAccountsCompany;
     }
 
+    /**
+     * Setter for the number of loan accounts for companies
+     * @param numLoanAccountsCompany Int: The new number of company loan accounts
+     */
     public static void setNumLoanAccountsCompany(int numLoanAccountsCompany) {
         Account.numLoanAccountsCompany = numLoanAccountsCompany;
     }
+
+    public String withdraw(int cents){
+        String returnString = ""; //string to hold return message of code
+        if ((cents <= balance) && (cents >=1)){
+            balance = balance - cents;
+            returnString = "Withdrawl Succsesful!";
+        }
+        else if (cents > balance){
+            returnString ="You cannot withdraw more than your account balance";
+        }
+        else{
+            returnString = "You cannot withdraw less than 1 cent";
+        }
+        return returnString;
+    }
+
+    public String deposit(int cents)
 
 }
