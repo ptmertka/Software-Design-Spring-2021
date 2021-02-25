@@ -8,6 +8,11 @@ public class SavingsAccount extends Account{
     private int interestRate;
 
     /**
+     * Static int: the number of savings accounts made in the bank
+     */
+    private static int numSavingsAccounts = 0;
+
+    /**
      * Subclass constructor, calls the super class constructor as well as updating the interest rate and number of accounts
      * @param name String: the name of the Owner of the account
      * @param number Int: the number of the account
@@ -18,7 +23,7 @@ public class SavingsAccount extends Account{
     public SavingsAccount(String name, int number, int balanceOfAccount, String type, int interest){
         super(name, number, balanceOfAccount, type); //super class constructor
         interestRate = interest; //sets interest rate
-        setNumSavingsAccounts(getNumSavingsAccounts() + 1); //increments number of savings accounts
+        numSavingsAccounts = numSavingsAccounts+ 1; //increments number of savings accounts
     }
 
     /**
@@ -30,5 +35,21 @@ public class SavingsAccount extends Account{
         double temp = getBalance() + (getBalance() * rate); //adds the interest to the balance
         int newBalance = (int) temp; //casts it back to being an integer to account for cents
         setBalance(newBalance); //updates the balance of the account
+    }
+
+    /**
+     * Getter for the number of the Savings Accounts
+     * @return Int: The number of savings accounts
+     */
+    public static int getNumSavingsAccounts() {
+        return numSavingsAccounts;
+    }
+
+    /**
+     * Setter for the number of Savings Accounts in the bank
+     * @param numSavingsAccounts Int: The new number to set the number of accounts to
+     */
+    public static void setNumSavingsAccounts(int numSavingsAccounts) {
+        SavingsAccount.numSavingsAccounts = numSavingsAccounts;
     }
 }

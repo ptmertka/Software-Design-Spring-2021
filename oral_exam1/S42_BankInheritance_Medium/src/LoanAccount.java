@@ -9,6 +9,16 @@ public class LoanAccount extends Account{
     private int interestRate;
 
     /**
+     * Static int: The number of Individual Loan Accounts made in the bank
+     */
+    private static int numLoanAccountsIndividual = 0;
+
+    /**
+     * The number of company Loan accounts made in the bank
+     */
+    private static int numLoanAccountsCompany = 0;
+
+    /**
      * Class constructor, calls the super class constrctor before incrementing number of accounts
      * @param name String: Name of the account owner
      * @param number int: The account number
@@ -18,12 +28,12 @@ public class LoanAccount extends Account{
      */
     public LoanAccount(String name, int number, int balanceOfAccount, String type, int rate){
         super(name, number, balanceOfAccount, type);
-        interestRate = rate;
-        if(type == "Individual"){
-            setNumLoanAccountsIndividual(getNumLoanAccountsIndividual() + 1);
+        interestRate = rate; //sets the interest rate
+        if(type == "Individual"){ //updates the number of accounts based on type
+            numLoanAccountsIndividual++;
 
         }else{
-            setNumLoanAccountsCompany(getNumLoanAccountsCompany() + 1);
+            numLoanAccountsCompany++;
         }
 
 
@@ -63,6 +73,38 @@ public class LoanAccount extends Account{
         double temp = getBalance() + (getBalance() * rate); //adds the interest to the balance
         int newBalance = (int) temp; //casts it back to being an integer to account for cents
         setBalance(newBalance); //updates the balance of the account
+    }
+
+    /**
+     * Getter for the number of individual loan accounts
+     * @return Int: The number of individual loan accounts
+     */
+    public static int getNumLoanAccountsIndividual() {
+        return numLoanAccountsIndividual;
+    }
+
+    /**
+     * Setter for the number of individual loan accounts
+     * @param numLoanAccountsIndividual Int: The new number of individual loan accounts
+     */
+    public static void setNumLoanAccountsIndividual(int numLoanAccountsIndividual) {
+        LoanAccount.numLoanAccountsIndividual = numLoanAccountsIndividual;
+    }
+
+    /**
+     * Getter for the number of loan accounts for companies
+     * @return Int: The number of company loan accounts
+     */
+    public static int getNumLoanAccountsCompany() {
+        return numLoanAccountsCompany;
+    }
+
+    /**
+     * Setter for the number of loan accounts for companies
+     * @param numLoanAccountsCompany Int: The new number of company loan accounts
+     */
+    public static void setNumLoanAccountsCompany(int numLoanAccountsCompany) {
+        LoanAccount.numLoanAccountsCompany = numLoanAccountsCompany;
     }
 }
 

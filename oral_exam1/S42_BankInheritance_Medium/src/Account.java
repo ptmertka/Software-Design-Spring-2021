@@ -25,32 +25,13 @@ public class Account {
     private int balance = 0;
 
     /**
-     * Static int: the number of savings accounts made in the bank
+     * Int: The total number of account objects made
      */
-    private static int numSavingsAccounts = 0;
+    private static int totalAccounts = 0;
+
 
     /**
-     * Static int: The number of Individual Checking Accounts made in the bank
-     */
-    private static int NumCheckingIndividual = 0;
-
-    /**
-     * Static int: The number of Company Checking Accounts made in the bank
-     */
-    private static int numCheckingCompany = 0;
-
-    /**
-     * Static int: The number of Individual Loan Accounts made in the bank
-     */
-    private static int numLoanAccountsIndividual = 0;
-
-    /**
-     * The number of company Loan accounts made in the bank
-     */
-    private static int numLoanAccountsCompany = 0;
-
-    /**
-     * Class constructor for the Account class
+     * Class constructor for the Account class, increments the number of accounts
      * @param name The name of the account owner
      * @param number The number of the account
      * @param balanceOfAccount the balance of the account
@@ -61,6 +42,7 @@ public class Account {
         accountNumber = number;
         balance = balanceOfAccount;
         accountType = type;
+        totalAccounts++;
     }
 
     /**
@@ -126,84 +108,21 @@ public class Account {
     public void setBalance(int balance){
         this.balance = balance;
     }
+
     /**
-     * Getter for the number of the Savings Accounts
-     * @return Int: The number of savings accounts
+     * Getter for the total number of accounts
+     * @return int; the total number of account objects made
      */
-    public static int getNumSavingsAccounts() {
-        return numSavingsAccounts;
+    public static int getTotalAccounts() {
+        return totalAccounts;
     }
 
     /**
-     * Setter for the number of Savings Accounts in the bank
-     * @param numSavingsAccounts Int: The new number to set the number of accounts to
+     * Setter for the total number of accounts
+     * @param totalAccounts Int: The total number of accounts being updated to
      */
-    public static void setNumSavingsAccounts(int numSavingsAccounts) {
-        Account.numSavingsAccounts = numSavingsAccounts;
-    }
-
-    /**
-     * Getter the number of checking accounts for individuals
-     * @return
-     */
-    public static int getNumCheckingIndividual() {
-        return NumCheckingIndividual;
-    }
-
-    /**
-     * Setter for the number of individual checking accounts in the bank
-     * @param numCheckingIndividual Int: the new number of checking accounts in the bank to update to
-     */
-    public static void setNumCheckingIndividual(int numCheckingIndividual) {
-        NumCheckingIndividual = numCheckingIndividual;
-    }
-
-    /**
-     * Getter for the number of the checking accounts for companies
-     * @return Int: the number of company checking accounts
-     */
-    public static int getNumCheckingCompany() {
-        return numCheckingCompany;
-    }
-
-    /**
-     * Setter for the number of company checking accounts
-     * @param numCheckingCompany Int: The new number of checking accounts for companys
-     */
-    public static void setNumCheckingCompany(int numCheckingCompany) {
-        Account.numCheckingCompany = numCheckingCompany;
-    }
-
-    /**
-     * Getter for the number of individual loan accounts
-     * @return Int: The number of individual loan accounts
-     */
-    public static int getNumLoanAccountsIndividual() {
-        return numLoanAccountsIndividual;
-    }
-
-    /**
-     * Setter for the number of individual loan accounts
-     * @param numLoanAccountsIndividual Int: The new number of individual loan accounts
-     */
-    public static void setNumLoanAccountsIndividual(int numLoanAccountsIndividual) {
-        Account.numLoanAccountsIndividual = numLoanAccountsIndividual;
-    }
-
-    /**
-     * Getter for the number of loan accounts for companies
-     * @return Int: The number of company loan accounts
-     */
-    public static int getNumLoanAccountsCompany() {
-        return numLoanAccountsCompany;
-    }
-
-    /**
-     * Setter for the number of loan accounts for companies
-     * @param numLoanAccountsCompany Int: The new number of company loan accounts
-     */
-    public static void setNumLoanAccountsCompany(int numLoanAccountsCompany) {
-        Account.numLoanAccountsCompany = numLoanAccountsCompany;
+    public static void setTotalAccounts(int totalAccounts) {
+        Account.totalAccounts = totalAccounts;
     }
 
     /**

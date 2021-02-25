@@ -8,6 +8,16 @@ public class CheckingAccount extends Account{
     private int overdraftLimit;
 
     /**
+     * Static int: The number of Individual Checking Accounts made in the bank
+     */
+    private static int NumCheckingIndividual = 0;
+
+    /**
+     * Static int: The number of Company Checking Accounts made in the bank
+     */
+    private static int numCheckingCompany = 0;
+
+    /**
      * Class constructor, calls superclass constructor before initializing the overdraft limit and incrimenting the number of accounts
      * @param name String: Name of the user of the account
      * @param number int: The number of the account
@@ -19,9 +29,9 @@ public class CheckingAccount extends Account{
         super(name, number, balanceOfAccount, type); //calls super cosntructor
         overdraftLimit = overdraft; //sets the over draft limit
         if(type.equals("Individual")){ //if this account is for an individual, updates the number of individual account, else the number of company accounts
-            setNumCheckingIndividual(getNumCheckingIndividual() + 1);
+            NumCheckingIndividual++;
         }else{
-            setNumCheckingCompany(getNumCheckingCompany() + 1);
+            numCheckingCompany++;
         }
 
 
@@ -49,4 +59,37 @@ public class CheckingAccount extends Account{
         }
         return returnMessage;
     }
+
+    /**
+     * Getter the number of checking accounts for individuals
+     * @return
+     */
+    public static int getNumCheckingIndividual() {
+        return NumCheckingIndividual;
+    }
+
+    /**
+     * Setter for the number of individual checking accounts in the bank
+     * @param numCheckingIndividual Int: the new number of checking accounts in the bank to update to
+     */
+    public static void setNumCheckingIndividual(int numCheckingIndividual) {
+        NumCheckingIndividual = numCheckingIndividual;
+    }
+
+    /**
+     * Getter for the number of the checking accounts for companies
+     * @return Int: the number of company checking accounts
+     */
+    public static int getNumCheckingCompany() {
+        return numCheckingCompany;
+    }
+
+    /**
+     * Setter for the number of company checking accounts
+     * @param numCheckingCompany Int: The new number of checking accounts for companys
+     */
+    public static void setNumCheckingCompany(int numCheckingCompany) {
+        CheckingAccount.numCheckingCompany = numCheckingCompany;
+    }
+
 }
