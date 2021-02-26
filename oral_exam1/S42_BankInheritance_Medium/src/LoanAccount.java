@@ -21,13 +21,12 @@ public class LoanAccount extends Account{
     /**
      * Class constructor, calls the super class constrctor before incrementing number of accounts
      * @param name String: Name of the account owner
-     * @param number int: The account number
      * @param balanceOfAccount int: The balance of the account in cents
      * @param type String: the type of the account
      * @param rate int: the interest rate of the account as a percent
      */
-    public LoanAccount(String name, int number, int balanceOfAccount, String type, int rate){
-        super(name, number, balanceOfAccount, type);
+    public LoanAccount(String name, int balanceOfAccount, String type, int rate){
+        super(name, balanceOfAccount, type);
         interestRate = rate; //sets the interest rate
         if(type == "Individual"){ //updates the number of accounts based on type
             numLoanAccountsIndividual++;

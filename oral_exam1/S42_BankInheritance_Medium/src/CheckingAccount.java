@@ -20,13 +20,12 @@ public class CheckingAccount extends Account{
     /**
      * Class constructor, calls superclass constructor before initializing the overdraft limit and incrimenting the number of accounts
      * @param name String: Name of the user of the account
-     * @param number int: The number of the account
      * @param balanceOfAccount int: The balance of the account to set in cents
      * @param type String: the type of the account
      * @param overdraft int: the overdraft limit of the account in cents
      */
-    public CheckingAccount(String name, int number, int balanceOfAccount, String type, int overdraft){
-        super(name, number, balanceOfAccount, type); //calls super cosntructor
+    public CheckingAccount(String name, int balanceOfAccount, String type, int overdraft){
+        super(name,  balanceOfAccount, type); //calls super cosntructor
         overdraftLimit = overdraft; //sets the over draft limit
         if(type.equals("Individual")){ //if this account is for an individual, updates the number of individual account, else the number of company accounts
             NumCheckingIndividual++;

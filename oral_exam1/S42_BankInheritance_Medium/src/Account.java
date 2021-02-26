@@ -33,16 +33,15 @@ public abstract class Account {
     /**
      * Class constructor for the Account class, increments the number of accounts
      * @param name The name of the account owner
-     * @param number The number of the account
      * @param balanceOfAccount the balance of the account
      * @param type The account type
      */
-    public Account(String name, int number, int balanceOfAccount, String type){
+    public Account(String name, int balanceOfAccount, String type){
         accountUserName = name;
-        accountNumber = number;
         balance = balanceOfAccount;
         accountType = type;
         totalAccounts++;
+        accountNumber = totalAccounts;
     }
 
     /**

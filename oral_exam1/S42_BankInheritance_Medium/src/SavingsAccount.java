@@ -15,13 +15,12 @@ public class SavingsAccount extends Account{
     /**
      * Subclass constructor, calls the super class constructor as well as updating the interest rate and number of accounts
      * @param name String: the name of the Owner of the account
-     * @param number Int: the number of the account
      * @param balanceOfAccount Int: The balance of the account in cents
      * @param type String: the type of the account
      * @param interest int: The percentage of interest for the account
      */
-    public SavingsAccount(String name, int number, int balanceOfAccount, String type, int interest){
-        super(name, number, balanceOfAccount, type); //super class constructor
+    public SavingsAccount(String name, int balanceOfAccount, String type, int interest){
+        super(name, balanceOfAccount, type); //super class constructor
         interestRate = interest; //sets interest rate
         numSavingsAccounts = numSavingsAccounts+ 1; //increments number of savings accounts
     }
