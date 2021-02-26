@@ -35,11 +35,15 @@ public class Bank {
 
         ArrayList<Account> accountList = new ArrayList<Account>(); // creates an array list to store accounts
 
-        while(operation){
-            System.out.println("Please select what you would like to do\n");
+        Scanner scanner = new Scanner(System.in); //scanner to get string input
+
+        while(operation){ //loop that runs while banker has the app open
+
+            System.out.println("Please select what you would like to do\n"); //gives the banker options to choose how to operate the system
             System.out.println("1. Create New Account\n +" +
                     "2. Interact Wtih Account\n" +
-                    "3. View Bank Details\n");
+                    "3. View Bank Details\n"+
+                    "4. Exit");
 
             int userChoice = getValidInput(); //gets users choice for interaction
 
@@ -57,6 +61,10 @@ public class Bank {
                 else if (userChoice == 2){
                     String type = "Company";
                 }
+
+                System.out.println("Please enter the name of the owner of the account");
+
+                String owner = scanner.nextLine();
 
             }
 
