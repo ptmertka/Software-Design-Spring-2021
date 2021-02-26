@@ -28,6 +28,10 @@ public class Bank {
         return i;
     }
 
+    /**
+     * Converts an inputted, positive double to cents amount so that program can run in cents
+     * @return Int: the amount entered in cents
+     */
     public static int convertAndGetDouble(){
         double amount = -1.1;
         Scanner scanner = new Scanner(System.in);
@@ -44,6 +48,31 @@ public class Bank {
         }
         int centsAmount = (int) (amount * 100); //converts the double to cents and then returns it
         return centsAmount;
+    }
+
+    /**
+     * Displays the total amount of each type of the account
+     * @return String: A string that contains all the relevant account info of the bank
+     */
+    public String displayAccountsInfo(){
+        String returnVal = "Total Number of Accounts:\n " +
+                Account.getTotalAccounts() +"\n" +
+                "Total Individual Accounts: \n" +
+                (SavingsAccount.getNumSavingsAccounts() + CheckingAccount.getNumCheckingIndividual() + LoanAccount.getNumLoanAccountsIndividual()) + "\n" +
+                "Total Company Accounts:\n" +
+                (CheckingAccount.getNumCheckingCompany() +LoanAccount.getNumLoanAccountsCompany()) + "\n" +
+                "Number of Savings Accounts:\n" +
+                SavingsAccount.getNumSavingsAccounts() + "\n" +
+                "Number of Individual Checking Accounts:\n" +
+                CheckingAccount.getNumCheckingIndividual() + "\n" +
+                "Number of Individual Loan Accounts:\n" +
+                LoanAccount.getNumLoanAccountsCompany() + "\n" +
+                "Number of Company Checking Accounts:\n" +
+                CheckingAccount.getNumCheckingCompany() + "\n" +
+                "Number of Company Loan Accounts:\n" +
+                LoanAccount.getNumLoanAccountsCompany() +"\n";
+            return returnVal;
+
     }
 
     public static void main(String args[]){
@@ -105,10 +134,9 @@ public class Bank {
                 System.out.println("Please enter the balance for this account in dollars");
 
 
-                int centsAmount = convertAndGetDouble();//gets the double amount
+                int centsAmount = convertAndGetDouble();//gets the double amount, converts it to cents for the balance
 
 
-                System.out.println("centsAmount is " + centsAmount);
 
                 if(userChoice ==1){ //if user is making a savings account
                     System.out.println("Please enter the interest rate for this account as a percent, integer percents only");
@@ -142,7 +170,7 @@ public class Bank {
 
 
             }
-            else if(userChoice == 4){
+            else if(userChoice == 4){ //if the user chooses to exit, exits
                 operation = false;
             }
 
