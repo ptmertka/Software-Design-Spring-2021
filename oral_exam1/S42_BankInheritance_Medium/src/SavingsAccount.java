@@ -103,6 +103,8 @@ public class SavingsAccount extends Account{
                "Account Owner: " + getAccountUserName() + "\n" +
                "Account Number: " + getAccountNumber() + "\n" +
                "Account Type: " + getAccountType() + "\n" +
+               "Balance: " + getBalance() + "\n" +
+               "Interest Rate: " + interestRate + "%\n";
 
     }
 }

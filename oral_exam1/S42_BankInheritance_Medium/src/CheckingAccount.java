@@ -112,4 +112,14 @@ public class CheckingAccount extends Account{
         CheckingAccount.numCheckingCompany = numCheckingCompany;
     }
 
+    @Override
+    public String toString() {
+        return "Checking Account: \n" +
+                "---------------------------" +
+                "Account Owner: " + getAccountUserName() + "\n" +
+                "Account Number: " + getAccountNumber() + "\n" +
+                "Account Type: " + getAccountType() + "\n" +
+                "Balance: " + getBalance() + "\n" +
+                "Overdraft Limit: " + overdraftLimit + "%\n";
+    }
 }
