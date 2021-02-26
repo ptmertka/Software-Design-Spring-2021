@@ -44,7 +44,8 @@ public class LoanAccount extends Account{
      * @param cents The amount being paid in cents
      * @return String: the positive/negative return message
      */
-    public String makePayment(int cents){
+    @Override
+    public String withdraw(int cents){
         String returnMessage = ""; //return message for the function
 
         if (cents >= 0 && (getBalance() - cents >= 0)){ //if the payment on the balance is valud
@@ -53,6 +54,7 @@ public class LoanAccount extends Account{
 
         }
         else if (getBalance() - cents < 0){ //if the payment is going to overpay the loan
+
             returnMessage = "You cannot payoff more than the balance of the account";
 
         }
@@ -62,6 +64,26 @@ public class LoanAccount extends Account{
 
         return returnMessage;
 
+    }
+
+    /**
+     * Allows the user to deposit into the account, checking for bad inputs
+     * @param cents Int; the amount being deposited
+     * @return String: the return message either of success or error
+     */
+    @Override
+    public String deposit(int cents) {
+        String returnString = ""; //sets a string for the return message
+
+        if (cents >=0){ //if the user is adding 0 or more cents
+            setBalance(getBalance() + cents); //adds the amount and sets the balance to the same plus the deposit
+            returnString = "Deposit Succseful";
+        }
+        else{ //if the user tries adding negative funds, sets an error message
+            returnString = "You cannot deposit a negative value";
+        }
+
+        return returnString;
     }
 
     /**

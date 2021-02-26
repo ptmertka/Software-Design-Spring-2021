@@ -61,6 +61,26 @@ public class CheckingAccount extends Account{
     }
 
     /**
+     * Allows the user to deposit into the account, checking for bad inputs
+     * @param cents Int; the amount being deposited
+     * @return String: the return message either of success or error
+     */
+    @Override
+    public String deposit(int cents) {
+        String returnString = ""; //sets a string for the return message
+
+        if (cents >=0){ //if the user is adding 0 or more cents
+            setBalance(getBalance()+cents); //adds the amount and sets the balance to the same plus the deposit
+            returnString = "Deposit Succseful";
+        }
+        else{ //if the user tries adding negative funds, sets an error message
+            returnString = "You cannot deposit a negative value";
+        }
+
+        return returnString;
+    }
+
+    /**
      * Getter the number of checking accounts for individuals
      * @return
      */

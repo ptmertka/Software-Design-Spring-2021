@@ -26,6 +26,7 @@ public class SavingsAccount extends Account{
         numSavingsAccounts = numSavingsAccounts+ 1; //increments number of savings accounts
     }
 
+
     /**
      * Adds the interest of the account to the balance
      */
@@ -51,5 +52,57 @@ public class SavingsAccount extends Account{
      */
     public static void setNumSavingsAccounts(int numSavingsAccounts) {
         SavingsAccount.numSavingsAccounts = numSavingsAccounts;
+    }
+
+    /**
+     * Allows users to withdraw from the account, with error checking for bad inputs
+     * @param cents int: the amount being withdrawn in cents
+     * @return String: The error or success message for the operation
+     */
+    @Override
+    public String withdraw(int cents) {
+        String returnString = ""; //string to hold return message of code
+
+        if ((cents <= getBalance()) && (cents >=0)){ //if the user is withdrawn an amount smaller or equal to balance
+            setBalance(getBalance()-cents);//removes the withdrawl
+            returnString = "Withdrawl Succsesful!"; //sets the return message
+        }
+        else if (cents > getBalance()){ //if the user is trying to withdraw more than possible
+            returnString ="You cannot withdraw more than your account balance"; //sets return message
+        }
+        else{ //third case is the withdraw amount is negative
+            returnString = "You cannot withdraw less than 0 cents";  //sets return message
+        }
+        return returnString;
+    }
+
+    /**
+     * Allows the user to deposit into the account, checking for bad inputs
+     * @param cents Int; the amount being deposited
+     * @return String: the return message either of success or error
+     */
+    @Override
+    public String deposit(int cents) {
+        String returnString = ""; //sets a string for the return message
+
+        if (cents >=0){ //if the user is adding 0 or more cents
+            setBalance(getBalance()+cents); //adds the amount and sets the balance to the same plus the deposit
+            returnString = "Deposit Succseful";
+        }
+        else{ //if the user tries adding negative funds, sets an error message
+            returnString = "You cannot deposit a negative value";
+        }
+
+        return returnString;
+    }
+
+    @Override
+    public String toString() {
+       return "Savings Account: \n" +
+               "---------------------------" +
+               "Account Owner: " + getAccountUserName() + "\n" +
+               "Account Number: " + getAccountNumber() + "\n" +
+               "Account Type: " + getAccountType() + "\n" +
+
     }
 }
