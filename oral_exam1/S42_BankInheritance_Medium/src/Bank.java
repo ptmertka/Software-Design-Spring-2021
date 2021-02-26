@@ -103,7 +103,7 @@ public class Bank {
                     Account tempAccount = new SavingsAccount(owner, centsAmount, type, rate); //creates the new savings account
                     accountList.add(tempAccount); //adds the account to the arrayList
                 }
-                else if (userChoice == 2){
+                else if (userChoice == 2){ //creates a new checking account
                     System.out.println("Please enter an overdraft limit for this account as a dollar amount");
                     amount = -1.1; //resets amount to get the double valued figure for the overdraft limit
                     while (amount <0){ //while the user hasn't entered a negative number
@@ -121,12 +121,22 @@ public class Bank {
                     Account tempAccount = new CheckingAccount(owner, centsAmount, type, overdraft);
                     accountList.add(tempAccount); //creates the new checking account and adds it to the array list
                 }
+                else if (userChoice == 3){ //creates a new loan account
+                    System.out.println("Please enter the interest rate for this account as a percent");
+                    int rate = getValidInput(100); //gets the interest rate for the account
+
+                    Account tempAccount = new LoanAccount(owner, centsAmount, type, rate); //creates the new savings account
+                    accountList.add(tempAccount); //adds the account to the arrayList
+                }
 
 
 
 
 
 
+            }
+            else if(userChoice == 4){
+                operation = false;
             }
 
 
