@@ -114,11 +114,12 @@ public class CheckingAccount extends Account{
     @Override
     public String toString() {
         return "Checking Account: \n" +
-                "---------------------------" +
+                "---------------------------\n" +
                 "Account Owner: " + getAccountUserName() + "\n" +
                 "Account Number: " + getAccountNumber() + "\n" +
                 "Account Type: " + getAccountType() + "\n" +
-                "Balance: " + getBalance() + "\n" +
-                "Overdraft Limit: " + overdraftLimit + "%\n";
+                "Balance: $" + (double) (getBalance()/100.0) + "\n" +
+                "Overdraft Limit: " + (double) (overdraftLimit/100.0) + "\n" +
+                "----------------------------\n";
     }
 }

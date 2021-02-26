@@ -98,12 +98,13 @@ public class SavingsAccount extends Account{
     @Override
     public String toString() {
        return "Savings Account: \n" +
-               "---------------------------" +
+               "---------------------------\n" +
                "Account Owner: " + getAccountUserName() + "\n" +
                "Account Number: " + getAccountNumber() + "\n" +
                "Account Type: " + getAccountType() + "\n" +
-               "Balance: " + getBalance() + "\n" +
-               "Interest Rate: " + interestRate + "%\n";
+               "Balance: $" + (double) getBalance()/100.0 + "\n" +
+               "Interest Rate: " + interestRate + "%\n" +
+               "--------------------------\n";
 
     }
 }
