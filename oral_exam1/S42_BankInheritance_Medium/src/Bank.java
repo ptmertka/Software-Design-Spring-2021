@@ -54,7 +54,7 @@ public class Bank {
      * Displays the total amount of each type of the account
      * @return String: A string that contains all the relevant account info of the bank
      */
-    public String displayAccountsInfo(){
+    public static String displayAccountsInfo(){
         String returnVal = "Total Number of Accounts:\n " +
                 Account.getTotalAccounts() +"\n" +
                 "Total Individual Accounts: \n" +
@@ -122,6 +122,8 @@ public class Bank {
                     userChoice = getValidInput(3); //gets users choice
 
 
+
+
                 }
                 else{ //if the user is making a company account, only makes two accounts
                     System.out.println("Please choose what type of account you would like to create:\n" +
@@ -169,6 +171,115 @@ public class Bank {
 
 
 
+            }
+            else if(userChoice ==2){
+                System.out.println("Please enter the number of the account you would like to interact with\n");
+                userChoice = getValidInput(Account.getTotalAccounts()); //only allows user to choose accounts that exist in the arrayList
+
+                int trueIndex = userChoice -1; //moves the index back one to get the actual account you want to interact with
+
+                if(accountList.get(trueIndex).getClass() == SavingsAccount.class){ //if the account is a savings account
+                    System.out.println("Please select what you would like to do with the account:\n" +
+                            "1. Withdraw\n" +
+                            "2. Deposit\n" +
+                            "3. Add Interest\n");
+
+                    userChoice = getValidInput(3);
+
+                    if(userChoice ==1){
+                        System.out.println("How much would you like to withdraw?\n");
+
+                        int newAmount = convertAndGetDouble(); //gets the amount of money to be withdrawn
+
+                        System.out.println(accountList.get(trueIndex).withdraw(newAmount)); //attempts to do the withdraw, returning success/fail message
+
+                        System.out.println(accountList.get(trueIndex).toString()); //prints out the new account state
+                    }
+                    else if (userChoice == 2){
+                        System.out.println("How much would you like to deposit?\n");
+
+                        int newAmount = convertAndGetDouble(); //gets the amount of money to be withdrawn
+
+                        System.out.println(accountList.get(trueIndex).deposit(newAmount)); //attempts to do the deposit, returning success/fail message
+
+                        System.out.println(accountList.get(trueIndex).toString()); //prints out the new account state
+                    }
+                    else if (userChoice == 3){
+                        SavingsAccount a =(SavingsAccount) accountList.get(trueIndex);
+                        a.addInterest(); //creates a savings account object, and calls add interest
+
+                        accountList.set(trueIndex, (Account) a); //converts the account back to an account class and adds it back to the array List
+                    }
+
+
+
+
+                }
+                else if (accountList.get(trueIndex).getClass() == CheckingAccount.class){ //if the account is a checking account
+                    System.out.println("Please select what you would like to do with the account:\n" +
+                            "1. Withdraw\n" +
+                            "2. Deposit\n");
+
+
+                    userChoice = getValidInput(2);
+
+                    if(userChoice ==1){
+                        System.out.println("How much would you like to withdraw?\n");
+
+                        int newAmount = convertAndGetDouble(); //gets the amount of money to be withdrawn
+
+                        System.out.println(accountList.get(trueIndex).withdraw(newAmount)); //attempts to do the withdraw, returning success/fail message
+
+                        System.out.println(accountList.get(trueIndex).toString()); //prints out the new account state
+                    }
+                    else if (userChoice == 2){
+                        System.out.println("How much would you like to deposit?\n");
+
+                        int newAmount = convertAndGetDouble(); //gets the amount of money to be withdrawn
+
+                        System.out.println(accountList.get(trueIndex).deposit(newAmount)); //attempts to do the deposit, returning success/fail message
+
+                        System.out.println(accountList.get(trueIndex).toString()); //prints out the new account state
+                    }
+                }
+                else if(accountList.get(trueIndex).getClass() == LoanAccount.class){
+                    //if the account is a loan account
+                    System.out.println("Please select what you would like to do with the account:\n" +
+                            "1. Make a payment\n" +
+                            "2. Borrow Further\n" +
+                            "3. Add Interest\n");
+
+                    userChoice = getValidInput(3);
+
+                    if(userChoice ==1){
+                        System.out.println("How much would you like to pay?\n");
+
+                        int newAmount = convertAndGetDouble(); //gets the amount of money to be withdrawn
+
+                        System.out.println(accountList.get(trueIndex).withdraw(newAmount)); //attempts to do the withdraw, returning success/fail message
+
+                        System.out.println(accountList.get(trueIndex).toString()); //prints out the new account state
+                    }
+                    else if (userChoice == 2){
+                        System.out.println("How much would you like to borrow?\n");
+
+                        int newAmount = convertAndGetDouble(); //gets the amount of money to be withdrawn
+
+                        System.out.println(accountList.get(trueIndex).deposit(newAmount)); //attempts to do the deposit, returning success/fail message
+
+                        System.out.println(accountList.get(trueIndex).toString()); //prints out the new account state
+                    }
+                    else if (userChoice == 3){
+                        LoanAccount a =(LoanAccount) accountList.get(trueIndex);
+                        a.addInterest(); //creates a loan account object, and calls add interest
+
+                        accountList.set(trueIndex, (Account) a); //converts the account back to an account class and adds it back to the array List
+                    }
+
+                }
+            }
+            else if (userChoice == 3){
+                System.out.println(displayAccountsInfo());//gets the info for the bank of the number of accounts
             }
             else if(userChoice == 4){ //if the user chooses to exit, exits
                 operation = false;
