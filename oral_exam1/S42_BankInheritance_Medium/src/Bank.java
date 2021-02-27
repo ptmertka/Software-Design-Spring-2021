@@ -275,7 +275,7 @@ public class Bank {
                         a.addInterest(); //creates a loan account object, and calls add interest
 
                         accountList.set(trueIndex, (Account) a); //converts the account back to an account class and adds it back to the array List
-                        System.out.println(accountList.get(trueIndex).toString()); //prints out the new account state
+                        System.out.println(accountList.get(trueIndex).toString()); //prints out the new account state1
                     }
 
                 }

@@ -119,7 +119,7 @@ public class CheckingAccount extends Account{
                 "Account Number: " + getAccountNumber() + "\n" +
                 "Account Type: " + getAccountType() + "\n" +
                 "Balance: $" + (double) (getBalance()/100.0) + "\n" +
-                "Overdraft Limit: " + (double) (overdraftLimit/100.0) + "\n" +
+                "Overdraft Limit: $" + (double) (overdraftLimit/100.0) + "\n" +
                 "----------------------------\n";
     }
 }
