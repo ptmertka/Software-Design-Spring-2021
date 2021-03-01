@@ -26,7 +26,7 @@ public class MorseCodeFrame extends JFrame {
         add(morseCodeTextField);
         add(outputText);
 
-        EnglishTextListner handler = new EnglishTextListner();
+        TextListner handler = new TextListner();
         englishTextField.getDocument().addDocumentListener(handler);
         morseCodeTextField.getDocument().addDocumentListener(handler);
 
@@ -34,21 +34,34 @@ public class MorseCodeFrame extends JFrame {
 
 
     }
-    private class EnglishTextListner implements DocumentListener {
+    private class TextListner implements DocumentListener {
 
 
         @Override
         public void insertUpdate(DocumentEvent documentEvent) {
-            if(documentEvent.getDocument() == englishTextField.getDocument()){
-                morseCodeTextField.getDocument().removeDocumentListener();
-                outputText.setText(englishTextField.getText());
+           if (documentEvent.getDocument() == englishTextField.getDocument()) {
+               morseCodeTextField.getDocument().removeDocumentListener(this);
+               morseCodeTextField.setText(englishTextField.getText());
+                morseCodeTextField.getDocument().addDocumentListener(this);
+            }
+            else if (documentEvent.getDocument() == morseCodeTextField.getDocument()) {
+                englishTextField.getDocument().removeDocumentListener(this);
+                englishTextField.setText(morseCodeTextField.getText());
+                englishTextField.getDocument().addDocumentListener(this);
             }
         }
 
         @Override
         public void removeUpdate(DocumentEvent documentEvent) {
-            if(documentEvent.getDocument() == morseCodeTextField.getDocument()){
-                outputText.setText(morseCodeTextField.getText());
+            if (documentEvent.getDocument() == englishTextField.getDocument()) {
+               morseCodeTextField.getDocument().removeDocumentListener(this);
+               morseCodeTextField.setText(englishTextField.getText());
+               morseCodeTextField.getDocument().addDocumentListener(this);
+            }
+            else if (documentEvent.getDocument() == morseCodeTextField.getDocument()) {
+                englishTextField.getDocument().removeDocumentListener(this);
+                englishTextField.setText(morseCodeTextField.getText());
+                englishTextField.getDocument().addDocumentListener(this);
             }
         }
 
