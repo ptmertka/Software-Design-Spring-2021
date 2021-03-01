@@ -1,22 +1,24 @@
-import javax.swing.JFrame;
-import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.FlowLayout;
 
 public class MorseCodeFrame extends JFrame {
-    private final JTextField englishTextField ;
-    private final JTextField morseCodeTextField ;
-    private final JTextField outputText;
+    private final JTextArea englishTextField ;
+    private final JTextArea morseCodeTextField ;
+    private final JTextArea outputText;
 
     public MorseCodeFrame(){
         super("Morse Code Translator");
 
         setLayout(new FlowLayout());
 
-        englishTextField = new JTextField("Enter English Text Here", 200);
-        morseCodeTextField = new JTextField("Enter Morse Code Text here", 200);
-        outputText = new JTextField("Response will be displayed here", 200);
+        englishTextField = new JTextArea("Enter English Text Here", 10,20);
+        morseCodeTextField = new JTextArea("Enter Morse Code Text here", 10,20);
+        outputText = new JTextArea("Response will be displayed here", 10,20);
 
         outputText.setEditable(false);
 
@@ -25,25 +27,33 @@ public class MorseCodeFrame extends JFrame {
         add(outputText);
 
         EnglishTextListner handler = new EnglishTextListner();
+        englishTextField.getDocument().addDocumentListener(handler);
+        morseCodeTextField.getDocument().addDocumentListener(handler);
 
 
 
 
     }
-    private class EnglishTextListner implements KeyListener{
+    private class EnglishTextListner implements DocumentListener {
+
 
         @Override
-        public void keyTyped(KeyEvent keyEvent) {
-
+        public void insertUpdate(DocumentEvent documentEvent) {
+            if(documentEvent.getDocument() == englishTextField.getDocument()){
+                morseCodeTextField.getDocument().removeDocumentListener();
+                outputText.setText(englishTextField.getText());
+            }
         }
 
         @Override
-        public void keyPressed(KeyEvent keyEvent) {
-
+        public void removeUpdate(DocumentEvent documentEvent) {
+            if(documentEvent.getDocument() == morseCodeTextField.getDocument()){
+                outputText.setText(morseCodeTextField.getText());
+            }
         }
 
         @Override
-        public void keyReleased(KeyEvent keyEvent) {
+        public void changedUpdate(DocumentEvent documentEvent) {
 
         }
     }
