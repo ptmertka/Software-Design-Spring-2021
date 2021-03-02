@@ -112,9 +112,6 @@ public class MorseCodeFrame extends JFrame {
 
             }
             else if (documentEvent.getDocument() == morseCodeTextField.getDocument()) {
-                //englishTextField.getDocument().removeDocumentListener(this);
-               //englishTextField.setText(morseCodeTextField.getText());
-               // englishTextField.getDocument().addDocumentListener(this);
 
                String morseCodeText = morseCodeTextField.getText();
 
@@ -126,23 +123,130 @@ public class MorseCodeFrame extends JFrame {
                for( String word : splitText){
                    String letters [] = word.split(" ");
                    for (String letter : letters){
+                       if(letter.matches("^[.-]+$")){
+                           String englishLetter = morseToEnglish.get(letter);
+
+                           if(englishLetter != null){
+                               textToAdd.add(englishLetter);
+                           }
+                           else{
+                               badWord = true;
+                           }
+                       }
+                       else{
+                           badWord = true;
+                       }
 
                    }
+                   textToAdd.add(" ");
                }
+
+               if(badWord == true){
+                   outputText.setText("You have entered an invalid character in the Morse Code Field, please delete it");
+               }
+               else{
+                   StringBuilder englishText = new StringBuilder();
+                   for(String a : textToAdd){
+                       englishText.append(a);
+                   }
+
+                   englishTextField.getDocument().removeDocumentListener(this);
+                   englishTextField.setText(String.valueOf(englishText));
+                   englishTextField.getDocument().addDocumentListener(this);
+               }
+
+
             }
         }
 
         @Override
         public void removeUpdate(DocumentEvent documentEvent) {
             if (documentEvent.getDocument() == englishTextField.getDocument()) {
-               morseCodeTextField.getDocument().removeDocumentListener(this);
-               morseCodeTextField.setText(englishTextField.getText());
-               morseCodeTextField.getDocument().addDocumentListener(this);
+
+                String englishText = englishTextField.getText();
+
+                String [] splitText = englishText.split(" ");
+
+                boolean badWord = false;
+                ArrayList<String> textToAdd = new ArrayList<String>();
+                for (String word : splitText){
+                    char [] wordAsLetters = word.toCharArray();
+                    for (char c : wordAsLetters){
+                        if (Character.isLetterOrDigit(c)){
+                            String s = String.valueOf(c);
+                            String morseLetter = englishToMorse.get(s);
+                            morseLetter = morseLetter + " ";
+                            textToAdd.add(morseLetter);
+                        }
+                        else{
+                            badWord = true;
+                        }
+
+                    }
+                    textToAdd.add("  ");
+
+                }
+
+                if(badWord == true){
+                    outputText.setText("You have entered an invalid character in the English Field, please delete it");
+                }
+                else{
+                    StringBuilder morseText = new StringBuilder();
+                    for(String a : textToAdd){
+                        morseText.append(a);
+                    }
+
+                    morseCodeTextField.getDocument().removeDocumentListener(this);
+                    morseCodeTextField.setText(String.valueOf(morseText));
+                    morseCodeTextField.getDocument().addDocumentListener(this);
+                }
+
             }
             else if (documentEvent.getDocument() == morseCodeTextField.getDocument()) {
-                englishTextField.getDocument().removeDocumentListener(this);
-                englishTextField.setText(morseCodeTextField.getText());
-                englishTextField.getDocument().addDocumentListener(this);
+
+                String morseCodeText = morseCodeTextField.getText();
+
+                String [] splitText = morseCodeText.split("\\s{3,4}");
+
+                boolean badWord = false;
+                ArrayList<String> textToAdd = new ArrayList<String>();
+
+                for( String word : splitText){
+                    String letters [] = word.split(" ");
+                    for (String letter : letters){
+                        if(letter.matches("^[.-]+$")){
+                            String englishLetter = morseToEnglish.get(letter);
+
+                            if(englishLetter != null){
+                                textToAdd.add(englishLetter);
+                            }
+                            else{
+                                badWord = true;
+                            }
+                        }
+                        else{
+                            badWord = true;
+                        }
+
+                    }
+                    textToAdd.add(" ");
+                }
+
+                if(badWord == true){
+                    outputText.setText("You have entered an invalid character in the Morse Code Field, please delete it");
+                }
+                else{
+                    StringBuilder englishText = new StringBuilder();
+                    for(String a : textToAdd){
+                        englishText.append(a);
+                    }
+
+                    englishTextField.getDocument().removeDocumentListener(this);
+                    englishTextField.setText(String.valueOf(englishText));
+                    englishTextField.getDocument().addDocumentListener(this);
+                }
+
+
             }
         }
 
