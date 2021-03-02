@@ -8,6 +8,8 @@ import java.util.ArrayList;
 /**
  * Holds the creation and implementation of the swing elements to the frame
  * Contains the subclass for the Document Listener attached to the text fields
+ * @author Peter Mertka
+ * @version 2/28/2021
  */
 
 public class MorseCodeFrame extends JFrame {
@@ -59,6 +61,8 @@ public class MorseCodeFrame extends JFrame {
     /**
      * Class TextListener implemnts document listener, so that object of this class
      * are able to listen to text fields to check for changes to them, while also implementing the translation of the text
+     * @author Peter Mertka
+     * @version 3/1/2021
      */
 
     private class TextListener implements DocumentListener {
@@ -137,7 +141,7 @@ public class MorseCodeFrame extends JFrame {
                            textToAdd.add(morseLetter); //add it to the array list of total text to add
                        }
                        else{
-                           badWord = true; //if the character is not a valid one, tells the translator to skip over it
+                           badWord = true; //if the character is not a valid one, tells the translator to halt
                        }
 
                    }
@@ -147,65 +151,70 @@ public class MorseCodeFrame extends JFrame {
 
                if(badWord == true){ //updates the output message if there was a bad character
                    outputText.setText("You have entered an invalid character in the English Field, please delete it");
+
                }
-               else{
-                   StringBuilder morseText = new StringBuilder();
-                   for(String a : textToAdd){
+               else{ //if there is no bad character
+                   StringBuilder morseText = new StringBuilder(); //makes a string builder object
+                   for(String a : textToAdd){ //constructs the string from all the values and spaces from the array list
                        morseText.append(a);
                    }
 
-                   morseCodeTextField.getDocument().removeDocumentListener(this);
-                   morseCodeTextField.setText(String.valueOf(morseText));
-                   morseCodeTextField.getDocument().addDocumentListener(this);
+                   morseCodeTextField.getDocument().removeDocumentListener(this); //removes the listener from the morseCode Text field so that an event isn't generated when the text is update
+                   morseCodeTextField.setText(String.valueOf(morseText)); //updates the text with the new translation in the morse code side
+                   morseCodeTextField.getDocument().addDocumentListener(this); //reattached the listener from the text field
 
-                   outputText.setText("Translation Complete");
+                   outputText.setText("Translation Complete"); //updates the output text
                }
 
             }
-            else if (documentEvent.getDocument() == morseCodeTextField.getDocument()) {
+            else if (documentEvent.getDocument() == morseCodeTextField.getDocument()) { //if the event is from the morse code text box
 
-               String morseCodeText = morseCodeTextField.getText();
+               String morseCodeText = morseCodeTextField.getText(); //gets the text from the morse code box
 
-               String [] splitText = morseCodeText.split("\\s{3,4}");
+               String [] splitText = morseCodeText.split("\\s{3,}"); //splits the text with a regex by only 3+ spaces for each word
 
-               boolean badWord = false;
-               ArrayList<String> textToAdd = new ArrayList<String>();
+               boolean badWord = false; //creates the boolean again for a bad input
+               ArrayList<String> textToAdd = new ArrayList<String>(); //an array list to store the translated letters
 
-               for( String word : splitText){
-                   String letters [] = word.split(" ");
-                   for (String letter : letters){
-                       if(letter.matches("^[.-]+$")){
-                           String englishLetter = morseToEnglish.get(letter);
+               for( String word : splitText){ //for every word in the text field
 
-                           if(englishLetter != null){
-                               textToAdd.add(englishLetter);
+                   String letters [] = word.split(" "); //splits the words by spaces to get only each letter
+
+                   for (String letter : letters){ //for every letter in the word
+
+                       if(letter.matches("^[.-]+$")){ //if the letter is only dots and dashes
+
+                           String englishLetter = morseToEnglish.get(letter); //tries to get the equivalent english lette
+
+                           if(englishLetter != null){ //if the key was found in the hashmap, translation was succsesful
+                               textToAdd.add(englishLetter); //adds the letter to the array list
                            }
-                           else{
-                               badWord = true;
+                           else{ //if the key wasnt in the hashmap
+                               badWord = true; //there was a bad letter in this word
                            }
                        }
-                       else{
+                       else{ //if the word had a character that wasnt a dot or dash, there was a bad letter
                            badWord = true;
                        }
 
                    }
-                   textToAdd.add(" ");
+                   textToAdd.add(" "); //adds a space after each word
                }
 
-               if(badWord == true){
+               if(badWord == true){ //if there is a bad letter in a word, updates the output message
                    outputText.setText("You have entered an invalid character in the Morse Code Field, please delete it");
                }
-               else{
-                   StringBuilder englishText = new StringBuilder();
-                   for(String a : textToAdd){
+               else{ //otherwise, the whole text is valid
+                   StringBuilder englishText = new StringBuilder(); //creates a string builder for the array of letter
+                   for(String a : textToAdd){ //creates the string from all the values
                        englishText.append(a);
                    }
-
-                   englishTextField.getDocument().removeDocumentListener(this);
+                    //adds the text to the english field in the same manner as the morse code side,
+                   englishTextField.getDocument().removeDocumentListener(this); ///removes the listener, updates the text to the translation, attaches the listener
                    englishTextField.setText(String.valueOf(englishText));
                    englishTextField.getDocument().addDocumentListener(this);
 
-                   outputText.setText("Translation Complete");
+                   outputText.setText("Translation Complete"); //returns a success message
                }
 
 
@@ -215,8 +224,12 @@ public class MorseCodeFrame extends JFrame {
             }
         }
 
+        /**
+         * Same implmentation as the insertUpdate function, with identical body, just so it applies when text is delted
+         * @param documentEvent Document Event: an event generated from text being deleted from a field
+         */
         @Override
-        public void removeUpdate(DocumentEvent documentEvent) {
+        public void removeUpdate(DocumentEvent documentEvent) { //body is the same us the insertUpdate function, so the same translation holds, just as text is deleted
             if (documentEvent.getDocument() == englishTextField.getDocument()) {
 
                 String englishText = englishTextField.getText();
@@ -306,6 +319,11 @@ public class MorseCodeFrame extends JFrame {
             }
         }
 
+        /**
+         * Function is not implemented, as the specific situation for a changed update does not occur/need to occur in this program
+         * Event only occuser when the style of the text is changed, which cant happen with plain text elements like the text areas in this GUI
+         * @param documentEvent
+         */
         @Override
         public void changedUpdate(DocumentEvent documentEvent) {
 
