@@ -40,7 +40,8 @@ public class MorseCodeFrame extends JFrame {
         setLayout(new FlowLayout()); //makes the layout a flow layout
 
         englishTextField = new JTextArea("Enter English Text Here", 10,20); // makes the fields 10 x 20, with default text in each
-        morseCodeTextField = new JTextArea("Enter Morse Code Text here", 10,20);
+        morseCodeTextField = new JTextArea("Enter Morse Code Text here\n" +
+                "One space between each letter and 3 between each word", 10,20);
         outputText = new JTextArea("Response will be displayed here", 10,20);
 
         outputText.setEditable(false); //makes it so the output text box is not editable
@@ -157,6 +158,7 @@ public class MorseCodeFrame extends JFrame {
                    StringBuilder morseText = new StringBuilder(); //makes a string builder object
                    for(String a : textToAdd){ //constructs the string from all the values and spaces from the array list
                        morseText.append(a);
+
                    }
 
                    morseCodeTextField.getDocument().removeDocumentListener(this); //removes the listener from the morseCode Text field so that an event isn't generated when the text is update
@@ -202,12 +204,14 @@ public class MorseCodeFrame extends JFrame {
                }
 
                if(badWord == true){ //if there is a bad letter in a word, updates the output message
-                   outputText.setText("You have entered an invalid character in the Morse Code Field, please delete it");
+                   outputText.setText("You have entered an invalid character in the Morse Code Field\n," +
+                           "Or you have entered in the wrong amount of spaces between letters or words, please fix it");
                }
                else{ //otherwise, the whole text is valid
                    StringBuilder englishText = new StringBuilder(); //creates a string builder for the array of letter
                    for(String a : textToAdd){ //creates the string from all the values
                        englishText.append(a);
+
                    }
                     //adds the text to the english field in the same manner as the morse code side,
                    englishTextField.getDocument().removeDocumentListener(this); ///removes the listener, updates the text to the translation, attaches the listener
@@ -257,22 +261,25 @@ public class MorseCodeFrame extends JFrame {
                 }
 
                 if(badWord == true){
-                    outputText.setText("You have entered an invalid character in the English Field, please delete it");
+                    outputText.setText("You have typed an invalid character in the English Field, please delete it");
                 }
                 else{
+
                     StringBuilder morseText = new StringBuilder();
                     for(String a : textToAdd){
                         morseText.append(a);
+
                     }
 
                     morseCodeTextField.getDocument().removeDocumentListener(this);
                     morseCodeTextField.setText(String.valueOf(morseText));
                     morseCodeTextField.getDocument().addDocumentListener(this);
+
+                    outputText.setText("Translation Complete");
                 }
 
             }
             else if (documentEvent.getDocument() == morseCodeTextField.getDocument()) {
-
                 String morseCodeText = morseCodeTextField.getText();
 
                 String [] splitText = morseCodeText.split("\\s{3,4}");
@@ -288,6 +295,7 @@ public class MorseCodeFrame extends JFrame {
 
                             if(englishLetter != null){
                                 textToAdd.add(englishLetter);
+                                badWord = false;
                             }
                             else{
                                 badWord = true;
@@ -300,9 +308,12 @@ public class MorseCodeFrame extends JFrame {
                     }
                     textToAdd.add(" ");
                 }
-
-                if(badWord == true){
-                    outputText.setText("You have entered an invalid character in the Morse Code Field, please delete it");
+                if(morseCodeTextField.getText().equals("")){ //checker so that error not present if field is empty
+                    outputText.setText("Please enter something for translation");
+                }
+                else if(badWord == true){
+                    outputText.setText("You have entered an invalid character in the Morse Code Field\n," +
+                            "Or you have entered in the wrong amount of spaces between letters or words, please fix it");
                 }
                 else{
                     StringBuilder englishText = new StringBuilder();
@@ -313,6 +324,8 @@ public class MorseCodeFrame extends JFrame {
                     englishTextField.getDocument().removeDocumentListener(this);
                     englishTextField.setText(String.valueOf(englishText));
                     englishTextField.getDocument().addDocumentListener(this);
+
+                    outputText.setText("Translation Complete");
                 }
 
 
