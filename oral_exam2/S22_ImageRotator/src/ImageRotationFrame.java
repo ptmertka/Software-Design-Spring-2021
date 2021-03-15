@@ -43,7 +43,7 @@ public class ImageRotationFrame extends JFrame {
 
         startButton = new JButton("Start Rotation");
 
-        spinBox = new JCheckBox("Spin Continuosly");
+        spinBox = new JCheckBox("Spin Continuously");
 
         add(imagePanel);
         add(degreeLabel);
@@ -52,6 +52,8 @@ public class ImageRotationFrame extends JFrame {
         add(speedSpinner);
         add(startButton);
         add(spinBox);
+
+
 
 
     }
