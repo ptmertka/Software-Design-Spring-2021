@@ -32,6 +32,8 @@ public class ImageRotationFrame extends JFrame {
 
     private int degrees = 0;
 
+    private Timer timer;
+
 
 
     public ImageRotationFrame(){
@@ -84,7 +86,38 @@ public class ImageRotationFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            imageLabel.repaint();
+            int speed = 21 - (int) speedSpinner.getValue();
+
+            timer = new Timer(speed, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    degrees = degrees + 1;
+                    imageLabel.repaint();
+                }
+            });
+
+            System.out.println("IM IN THE BUTTON CLICK");
+            if (spinBox.isSelected() == true){
+                while(spinBox.isSelected() == true){
+                    timer.start();
+                }
+                timer.stop();
+            }
+            else{
+                System.out.println("IM IN THE ELSE STATEMENT");
+
+                int degreesToSpin = (int) degreeSpinner.getValue();
+
+                System.out.println("DEGREES TO SPIN IS:" + degreesToSpin);
+                while(degreesToSpin > 0){
+                    System.out.println("IM IN WHILE LOOP");
+
+                    timer.start();
+                    degreesToSpin--;
+                }
+                timer.stop();
+            }
+
         }
 
     }
