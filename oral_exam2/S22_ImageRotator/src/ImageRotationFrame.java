@@ -1,6 +1,12 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class ImageRotationFrame extends JFrame {
 
@@ -21,6 +27,11 @@ public class ImageRotationFrame extends JFrame {
     private final JButton startButton;
 
     private final JCheckBox spinBox;
+
+    private final JLabel imageLabel;
+
+    private BufferedImage image = null;
+
 
     public ImageRotationFrame(){
         super("Rotate an Image!");
@@ -45,6 +56,17 @@ public class ImageRotationFrame extends JFrame {
 
         spinBox = new JCheckBox("Spin Continuously");
 
+
+
+        try {
+            image = ImageIO.read(new File("oral_exam2/S22_ImageRotator/Images/iowa.png"));
+        }
+        catch(IOException Ioe){
+
+        }
+
+        imageLabel = new JLabel(new ImageIcon(image));
+
         add(imagePanel);
         add(degreeLabel);
         add(degreeSpinner);
@@ -53,8 +75,23 @@ public class ImageRotationFrame extends JFrame {
         add(startButton);
         add(spinBox);
 
+        imagePanel.add(imageLabel);
+
+        ButtonListener buttonListener = new ButtonListener();
+        startButton.addActionListener(buttonListener);
 
 
 
+
+
+
+    }
+
+    private class ButtonListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+
+        }
     }
 }
