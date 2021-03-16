@@ -88,6 +88,9 @@ public class ImageRotationFrame extends JFrame {
         public void actionPerformed(ActionEvent actionEvent) {
             int speed = 21 - (int) speedSpinner.getValue();
 
+            int degreesToSpin = (int) degreeSpinner.getValue();
+            int degreesOnClick = degrees;
+
             timer = new Timer(speed, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
@@ -96,27 +99,7 @@ public class ImageRotationFrame extends JFrame {
                 }
             });
 
-            System.out.println("IM IN THE BUTTON CLICK");
-            if (spinBox.isSelected() == true){
-                while(spinBox.isSelected() == true){
-                    timer.start();
-                }
-                timer.stop();
-            }
-            else{
-                System.out.println("IM IN THE ELSE STATEMENT");
-
-                int degreesToSpin = (int) degreeSpinner.getValue();
-
-                System.out.println("DEGREES TO SPIN IS:" + degreesToSpin);
-                while(degreesToSpin > 0){
-                    System.out.println("IM IN WHILE LOOP");
-
-                    timer.start();
-                    degreesToSpin--;
-                }
-                timer.stop();
-            }
+            timer.start();
 
         }
 
@@ -149,6 +132,8 @@ public class ImageRotationFrame extends JFrame {
             g2d.rotate(Math.toRadians(degrees),width/2, height/2);
             g2d.drawImage(imageIcon.getImage(), 0, 0, this);
             g2d.dispose();
+
+
 
         }
     }
