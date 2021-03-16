@@ -28,9 +28,10 @@ public class ImageRotationFrame extends JFrame {
 
     private final JCheckBox spinBox;
 
-    private final JLabel imageLabel;
+    private final ImageLabel imageLabel;
 
-    private BufferedImage image = null;
+    private int degrees = 0;
+
 
 
     public ImageRotationFrame(){
@@ -56,16 +57,7 @@ public class ImageRotationFrame extends JFrame {
 
         spinBox = new JCheckBox("Spin Continuously");
 
-
-
-        try {
-            image = ImageIO.read(new File("oral_exam2/S22_ImageRotator/Images/iowa.png"));
-        }
-        catch(IOException Ioe){
-
-        }
-
-        imageLabel = new JLabel(new ImageIcon(image));
+        imageLabel = new ImageLabel();
 
         add(imagePanel);
         add(degreeLabel);
@@ -92,9 +84,40 @@ public class ImageRotationFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-
+            imageLabel.repaint();
         }
 
+    }
+
+    private class ImageLabel extends JLabel{
+        BufferedImage image;
+
+        ImageIcon imageIcon;
+
+
+        public ImageLabel(){
+            try {
+                image = ImageIO.read(new File("oral_exam2/S22_ImageRotator/Images/iowa.png"));
+            }
+            catch(IOException Ioe){
+
+            }
+            imageIcon = new ImageIcon(image);
+
+            this.setIcon(imageIcon);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            int width = imageIcon.getIconWidth();
+            int height = imageIcon.getIconHeight();
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.rotate(Math.toRadians(degrees),width/2, height/2);
+            g2d.drawImage(imageIcon.getImage(), 0, 0, this);
+            g2d.dispose();
+
+        }
     }
 
 }
