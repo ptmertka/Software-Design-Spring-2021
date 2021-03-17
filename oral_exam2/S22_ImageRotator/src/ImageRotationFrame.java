@@ -78,33 +78,37 @@ public class ImageRotationFrame extends JFrame {
     private Timer timer;
 
 
-
+    /**
+     * Constructor for the ImageRotationFrame Class
+     * initializes all the components of the Frame, adding them to the frame, as well as adding the listeners
+     */
     public ImageRotationFrame(){
-        super("Rotate an Image!");
+        super("Rotate an Image!"); //calls super constructor to name the frame
 
-        setLayout(new FlowLayout());
+        setLayout(new FlowLayout()); //sets layout to flow so that all elements are easily added
 
-        imagePanel = new JPanel();
+        imagePanel = new JPanel(); //basic declaration of Panel
 
-        degreeModel = new SpinnerNumberModel(90,1,360,1);
+        degreeModel = new SpinnerNumberModel(90,1,360,1); //sets bounds of degree spinner, goes from 1-360
+        //step value of 1 degree, default of 90
 
-        speedModel = new SpinnerNumberModel(1,1,20,1);
+        speedModel = new SpinnerNumberModel(1,1,20,1);//sets the bounds of the speed spinner, goes from 1 to 20,
+        //step value of 1 degree, default of 1
+        degreeSpinner = new JSpinner(degreeModel); //attaches the degree model to the degree spinner
 
-        degreeSpinner = new JSpinner(degreeModel);
+        speedSpinner = new JSpinner(speedModel); //attaches the speed model to the speed spinner
 
-        speedSpinner = new JSpinner(speedModel);
-
-        degreeLabel = new JLabel("Degrees to Rotate");
+        degreeLabel = new JLabel("Degrees to Rotate"); //these two labels add text to go along with spinners
 
         speedLabel = new JLabel("Speed of Rotation");
 
-        startButton = new JButton("Start Rotation");
+        startButton = new JButton("Start Rotation"); //creates button with start message
 
-        spinBox = new JCheckBox("Spin Continuously");
+        spinBox = new JCheckBox("Spin Continuously"); //creates the box to check to spin continously
 
-        imageLabel = new ImageLabel();
+        imageLabel = new ImageLabel(); //creates a new Image label, an instance of my custom class that extends JLabel
 
-        add(imagePanel);
+        add(imagePanel); //adds all the components to the frame
         add(degreeLabel);
         add(degreeSpinner);
         add(speedLabel);
@@ -112,10 +116,10 @@ public class ImageRotationFrame extends JFrame {
         add(startButton);
         add(spinBox);
 
-        imagePanel.add(imageLabel);
+        imagePanel.add(imageLabel); //adds the image to the JPanel, as the image is going to be attached to the label in the panel
 
-        ButtonListener buttonListener = new ButtonListener();
-        startButton.addActionListener(buttonListener);
+        ButtonListener buttonListener = new ButtonListener(); //creates a new Button Listener
+        startButton.addActionListener(buttonListener); //adds that listener to the Button so that it seeks out clicks of the button
 
 
 
@@ -124,58 +128,92 @@ public class ImageRotationFrame extends JFrame {
 
     }
 
-
+    /**
+     * Class ButtonListener
+     * Extends ActionListener, implements the functionality of the the button being pressed, allowing the image to spin
+     */
     private class ButtonListener implements ActionListener{
 
+        /**
+         * Seeks out and catches actionEvents (buttonClicks) and handles them
+         * @param actionEvent ActionEvent: an event triggered by the button being pressed
+         */
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            int speed = 21 - (int) speedSpinner.getValue();
+            int speed = 21 - (int) speedSpinner.getValue(); //gets the speed of the spinner, setting it to 21 minus its value
+            //as that way, when speed is at max, speed represents 1 event/speed milliseconds
 
-
+            // if the user doesn't want to spin continously (check box not selected)
             if(spinBox.isSelected()==false) {
-                int degreesToSpin = (int) degreeSpinner.getValue();
-                int degreesOnClick = degrees;
+                int degreesToSpin = (int) degreeSpinner.getValue(); //gets the degree value of the spinner
+                int degreesOnClick = degrees; //gets the current value of degrees before the timer begins
 
 
-                timer = new Timer(speed, new ActionListener() {
-                    @Override
+                timer = new Timer(speed, new ActionListener() { //creates a new timer that fires off events at every speed milliseconds
+                    @Override //new annoymous action listener is attached to handle the events fired by the timer
+                    /**
+                     *Performs an action every time the timer event actionEvent is fired, in this case
+                     * the action is to increment degrees by 1 degree, so that it rotates 1 degree per event and
+                     * repaints the image
+                     */
                     public void actionPerformed(ActionEvent actionEvent) {
-                        degrees = degrees + 1;
-                        imageLabel.repaint();
-                        if(degrees > degreesToSpin + degreesOnClick){
-                            timer.stop();
+                        degrees = degrees + 1; //increments the degree by 1
+                        imageLabel.repaint(); //repaints the image so that it is rotated
+                        if(degrees > degreesToSpin + degreesOnClick){ //if the image has rotated past what the user specified
+                            timer.stop(); //stops the timer so events stop firing
                         }
                     }
                 });
 
-                timer.start();
+                timer.start(); //starts the timer after its created
             }
-            else{
+            else{ //if the checkBox is clicked, the user wants to spin the image continously
+                //creates a new timer and annyomous ActionListener
 
                 timer = new Timer(speed, new ActionListener() {
                     @Override
+                    /**
+                     *Performs an action every time the timer event actionEvent is fired, in this case
+                     * the action is to increment degrees by 1 degree, so that it rotates 1 degree per event and
+                     * repaints the image
+                     */
                     public void actionPerformed(ActionEvent actionEvent) {
-                        degrees = degrees + 1;
+                        degrees = degrees + 1; //increments degrees by 1 and repaints the image so it rotates
                         imageLabel.repaint();
-                        if(spinBox.isSelected()==false){
+                        if(spinBox.isSelected()==false){ //stops the timer if the user unchecks the box
                             timer.stop();
                         }
                     }
                 });
 
-                timer.start();
+                timer.start(); //starts the timer
             }
 
         }
 
     }
 
+    /**
+     * ImageLabel
+     * Class that extends JLabel in order to override PaintCompent so that every time it is redrawn, it is rotated
+     * by 1 degreee, as before each time repaint is called, degrees is incremented by 1
+     */
     private class ImageLabel extends JLabel{
+        /**
+         * BufferedImage: Used to load the file in initially through ImageIO
+         */
         BufferedImage image;
 
+        /**
+         * ImageIcon: used to store the images as a mutable/drawable icon so that it can also be attached to the label
+         * so that it may appear on the screen
+         */
         ImageIcon imageIcon;
 
-
+        /**
+         * Constructor for the ImageLabel class
+         * Creates the bufferedImage and the ImageIcon for the label, using my chosen image
+         */
         public ImageLabel(){
             try {
                 image = ImageIO.read(new File("oral_exam2/S22_ImageRotator/Images/sonic.jpeg"));
