@@ -8,30 +8,73 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Class ImageRotationFrame
+ * Extends JFrame in order to create a frame that holds the rest of GUI for the image rotator
+ * Allows for users to rotate an image a specified number of degrees, while also being able to change speed or spin continously
+ * @author Peter Mertka
+ * @version 3/16/2021
+ */
 public class ImageRotationFrame extends JFrame {
 
+    /**
+     * JPanel: Holds the image that will be rotated, adjusts in size to the size of the image
+     */
     private final JPanel imagePanel;
 
+    /**
+     * SpinnerModel: contains the bounds, range, step, and initial condition for the degree spinner
+     */
     private final SpinnerModel degreeModel;
 
+    /**
+     * SpinnerModel: contains the bounds, range, step, and initial condition for the speed spinner
+     */
     private final SpinnerModel speedModel;
 
+    /**
+     * JSpinner: the actual spinner that allows users to choose a degrees to rotate
+     */
     private final JSpinner degreeSpinner;
 
+    /**
+     * JSpnner: the actual spinner that allows users to choose a speed to rotate at
+     */
     private final JSpinner speedSpinner;
 
+    /**
+     * JLabel: stores the text to label the degree spinner
+     */
     private final JLabel degreeLabel;
 
+    /**
+     * JLabel: stores the text to label the speed spinner
+     */
     private final JLabel speedLabel;
 
+    /**
+     * JButton: button that the user presses to begin the rotation
+     */
     private final JButton startButton;
 
+    /**
+     * JCheckBox: Check box that specifies if the user wants the image to spin continously or not
+     */
     private final JCheckBox spinBox;
 
+    /**
+     * ImageLabel: Instance of custome ImageLabel object that allows for image to be saved as an Icon and rotated
+     */
     private final ImageLabel imageLabel;
 
+    /**
+     * int: The number of degrees the image has been rotated
+     */
     private int degrees = 0;
 
+    /**
+     * Timer: timer that helps to specify how frequently the image rotates by firing actionEvents at certain rates
+     */
     private Timer timer;
 
 
@@ -88,18 +131,40 @@ public class ImageRotationFrame extends JFrame {
         public void actionPerformed(ActionEvent actionEvent) {
             int speed = 21 - (int) speedSpinner.getValue();
 
-            int degreesToSpin = (int) degreeSpinner.getValue();
-            int degreesOnClick = degrees;
 
-            timer = new Timer(speed, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    degrees = degrees + 1;
-                    imageLabel.repaint();
-                }
-            });
+            if(spinBox.isSelected()==false) {
+                int degreesToSpin = (int) degreeSpinner.getValue();
+                int degreesOnClick = degrees;
 
-            timer.start();
+
+                timer = new Timer(speed, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        degrees = degrees + 1;
+                        imageLabel.repaint();
+                        if(degrees > degreesToSpin + degreesOnClick){
+                            timer.stop();
+                        }
+                    }
+                });
+
+                timer.start();
+            }
+            else{
+
+                timer = new Timer(speed, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        degrees = degrees + 1;
+                        imageLabel.repaint();
+                        if(spinBox.isSelected()==false){
+                            timer.stop();
+                        }
+                    }
+                });
+
+                timer.start();
+            }
 
         }
 
@@ -113,7 +178,7 @@ public class ImageRotationFrame extends JFrame {
 
         public ImageLabel(){
             try {
-                image = ImageIO.read(new File("oral_exam2/S22_ImageRotator/Images/iowa.png"));
+                image = ImageIO.read(new File("oral_exam2/S22_ImageRotator/Images/sonic.jpeg"));
             }
             catch(IOException Ioe){
 
