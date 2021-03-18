@@ -215,26 +215,32 @@ public class ImageRotationFrame extends JFrame {
          * Creates the bufferedImage and the ImageIcon for the label, using my chosen image
          */
         public ImageLabel(){
-            try {
-                image = ImageIO.read(new File("oral_exam2/S22_ImageRotator/Images/sonic.jpeg"));
+            try { //tries to open the file based on my specific image
+                image = ImageIO.read(new File("oral_exam2/S22_ImageRotator/Images/sonic.jpeg")); //assigns the image to the Buffered Image
             }
-            catch(IOException Ioe){
+            catch(IOException Ioe){ //catches the Ioe exception in case it happens
 
             }
-            imageIcon = new ImageIcon(image);
+            imageIcon = new ImageIcon(image); //creates an image Icon from the Buffered Image
 
-            this.setIcon(imageIcon);
+            this.setIcon(imageIcon); //sets the Icon of the label to the image I chose
         }
 
+        /**
+         * Overridden Paint Component function so that every time the label is repainted, the rotation of the image occurs
+         * @param g Generic Graphics object that allows the GUI to perform drawable actions onto components
+         */
         @Override
         protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            int width = imageIcon.getIconWidth();
+            super.paintComponent(g); //calls the super paintComponent, that resides in JLabel
+            int width = imageIcon.getIconWidth(); //gets the width and height of the icon
             int height = imageIcon.getIconHeight();
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.rotate(Math.toRadians(degrees),width/2, height/2);
-            g2d.drawImage(imageIcon.getImage(), 0, 0, this);
-            g2d.dispose();
+            Graphics2D g2d = (Graphics2D) g; //casts the graphics of the label to be a Graphics2D object to allow for use of the rotate function
+            g2d.rotate(Math.toRadians(degrees),width/2, height/2); //roates the graphics2D around its center by whatever total amount of degrees.
+            //since degrees is constantly incremented, the picture appears to rotate smoothly, degree by degree
+            g2d.drawImage(imageIcon.getImage(), 0, 0, this); //redraws the image back at the top right corner of the new graphic, that is now tilted by some degrees
+            g2d.dispose(); //releases any image or graphics resources the program  is using, good practice to call this when manipulating images,
+            //prevents from more manipulations occuring
 
 
 
