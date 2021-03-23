@@ -98,22 +98,43 @@ public class Tree<T extends Comparable<T>> {
         postorderHelper(node.rightNode); // traverse right subtree
         System.out.printf("%s ", node.data); // output node data
     }
+
+    /**
+     * Calls the outputTree Helper Function on the root of the binary tree
+     * @return String: the output of the binary tree in a string format
+     */
     public String outputTree(){
         return outputTreeHelper(0, root);
     }
 
+    /**
+     * Traverse the binary tree in order, starting from the rightmost node and going left, printing out the values
+     * with 5 spaces per line from the left side of the terminal
+     * @param totalSpaces int: The number of spaces in between the left side of the terminal and the root node's value
+     * @param node TreeNode: The current node in the tree being analyzed by the function
+     * @return String: the partial or complete string representation of the binary tree
+     */
     private String outputTreeHelper(int totalSpaces, TreeNode<T> node){
-        if (node == null){
+        if (node == null){ //if the nodes to the right and left are empty, it passes a null node, so the base case such, and returns an empty string
             return "";
         }
-        else{
+        else{ //if the node itself is not null, it passed the child nodes of the root, first by passing the right node to the function, with five more spaces to be added from the left side of the terminal
+            //it then prints the value of the node, which will be once it has gone all the way down the rightmost branch or printed all other in order nodes
+            //it adds a multiple of 5 spaces from the left side of the terminal, to show the tree growning, as well as a new line so there is only one number per line
+            //it then goes down the left side of the node's tree, so that the traversal order is in order of the tree.
             return outputTreeHelper(totalSpaces + 5, node.rightNode) + returnSpaces(totalSpaces) + node.data +"\n" + outputTreeHelper(totalSpaces + 5, node.leftNode);
         }
     }
 
+    /**
+     * Simple helper string to return a certain number of spaces, used to condense code
+     * @param totalSpaces int: the total number of spaces to be returned
+     * @return String: a string of spaces with a length of totalSpaces
+     */
     private String returnSpaces(int totalSpaces){
         String returnVal = "";
-        for(int i = 0; i <totalSpaces ; i++){
+        for(int i = 0; i <totalSpaces ; i++){ //basic for loop that goes from 0 to n=totalspaces,
+            //making a string of spaces with length totalSpaces and returns it
             returnVal = returnVal + " ";
         }
         return returnVal;
