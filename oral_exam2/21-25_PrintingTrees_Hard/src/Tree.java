@@ -33,22 +33,7 @@ class TreeNode<T extends Comparable<T>> {
                 rightNode.insert(insertValue);
         }
     }
-    private String outputTree(int totalSpaces){
-        if(leftNode == null && rightNode == null){
-            return returnSpaces(totalSpaces) + (String)data + "\n";
-        }
-        else{
-            return  rightNode.outputTree(totalSpaces + 5) + returnSpaces(totalSpaces) + (String)data + leftNode.outputTree(totalSpaces + 5);
-        }
-    }
 
-    private String returnSpaces(int totalSpaces){
-        String returnVal = "";
-        for(int i = 0; i <totalSpaces ; i++){
-            returnVal = returnVal + " ";
-        }
-        return returnVal;
-    }
 
 } // end class TreeNode
 
@@ -112,6 +97,26 @@ public class Tree<T extends Comparable<T>> {
         postorderHelper(node.leftNode); // traverse left subtree
         postorderHelper(node.rightNode); // traverse right subtree
         System.out.printf("%s ", node.data); // output node data
+    }
+    public String outputTree(){
+        return outputTreeHelper(0, root);
+    }
+
+    private String outputTreeHelper(int totalSpaces, TreeNode<T> node){
+        if (node == null){
+            return "";
+        }
+        else{
+            return outputTreeHelper(totalSpaces + 5, node.rightNode) + returnSpaces(totalSpaces) + node.data +"\n" + outputTreeHelper(totalSpaces + 5, node.leftNode);
+        }
+    }
+
+    private String returnSpaces(int totalSpaces){
+        String returnVal = "";
+        for(int i = 0; i <totalSpaces ; i++){
+            returnVal = returnVal + " ";
+        }
+        return returnVal;
     }
 
 
