@@ -5,6 +5,7 @@
  * Class Tree: Defines the functionality of the Binary Tree and Binary Tree Node classes
  * Allows for the creation of Binary Tree objects, by using comparables as nodes.
  * Includes the implemtation of an output Tree method
+ * All other code contained in this file comes from the textbook example this problem is based off of
  * @param <T>
  */
 
