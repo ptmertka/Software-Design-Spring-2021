@@ -1,6 +1,13 @@
 // Fig. 21.17: Tree.java
 // TreeNode and Tree class declarations for a binary search tree.
 
+/**
+ * Class Tree: Defines the functionality of the Binary Tree and Binary Tree Node classes
+ * Allows for the creation of Binary Tree objects, by using comparables as nodes.
+ * Includes the implemtation of an output Tree method
+ * @param <T>
+ */
+
 // class TreeNode definition
 class TreeNode<T extends Comparable<T>> {
     // package access members
