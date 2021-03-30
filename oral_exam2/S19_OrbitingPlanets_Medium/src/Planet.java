@@ -97,7 +97,7 @@ public class Planet implements Runnable{
                 x = (int) (500 + (250 * Math.cos(Math.toRadians(degrees)))); //gets the new coordinates of the planet using sin and cos
                 y = (int) (500 + (250 * Math.sin(Math.toRadians(degrees)))); //multiplies by the radius of orbit 250, and adds 500 so that it is centered
                 degrees++; //increments degrees
-                Thread.sleep(2); //puts the thread to sleep to allow for other threads
+                Thread.sleep(10); //puts the thread to sleep to allow for other threads
             }
         }
         catch (InterruptedException e){ //if thread is interrupted, prints its stack trace
