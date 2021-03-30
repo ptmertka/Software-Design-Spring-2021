@@ -37,7 +37,14 @@ public class TestPrintTree {
         }
 
         System.out.println(tree.outputTree()); //Prints out the binary tree from the example, and the 2 random ones
+        for(int j = 0; j < 5; j++){ //prints out 5 enters between each tree
+            System.out.println("\n");
+        }
+
         System.out.println(tree2.outputTree());
+        for(int j = 0; j < 5; j++){
+            System.out.println("\n");
+        }
         System.out.println(tree3.outputTree());
     }
 }
