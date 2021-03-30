@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class OrbitingFrame extends JFrame {
 
-    private final JPanel space;
+    private final SpacePanel space;
 
     private final Timer timer;
 
@@ -15,7 +15,15 @@ public class OrbitingFrame extends JFrame {
     public OrbitingFrame(){
         super("Orbiting Planets");
 
-        space = new JPanel();
+        setLayout(new FlowLayout());
+
+        space = new SpacePanel();
+        space.setPreferredSize(new Dimension(1000,1000));
+
+        add(space);
+
+
+
 
 
     }
@@ -47,7 +55,9 @@ public class OrbitingFrame extends JFrame {
         }
     }
     private class SpacePanel extends JPanel{
-
+        public SpacePanel(){
+            super();
+        }
     }
 
 }
