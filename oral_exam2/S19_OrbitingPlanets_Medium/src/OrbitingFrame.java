@@ -17,6 +17,13 @@ public class OrbitingFrame extends JFrame {
 
     private ArrayList<Planet> planentList = new ArrayList<Planet>();
 
+    private Color[] colorList = {Color.lightGray,Color.pink, Color.green, Color.red, Color.orange,
+    Color.yellow, Color.cyan, Color.blue};
+
+    private int[] radiusList = {10, 15, 25, 20, 50, 45, 35, 30};
+
+    private int[] orbitList = {100, 125, 150, 175, 200, 225, 250, 275};
+
     ExecutorService executorService;
 
     public OrbitingFrame(){
@@ -25,7 +32,7 @@ public class OrbitingFrame extends JFrame {
         setLayout(new FlowLayout());
 
         space = new SpacePanel();
-        space.setPreferredSize(new Dimension(1000,1000));
+        space.setPreferredSize(new Dimension(800,800));
 
         executorService = Executors.newCachedThreadPool();
 
@@ -55,8 +62,8 @@ public class OrbitingFrame extends JFrame {
         public void mouseClicked(MouseEvent mouseEvent) {
 
             if(planentList.size() < 8) {
-
-                Planet planet = new Planet(250, 500, 10);
+                int index = planentList.size();
+                Planet planet = new Planet(400, 400, radiusList[index], orbitList[index]);
                 planentList.add(planet);
                 executorService.execute(planet);
 
@@ -100,13 +107,15 @@ public class OrbitingFrame extends JFrame {
             g.drawOval((getWidth()/2)-25,(getHeight()/2)-25, 50,50);
             g.fillOval((getWidth()/2)-25,(getHeight()/2)-25, 50,50);
 
-            g.setColor(Color.black);
-            g.drawOval((getWidth()/2)-250,(getHeight()/2)-250, 500,500);
 
+            int index = 0;
             for (Planet planet : planentList){
-                g.setColor(Color.orange);
+                g.setColor(Color.black);
+                g.drawOval((getWidth()/2)-orbitList[index],(getHeight()/2)-orbitList[index], orbitList[index]*2,orbitList[index]*2);
+                g.setColor(colorList[index]);
                 g.drawOval(planet.getX()-planet.getRadius(), planet.getY()-planet.getRadius(), planet.getRadius()*2, planet.getRadius()*2);
                 g.fillOval(planet.getX()-planet.getRadius(), planet.getY()-planet.getRadius(), planet.getRadius()*2, planet.getRadius()*2);
+                index++;
             }
 
 

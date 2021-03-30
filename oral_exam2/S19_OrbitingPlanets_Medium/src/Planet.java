@@ -22,6 +22,11 @@ public class Planet implements Runnable{
     private int radius = 0;
 
     /**
+     * Int: the radius of the orbit of the planet
+     */
+    private int orbit = 0;
+
+    /**
      * Int: the degreees around a circle that the planet is in its orbit
      */
     private int degrees = 0;
@@ -32,10 +37,11 @@ public class Planet implements Runnable{
      * @param y the y coordinate to be set to
      * @param radius the radius of the planet
      */
-    public Planet(int x, int y, int radius){
+    public Planet(int x, int y, int radius, int orbit){
         this.x = x;
         this.y = y;
         this.radius = radius;
+        this.orbit = orbit;
     }
 
     /**
@@ -94,8 +100,8 @@ public class Planet implements Runnable{
     public void run() {
         try { //in try block in case of interrupt during sleep
             while (true) {
-                x = (int) (500 + (250 * Math.cos(Math.toRadians(degrees)))); //gets the new coordinates of the planet using sin and cos
-                y = (int) (500 + (250 * Math.sin(Math.toRadians(degrees)))); //multiplies by the radius of orbit 250, and adds 500 so that it is centered
+                x = (int) (400 + (orbit * Math.cos(Math.toRadians(degrees)))); //gets the new coordinates of the planet using sin and cos
+                y = (int) (400 + (orbit * Math.sin(Math.toRadians(degrees)))); //multiplies by the radius of orbit, and adds 400 so that it is centered
                 degrees++; //increments degrees
                 Thread.sleep(10); //puts the thread to sleep to allow for other threads
             }
