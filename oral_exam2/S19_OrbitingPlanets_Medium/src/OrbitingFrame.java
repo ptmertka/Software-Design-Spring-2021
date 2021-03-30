@@ -104,14 +104,14 @@ public class OrbitingFrame extends JFrame {
 
             System.out.println("Paint Components was called");
             g.setColor(Color.yellow);
-            g.drawOval((getWidth()/2)-25,(getHeight()/2)-25, 50,50);
-            g.fillOval((getWidth()/2)-25,(getHeight()/2)-25, 50,50);
+            g.drawOval((getWidth()/2)-25,300-25, 50,50);
+            g.fillOval((getWidth()/2)-25,300-25, 50,50);
 
 
             int index = 0;
             for (Planet planet : planentList){
                 g.setColor(Color.black);
-                g.drawOval((getWidth()/2)-orbitList[index],(getHeight()/2)-orbitList[index], orbitList[index]*2,orbitList[index]*2);
+                g.drawOval((getWidth()/2)-orbitList[index], 300-orbitList[index], orbitList[index]*2,orbitList[index]*2);
                 g.setColor(colorList[index]);
                 g.drawOval(planet.getX()-planet.getRadius(), planet.getY()-planet.getRadius(), planet.getRadius()*2, planet.getRadius()*2);
                 g.fillOval(planet.getX()-planet.getRadius(), planet.getY()-planet.getRadius(), planet.getRadius()*2, planet.getRadius()*2);
