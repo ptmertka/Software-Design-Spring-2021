@@ -101,7 +101,7 @@ public class Planet implements Runnable{
         try { //in try block in case of interrupt during sleep
             while (true) {
                 x = (int) (400 + (orbit * Math.cos(Math.toRadians(degrees)))); //gets the new coordinates of the planet using sin and cos
-                y = (int) (300 + (orbit * Math.sin(Math.toRadians(degrees)))); //multiplies by the radius of orbit, and adds 400 so that it is centered
+                y = (int) (300 + (orbit * Math.sin(Math.toRadians(degrees)))); //multiplies by the radius of orbit, and adds 400 or 300 so that it is centered
                 degrees++; //increments degrees
                 Thread.sleep(10); //puts the thread to sleep to allow for other threads
             }
