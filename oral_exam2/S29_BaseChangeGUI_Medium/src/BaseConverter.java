@@ -54,8 +54,6 @@ public class BaseConverter {
                 "^[0-9A-Ka-k]+$", "^[0-9A-La-l]+$", "^[0-9A-Ma-m]+$","^[0-9A-Na-n]+$", "^[0-9A-Oa-o]+$","^[0-9A-Pa-p]+$",
                 "^[0-9A-Qa-q]+$", "^[0-9A-Ra-r]+$", "^[0-9A-Sa-s]+$", "^[0-9A-Ta-t]+$", "^[0-9A-Ua-u]+$", "^[0-9A-Va-v]+$"
                 };
-        String [] lowercase = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l","m", "n",
-                "o", "p", "q", "r", "s", "t", "u", "v"};
 
         String [] uppercase = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
                 "O", "P", "Q", "R", "S", "T", "U", "V"};
@@ -63,5 +61,25 @@ public class BaseConverter {
         String[] digitsPast9 = {"10", "11", "12", "13", "14", "15",
                 "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"};
 
+        for(int i = 0 ; i< bases.length; i++){ //creates both hashmaps for the regexes of each base, as well as the way to convert from digits to letters
+            baseRegexs.put(bases[i], regexes[i]);
+
+        }
+        for(int j = 0; j < uppercase.length ; j++){
+            baseLetters.put(digitsPast9[j], uppercase[j]);
+        }
     }
+
+    /**
+     * Function that takes the input base and the number being converted, and makes sure it is
+     * in the proper form, returns true if it is, false if not
+     * @return Boolean: whether or not the inputted number is valid
+     */
+    public boolean checkIfValid(){
+
+       return number.matches(baseRegexs.get(inputBase)); //compares the number to the corresponding regex for each base
+        //returns true if the number only contains the valid characters for that base
+    }
+
+
 }
