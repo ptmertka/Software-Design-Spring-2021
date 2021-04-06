@@ -81,5 +81,22 @@ public class BaseConverter {
         //returns true if the number only contains the valid characters for that base
     }
 
+    /**
+     * Translates the number, assuming its valid, from the inputted base to base 10
+     * and then from base 10 to the desired base
+     * @return String: the new base representation of the inputted number to the object
+     */
+    public String translate(){
+        int numInBase10 = 0;
+        int inputBaseAsInt = Integer.valueOf(inputBase);
+        String numberReversed = new StringBuilder(number).reverse().toString(); //revereses the string so that the x^0 place is at the front, to help with calculations
+        char[] numberByDigits = numberReversed.toCharArray(); //breaks the number into a character by character representation
+
+        for(int i = 0; i< numberByDigits.length ; i++){
+            numInBase10 = (int) (numInBase10 + (Math.pow(inputBaseAsInt, i) * (int) numberByDigits[i]));
+        }
+
+
+    }
 
 }
