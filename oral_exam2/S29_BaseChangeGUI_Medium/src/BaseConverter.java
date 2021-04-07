@@ -95,9 +95,14 @@ public class BaseConverter {
         String numberReversed = new StringBuilder(number).reverse().toString(); //revereses the string so that the x^0 place is at the front, to help with calculations
         char[] numberByDigits = numberReversed.toCharArray(); //breaks the number into a character by character representation
 
+
+
         for(int i = 0; i< numberByDigits.length ; i++){ //converts the number from its input base to base 10
-            numInBase10 = (int) (numInBase10 + (Math.pow(inputBaseAsInt, i) * (int) numberByDigits[i]));
+
+            numInBase10 = (int) (numInBase10 + (Math.pow(inputBaseAsInt, i) * Character.getNumericValue(numberByDigits[i])));
         }
+        System.out.println("Num in Base 10: " + numInBase10);
+
         ArrayList<Integer> digits = new ArrayList<Integer>(); //creates an arrayList to store the new digits of the number in the output base
 
         while (numInBase10 > 0){ //while the numberInBase10 is non zero
