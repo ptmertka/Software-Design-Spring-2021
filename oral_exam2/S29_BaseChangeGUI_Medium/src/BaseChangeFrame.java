@@ -110,7 +110,25 @@ public class BaseChangeFrame extends JFrame {
     private class ButtonListener implements ActionListener{
 
         @Override
+        /**
+         * Handles the click events of teh button, creating the baseCoverter object,
+         * and updating the outputTextField based on if number can be translated or not
+         */
         public void actionPerformed(ActionEvent actionEvent) {
+            String inputBase = inputBaseSpinner.getValue().toString(); //gets the values of the bases and numbers from the spinners and area
+            int outputBase = (int) outputBaseSpinner.getValue();
+            String number = inputField.getText();
+            BaseConverter baseConverter = new BaseConverter(inputBase, outputBase, number); //creates a new base converter
+
+            if ((int) inputBaseSpinner.getValue() == outputBase){
+                outputField.setText(number); //if the bases equal, just translate the number over
+
+            }else if(!baseConverter.checkIfValid()){ //if the number is not the correct form
+                outputField.setText("Number inputted is in wrong form or contains an invalid character, please fix");
+            }
+            else{
+                outputField.setText(baseConverter.translate());//gets the translated version of the number and outputs it
+            }
 
         }
     }

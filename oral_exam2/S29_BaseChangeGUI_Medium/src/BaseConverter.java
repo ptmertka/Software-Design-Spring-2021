@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -92,11 +95,33 @@ public class BaseConverter {
         String numberReversed = new StringBuilder(number).reverse().toString(); //revereses the string so that the x^0 place is at the front, to help with calculations
         char[] numberByDigits = numberReversed.toCharArray(); //breaks the number into a character by character representation
 
-        for(int i = 0; i< numberByDigits.length ; i++){
+        for(int i = 0; i< numberByDigits.length ; i++){ //converts the number from its input base to base 10
             numInBase10 = (int) (numInBase10 + (Math.pow(inputBaseAsInt, i) * (int) numberByDigits[i]));
         }
+        ArrayList<Integer> digits = new ArrayList<Integer>(); //creates an arrayList to store the new digits of the number in the output base
 
+        while (numInBase10 > 0){ //while the numberInBase10 is non zero
+            digits.add(numInBase10 % outputBase); //follows the algorithm of the number's remainder by dividing the new base is the first
+            numInBase10 = Math.floorDiv(numInBase10, outputBase);
+        }
+        ArrayList<String> digitsInNewBase = new ArrayList<String>(); //converts any digits greater than 9 to their letter output
+        for(int digit : digits){
+            if(digit > 9){ //once translated, adds the new string digits to a new array List
+                digitsInNewBase.add(baseLetters.get(Integer.toString(digit)));
+            }
+            else{
+                digitsInNewBase.add(Integer.toString(digit));
+            }
+        }
 
+        Collections.reverse(digitsInNewBase); //reverses list becuase when doing the initial add, adds digits right to left
+
+        String finalOutput = "";
+
+        for (String digit: digitsInNewBase){ //turns the array list into an output string
+            finalOutput = finalOutput + digit;
+        }
+        return finalOutput; //returns the new string
     }
 
 }
