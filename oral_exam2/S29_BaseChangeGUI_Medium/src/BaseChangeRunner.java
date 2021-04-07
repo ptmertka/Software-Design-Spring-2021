@@ -1,5 +1,10 @@
 import javax.swing.*;
 
+/**
+ * Class BaseChangeRunner
+ * Creates the actual frame of the project, allows it to close the program upon exit of the window
+ * sets the size of the frame and makes it visible.
+ */
 public class BaseChangeRunner {
     /**
      * Main function, creates the BaseChangerFrame itself, making it visible and usuable

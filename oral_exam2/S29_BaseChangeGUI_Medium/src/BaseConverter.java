@@ -60,6 +60,8 @@ public class BaseConverter {
 
         String [] uppercase = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
                 "O", "P", "Q", "R", "S", "T", "U", "V"};
+        String [] lowercase = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l","m", "n",
+                "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
 
         String[] digitsPast9 = {"10", "11", "12", "13", "14", "15",
                 "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32"};
@@ -70,6 +72,8 @@ public class BaseConverter {
         }
         for(int j = 0; j < uppercase.length ; j++){
             baseLetters.put(digitsPast9[j], uppercase[j]);
+            baseLetters.put(uppercase[j], digitsPast9[j]);
+            baseLetters.put(lowercase[j], digitsPast9[j]);
         }
     }
 
@@ -97,11 +101,14 @@ public class BaseConverter {
 
 
 
-        for(int i = 0; i< numberByDigits.length ; i++){ //converts the number from its input base to base 10
+        for(int i = 0; i< numberByDigits.length ; i++) { //converts the number from its input base to base 10
+            if (Character.isAlphabetic(numberByDigits[i])) {
+                numInBase10 = (int) (numInBase10 + (Math.pow(inputBaseAsInt, i) * Integer.valueOf(baseLetters.get(Character.toString(numberByDigits[i]))))); //handles the conversion to base 10 if a letter digit is encountered
+            } else {
+                numInBase10 = (int) (numInBase10 + (Math.pow(inputBaseAsInt, i) * Character.getNumericValue(numberByDigits[i]))); //handles the conversion if a numeric digit is enountered
 
-            numInBase10 = (int) (numInBase10 + (Math.pow(inputBaseAsInt, i) * Character.getNumericValue(numberByDigits[i])));
+            }
         }
-        System.out.println("Num in Base 10: " + numInBase10);
 
         ArrayList<Integer> digits = new ArrayList<Integer>(); //creates an arrayList to store the new digits of the number in the output base
 
