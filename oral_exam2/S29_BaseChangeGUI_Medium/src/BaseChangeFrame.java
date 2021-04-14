@@ -115,7 +115,7 @@ public class BaseChangeFrame extends JFrame {
          * and updating the outputTextField based on if number can be translated or not
          */
         public void actionPerformed(ActionEvent actionEvent) {
-            String inputBase = inputBaseSpinner.getValue().toString(); //gets the values of the bases and numbers from the spinners and area
+            String inputBase =  inputBaseSpinner.getValue().toString(); //gets the values of the bases and numbers from the spinners and area
             int outputBase = (int) outputBaseSpinner.getValue();
             String number = inputField.getText();
             BaseConverter baseConverter = new BaseConverter(inputBase, outputBase, number); //creates a new base converter
