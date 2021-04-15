@@ -10,6 +10,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+/**
+ * Class server creates the server frame, as well as the socket for the server to run on
+ * Also handles the filereading and parsing if the file exists, and if so, sends the text line by line to the client
+ * Most code is from the in class example, with all file processing being created by me
+ * @author ptmertka
+ * @version 4.15.21
+ */
 public class Server extends JFrame
 {
     private JTextField enterField; // inputs message from user
@@ -21,6 +28,10 @@ public class Server extends JFrame
     private int counter = 1; // counter of number of connections
 
     // set up GUI
+
+    /**
+     * Constructor, makes the frame for the Server, allows for the GUI components to appear
+     */
     public Server()
     {
         super("Server");
@@ -49,11 +60,16 @@ public class Server extends JFrame
     }
 
     // set up and run server
+
+    /**
+     * Runs the server by creating the serverSocket, waits for the connection,
+     * If it receives a connection, it gets the input and output streams, and then processes the connection
+     */
     public void runServer()
     {
         try // set up server to receive connections; process connections
         {
-            server = new ServerSocket(23655, 100); // create ServerSocket
+            server = new ServerSocket(23669, 100); // create ServerSocket
 
             while (true)
             {
@@ -81,6 +97,12 @@ public class Server extends JFrame
     }
 
     // wait for connection to arrive, then display connection info
+
+    /**
+     * Displays the waiting message to the server, sets the server to accept new connections, and when it does
+     * gets the IP address and host name of the client and displays it
+     * @throws IOException
+     */
     private void waitForConnection() throws IOException
     {
         displayMessage("Waiting for connection\n");
@@ -90,6 +112,11 @@ public class Server extends JFrame
     }
 
     // get streams to send and receive data
+
+    /**
+     * Once a connection has been made, gets the input and output streams of the connecting client
+     * @throws IOException
+     */
     private void getStreams() throws IOException
     {
         // set up output stream for objects
@@ -103,6 +130,13 @@ public class Server extends JFrame
     }
 
     // process connection with client
+
+    /**
+     * Main function that handles the file processing. It takes in the clients message, wich is a file name
+     * Makes a bufferedReader to attempt to parse the specified file, but if it does not exist, sends that error message to client and server
+     * If the file does exist, goes line by line and sends the text to the client
+     * @throws IOException
+     */
     private void processConnection() throws IOException
     {
         String message = "Connection successful, please enter a filename";
@@ -110,7 +144,7 @@ public class Server extends JFrame
 
         // enable enterField so server user can send messages
         setTextFieldEditable(true);
-
+        //creates a bufferedReader to read in a file, it defaults to the default text, not so that it reads it, but so the variable can be initialized
         BufferedReader reader = new BufferedReader(new FileReader("oral_exam2/28-13_FileRetrieve_Easy/textFiles/default.txt"));
 
         do // process messages sent from client
@@ -119,13 +153,14 @@ public class Server extends JFrame
             {
                 message = (String) input.readObject(); // read new message
                 displayMessage("\n" + message); // display message
-                String filepath = "oral_exam2/28-13_FileRetrieve_Easy/textFiles/" + message + ".txt";
-                reader = new BufferedReader(new FileReader(filepath)); //creates a BufferedReader object to read from the
+                String modifiedMessage = message.substring(10); //modifies the input from the user to take off the "CLIENT>>>"
+                String filepath = "oral_exam2/28-13_FileRetrieve_Easy/textFiles/" + modifiedMessage + ".txt"; //makes a filepath string using the directory and the name of the file entered by the user
+                reader = new BufferedReader(new FileReader(filepath)); //creates a BufferedReader object to read from the file path, returns an IOE exception if it fails
 
-                String line;
+                String line; //empty string to store line by line
 
-                while((line = reader.readLine()) != null){
-                    displayMessage(line);
+                while((line = reader.readLine()) != null){ //for each line in the file until it is null, sends each line of data to the client
+                    sendData(line);
                 }
 
 
@@ -133,12 +168,13 @@ public class Server extends JFrame
             catch (ClassNotFoundException classNotFoundException)
             {
                 displayMessage("\nUnknown object type received");
+                sendData("\nUnknown object type received");
             }
-            catch (IOException ioe){
-                displayMessage("\n" + "File Does Not Exist\n" + ioe.getMessage());
-
+            catch (IOException ioe){ //IOE exception thrown by BufferedReader
+                displayMessage("\n" + "File Does Not Exist\n" + ioe.getMessage()); //if the file doesn't exist, tells the server and client
+                sendData("\n" + "File Does Not Exist\n" + ioe.getMessage());
             }
-            finally {
+            finally { //closes the reader in order to ensure it is not left open
                 reader.close();
             }
 
@@ -147,6 +183,10 @@ public class Server extends JFrame
     }
 
     // close streams and socket
+
+    /**
+     * Once the client disconnects from the server, function closes the input and output, as well as the disconnecting the socket connection
+     */
     private void closeConnection()
     {
         displayMessage("\nTerminating connection\n");
@@ -165,6 +205,11 @@ public class Server extends JFrame
     }
 
     // send message to client
+
+    /**
+     * Sends data from the Server side to the client side
+     * @param message String: the message to be sent to the client
+     */
     private void sendData(String message)
     {
         try // send object to client
@@ -180,6 +225,11 @@ public class Server extends JFrame
     }
 
     // manipulates displayArea in the event-dispatch thread
+
+    /**
+     * Takes in a string so that it can update the GUI through the invokeLater method, making updates thread safe.
+     * @param messageToDisplay
+     */
     private void displayMessage(final String messageToDisplay)
     {
         SwingUtilities.invokeLater(
@@ -194,6 +244,11 @@ public class Server extends JFrame
     }
 
     // manipulates enterField in the event-dispatch thread
+
+    /**
+     * Also makes another function thread safe, this time making the enterField editable or non editable
+     * @param editable Boolean: whether or not the field should be editable or not
+     */
     private void setTextFieldEditable(final boolean editable)
     {
         SwingUtilities.invokeLater(

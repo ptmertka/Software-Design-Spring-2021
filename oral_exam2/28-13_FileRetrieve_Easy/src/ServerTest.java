@@ -1,11 +1,19 @@
 // Fig. 28.4: ServerTest.java
 // Test the Server application.
-import src.Server;
+
 
 import javax.swing.JFrame;
 
+/**
+ * Creates the Server GUI Frame, makes it visible and sets the server to run
+ * Code is from the in class example
+ */
 public class ServerTest
 {
+   /**
+    * Main function, creates the frame, makes it visible, runs the server
+    * @param args List of string optional arguments
+    */
    public static void main(String[] args)
    {
       Server application = new Server(); // create server

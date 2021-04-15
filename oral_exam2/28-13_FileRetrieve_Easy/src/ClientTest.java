@@ -1,11 +1,19 @@
 // Fig. 28.6: ClientTest.java
 // Class that tests the Client.
-import src.Client;
+
 
 import javax.swing.JFrame;
 
+/**
+ * ClientTest creates a Client object, and allows the frame to be seen, while also determining what IP address to connect to from the Arguments
+ * Code comes from the in class example
+ */
 public class ClientTest 
 {
+   /**
+    * Creates the frame of the client, reads in the IP address from the configuration if there is one entered there. Runs the client once created
+    * @param args List of strings that contains an IP address of server if it exists
+    */
    public static void main(String[] args)
    {
       Client application; // declare client application

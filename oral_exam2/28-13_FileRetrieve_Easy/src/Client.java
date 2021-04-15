@@ -13,6 +13,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+/**
+ * Class Client creates the GUI Frame for the client, allows the user to send messages to the server, in the form of filenames
+ * Code once again comes mostly from in class example of ServerConnection
+ * @author ptmertka
+ * @version 4.15.21
+ */
 public class Client extends JFrame
 {
     private JTextField enterField; // enters information from user
@@ -24,6 +30,11 @@ public class Client extends JFrame
     private Socket client; // socket to communicate with server
 
     // initialize chatServer and set up GUI
+
+    /**
+     * Constructor, creating the GUI of the client, taking in the IP address of the server
+     * @param host String: the IP address of the server being connected to
+     */
     public Client(String host)
     {
         super("Client");
@@ -54,6 +65,10 @@ public class Client extends JFrame
     }
 
     // connect to server and process messages from server
+
+    /**
+     * Function attempts to connect to the server, and if so, processes the connection and gets the input and output streams of the server
+     */
     public void runClient()
     {
         try // connect to server, get streams, process connection
@@ -77,12 +92,17 @@ public class Client extends JFrame
     }
 
     // connect to server
+
+    /**
+     * Attempts to make a new socket connection to the exact port and IP address of the server, throws IOException if it doesn't
+     * @throws IOException
+     */
     private void connectToServer() throws IOException
     {
         displayMessage("Attempting connection\n");
 
         // create Socket to make connection to server
-        client = new Socket(InetAddress.getByName(chatServer), 23655);
+        client = new Socket(InetAddress.getByName(chatServer), 23669);
 
         // display connection information
         displayMessage("Connected to: " +
@@ -90,6 +110,11 @@ public class Client extends JFrame
     }
 
     // get streams to send and receive data
+
+    /**
+     * If connection is made to server, gets the input and output streams of the server
+     * @throws IOException
+     */
     private void getStreams() throws IOException
     {
         // set up output stream for objects
@@ -103,6 +128,11 @@ public class Client extends JFrame
     }
 
     // process connection with server
+
+    /**
+     * Once connection is made and the streams are created, allows the user to send messages to the server
+     * @throws IOException
+     */
     private void processConnection() throws IOException
     {
         // enable enterField so client user can send messages
@@ -124,6 +154,10 @@ public class Client extends JFrame
     }
 
     // close streams and socket
+
+    /**
+     * Once user chooses to disconnect from the server, closes streams and connection from the server
+     */
     private void closeConnection()
     {
         displayMessage("\nClosing connection");
@@ -142,6 +176,11 @@ public class Client extends JFrame
     }
 
     // send message to server
+
+    /**
+     * Takes a string and sends it as data to the server side
+     * @param message String: the message, in this case a file name to send to the server
+     */
     private void sendData(String message)
     {
         try // send object to server
@@ -157,6 +196,11 @@ public class Client extends JFrame
     }
 
     // manipulates displayArea in the event-dispatch thread
+
+    /**
+     * Displays messages in a thread Safe manner for the GUI with invokeLater
+     * @param messageToDisplay String: what to be dispalyed to the Client GUI
+     */
     private void displayMessage(final String messageToDisplay)
     {
         SwingUtilities.invokeLater(
@@ -171,6 +215,11 @@ public class Client extends JFrame
     }
 
     // manipulates enterField in the event-dispatch thread
+
+    /**
+     * Another thread safe function to turn on and off the enter field of the client GUI
+     * @param editable Boolean: tells the client whether to turn on or off the ability to edit the enter field.
+     */
     private void setTextFieldEditable(final boolean editable)
     {
         SwingUtilities.invokeLater(
