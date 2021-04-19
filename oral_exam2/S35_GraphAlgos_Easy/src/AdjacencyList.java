@@ -19,6 +19,10 @@ public class AdjacencyList {
     private HashMap<String, ArrayList<String>> adjl = new HashMap<String, ArrayList<String>>();
 
     /**
+     * ArrayList of Strings; stores each word from the txt file so that it can be used to access adjacency list
+     */
+    private ArrayList<String> listOfWords = new ArrayList<String>();
+    /**
      * Constructor, reads in words.txt file and assigns the proper nodes and vertices to the adjacency list
      */
     public AdjacencyList(){
@@ -26,7 +30,6 @@ public class AdjacencyList {
         try {
 
             BufferedReader reader = new BufferedReader(new FileReader("oral_exam2/S35_GraphAlgos_Easy/words/words.txt")); //creates a buffered reader to read in the words
-            ArrayList<String> listOfWords = new ArrayList<String>();
             String word; //array list and string to hold every word
 
             while ((word = reader.readLine()) != null){
@@ -45,7 +48,7 @@ public class AdjacencyList {
                     String word2 = listOfWords.get(j); //temporaily stores the word the second for loop is on
 
                     if((!word.equals(word2)) && (oneLetterOff(word,word2))){ //if the words arent the same and they are 1 word off
-                        adjl.get(word).add(word2);//adds the word as a vertice to the arrayList of the word itself
+                        adjl.get(word).add(word2);//adds the word as an edge to the arrayList of the word itself
                     }
                 }
             }
@@ -82,6 +85,68 @@ public class AdjacencyList {
         return numDiff == 1; //returns true if numDiffs is 1, false elsewise
     }
 
+    /**
+     * When called on an adjacency list, gets the number of words with no edges,
+     * which words have the most edges, and what is the average number of edges per vertice
+     * @return
+     */
+    public String getNecessaryValues(){
 
+        int numWithNoEdges = 0; //number of words with no edges
+        ArrayList<String> maxEdgesWords = new ArrayList<String>(); //arrayList to track which word(s) have the most edges
+        int maxNumberOfEdges = 0;//max number of edges for a vertice
+        int numEdges = 0; //number of edges
+        int numVertices = listOfWords.size(); //number of vertices
+
+        for (int i = 0 ; i< listOfWords.size() ; i++ ){ //for every word in the adjacency list
+            if (adjl.get(listOfWords.get(i)).size() == 0){ //if the word's arrayList in the HashMap is length zero, it has no edges
+                numWithNoEdges++;
+            }
+
+            if (adjl.get(listOfWords.get(i)).size() > maxNumberOfEdges){ //if the word's arrayList has more edges than the previous max
+                maxEdgesWords = new ArrayList<String>(); //makes a new arrayList to reset the values and adds the new word
+                maxEdgesWords.add(listOfWords.get(i));
+                maxNumberOfEdges = adjl.get(listOfWords.get(i)).size();
+            }
+            else if (adjl.get(listOfWords.get(i)).size() == maxNumberOfEdges){ //if the length of the words arraylist matches, adds the word to the Max Array List
+                maxEdgesWords.add(listOfWords.get(i));
+            }
+            numEdges = numEdges + adjl.get(listOfWords.get(i)).size(); //get the number of edges from that vertice
+
+
+        }
+
+        numEdges = numEdges / 2 ; //divides by two as every edge is counted twice
+
+        //creates the return string with info
+        String firstAnswer = "The number of words with no edges is: " + numWithNoEdges +"\n";
+        String secondAnswerPart1 = "The word(s) with the most number of edges is(are)\n";
+        String secondAnswerPart2 = "";
+
+        for(int j = 0; j < maxEdgesWords.size() ; j++){
+            secondAnswerPart2 = secondAnswerPart2 + maxEdgesWords.get(j) + "\n";
+        }
+        String totalAnswerPart2 = secondAnswerPart1 + secondAnswerPart2;
+
+        double averageEdgesPerVertice = (double) numEdges/numVertices;
+
+        String thirdAnswer = "The average number of Edges per Vertice is " + averageEdgesPerVertice + "\n";
+
+        String returnVal = firstAnswer + totalAnswerPart2 + thirdAnswer;
+
+        return returnVal;
+
+    }
+
+    /**
+     * Overridden ToString that helps visualize the Adjacency List
+     * @return String: the adjacencyList in string format
+     */
+    @Override
+    public String toString() {
+        return "AdjacencyList{" +
+                "adjl=" + adjl +
+                '}';
+    }
 }
 
