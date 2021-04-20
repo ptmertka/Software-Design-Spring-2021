@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MyJavaFXApp extends Application {
+public class MyTipCalculatorApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -14,10 +14,11 @@ public class MyJavaFXApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("MyGUIJavaFXApp.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("MyTipCalculatorView.fxml"));
             Scene scene = new Scene(root);
-            primaryStage.setTitle("Peter's Application");
+            primaryStage.setTitle("Peter's Tip Calculator Application");
             primaryStage.setScene(scene);
             primaryStage.show();
         }catch(IOException e){
@@ -25,3 +26,5 @@ public class MyJavaFXApp extends Application {
         }
     }
 }
+
+

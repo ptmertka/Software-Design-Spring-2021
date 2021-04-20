@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label alignment="CENTER" prefHeight="110.0" prefWidth="600.0" text="We stray further from God's light" textAlignment="CENTER" textFill="#3f9970">
@@ -16,7 +15,7 @@
       </Label>
       <ImageView fitHeight="291.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../nfs/s-l011/local/vol02/p/ptmertka/IdeaProjects/ptmertka_swd/quizzes/JavaFXFirstApp/src/bug.png" />
+            <Image url="@bug.png" />
          </image>
       </ImageView>
    </children>
