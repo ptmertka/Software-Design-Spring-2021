@@ -3,15 +3,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
+
 public class CalculatorController {
 
-    private int firstNumber;
+    private CalculatorModel model = new CalculatorModel();
 
-    private int secondNumber;
+    private ArrayList<String> operators = new ArrayList<String>();
 
-    private int result;
-
-    private String currentText;
 
     @FXML
     private TextField displayArea;
@@ -66,7 +65,52 @@ public class CalculatorController {
 
     @FXML
     public void onPress(ActionEvent e){
+        operators.add("X");
+        operators.add("/");
+        operators.add("-");
+        operators.add("+");
 
+        if(((Button)e.getSource()).getText().equals("=")){
+            model.setSecondNum(Integer.parseInt(model.getCurrentText()));
+            if(model.getOperator().equals("+")){
+                model.setResult(model.getFirstNum()+model.getSecondNum());
+                model.setCurrentText(model.getResult());
+                displayArea.setText(model.getCurrentText());
+            }
+            else if (model.getOperator().equals("-")){
+                model.setResult(model.getFirstNum()-model.getSecondNum());
+                model.setCurrentText(model.getResult());
+                displayArea.setText(model.getCurrentText());
+            }
+            else if (model.getOperator().equals("X")){
+                model.setResult(model.getFirstNum()*model.getSecondNum());
+                model.setCurrentText(model.getResult());
+                displayArea.setText(model.getCurrentText());
+            }
+            else{
+                model.setResult(model.getFirstNum()/model.getSecondNum());
+                model.setCurrentText(model.getResult());
+                displayArea.setText(model.getCurrentText());
+            }
+        }
+        else if(((Button)e.getSource()).getText().equals("C")){
+            model.setOperator("");
+            model.setFirstNum(0);
+            model.setSecondNum(0);
+            model.setResult(0);
+            model.setCurrentText("");
+            displayArea.setText(model.getCurrentText());
+        }
+        else if (operators.contains(((Button)e.getSource()).getText()) ){
+            model.setFirstNum(Integer.parseInt(model.getCurrentText()));
+            model.setOperator(((Button)e.getSource()).getText());
+            model.setCurrentText("");
+            displayArea.setText(model.getCurrentText());
+        }
+        else{
+            model.setCurrentText(model.getCurrentText() + ((Button)e.getSource()).getText());
+            displayArea.setText(model.getCurrentText());
+        }
 
     }
 

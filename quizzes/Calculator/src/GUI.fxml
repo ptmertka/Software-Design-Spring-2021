@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CalculatorController">
    <children>
-      <TextField layoutX="14.0" layoutY="21.0" prefHeight="84.0" prefWidth="345.0" />
+      <TextField fx:id="displayArea" layoutX="14.0" layoutY="21.0" prefHeight="84.0" prefWidth="345.0" />
       <GridPane layoutX="14.0" layoutY="110.0" prefHeight="269.0" prefWidth="345.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -25,22 +25,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="seven" mnemonicParsing="false" text="7" />
-            <Button fx:id="eight" mnemonicParsing="false" text="8" GridPane.columnIndex="1" />
-            <Button fx:id="nine" mnemonicParsing="false" text="9" GridPane.columnIndex="2" />
-            <Button fx:id="divide" mnemonicParsing="false" text="/" GridPane.columnIndex="3" />
-            <Button fx:id="four" mnemonicParsing="false" text="4" GridPane.rowIndex="1" />
-            <Button fx:id="five" mnemonicParsing="false" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="six" mnemonicParsing="false" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="multiply" mnemonicParsing="false" text="X" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button fx:id="one" mnemonicParsing="false" text="1" GridPane.rowIndex="2" />
-            <Button fx:id="two" mnemonicParsing="false" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="three" mnemonicParsing="false" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="minus" mnemonicParsing="false" text="-" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button fx:id="zero" mnemonicParsing="false" text="0" GridPane.rowIndex="3" />
-            <Button fx:id="decimal" mnemonicParsing="false" text="." GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="equals" mnemonicParsing="false" text="=" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="plus" mnemonicParsing="false" text="+" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="seven" mnemonicParsing="false" onAction="#onPress" text="7" />
+            <Button fx:id="eight" mnemonicParsing="false" onAction="#onPress" text="8" GridPane.columnIndex="1" />
+            <Button fx:id="nine" mnemonicParsing="false" onAction="#onPress" text="9" GridPane.columnIndex="2" />
+            <Button fx:id="divide" mnemonicParsing="false" onAction="#onPress" text="/" GridPane.columnIndex="3" />
+            <Button fx:id="four" mnemonicParsing="false" onAction="#onPress" text="4" GridPane.rowIndex="1" />
+            <Button fx:id="five" mnemonicParsing="false" onAction="#onPress" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="six" mnemonicParsing="false" onAction="#onPress" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="multiply" mnemonicParsing="false" onAction="#onPress" text="X" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button fx:id="one" mnemonicParsing="false" onAction="#onPress" text="1" GridPane.rowIndex="2" />
+            <Button fx:id="two" mnemonicParsing="false" onAction="#onPress" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="three" mnemonicParsing="false" onAction="#onPress" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="minus" mnemonicParsing="false" onAction="#onPress" text="-" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="zero" mnemonicParsing="false" onAction="#onPress" text="0" GridPane.rowIndex="3" />
+            <Button fx:id="clear" mnemonicParsing="false" onAction="#onPress" text="C" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="equals" mnemonicParsing="false" onAction="#onPress" text="=" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="plus" mnemonicParsing="false" onAction="#onPress" text="+" GridPane.columnIndex="3" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>
