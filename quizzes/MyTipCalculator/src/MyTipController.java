@@ -1,3 +1,5 @@
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,6 +8,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 
 public class MyTipController {
@@ -49,5 +52,32 @@ public class MyTipController {
             amountTextField.requestFocus();     //puts cursor on amount field
         }
     }
+
+    @FXML
+    private void updateTip(){
+        tipPercent = BigDecimal.valueOf(percentSlider.getValue() / 100.0);
+        percentLabel.setText(percent.format(tipPercent));
+    }
+
+    public void initialize() {
+        // 0-4 rounds down, 5-9 rounds up
+        currency.setRoundingMode(RoundingMode.HALF_UP);
+
+        // listener for changes to tipPercentageSlider's value
+        percentSlider.valueProperty().addListener(
+                new ChangeListener<Number>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> ov,
+                                        Number oldValue, Number newValue) {
+                        tipPercent=
+                                BigDecimal.valueOf(newValue.intValue() / 100.0);
+                        percentLabel.setText(percent.format(tipPercent));
+                    }
+                }
+        );
+    }
+
+
+
 
 }
