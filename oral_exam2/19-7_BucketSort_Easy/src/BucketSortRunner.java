@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Class runner Creates a BucketSort Object and sorts it and dispalys it to the terminal. This is done for
+ * Class runner Creates a number of BucketSort Objects and sorts them and displays them to the terminal. This is done for
  * multiple examples
  */
 public class BucketSortRunner {
@@ -14,12 +14,13 @@ public class BucketSortRunner {
      */
     public static void main(String[] args){
 
-        ArrayList<BucketSort> listOfLists = new ArrayList<BucketSort>();
+        ArrayList<BucketSort> listOfLists = new ArrayList<BucketSort>(); //list of BucketSort objects to be printed
 
-        Random random1 = new Random();
+        Random random1 = new Random(); //random object to get random numbers
 
-        if(args.length != 0){
-            for (int i = 0; i < Integer.parseInt(args[0]); i++){
+        if(args.length != 0){ //if there is arguments to be used
+            for (int i = 0; i < Integer.parseInt(args[0]); i++){ //generate what every argument number of BucketSort Objects
+                //with randomly generated 15 number arrays
 
                 int [] temp = new int[15];
                 for (int j = 0; j < 15; j++){
@@ -31,7 +32,7 @@ public class BucketSortRunner {
 
             }
         }
-        else{
+        else{ //if there are no arguments, just make one object
             int [] temp = new int[15];
             for (int j = 0; j < 15; j++){
                 temp[j] = random1.nextInt(1500);
@@ -41,7 +42,7 @@ public class BucketSortRunner {
             listOfLists.add(temp2);
         }
 
-        for (int k = 0 ; k < listOfLists.size() ; k++){
+        for (int k = 0 ; k < listOfLists.size() ; k++){ //prints out each object's list before and after sort to prove it works
             System.out.println("The list before bucket sorting is\n");
             System.out.println(Arrays.toString(listOfLists.get(k).getNumbers()));
             listOfLists.get(k).sort();
